@@ -1,3 +1,9 @@
+// Main
+/*
+* @Author : SeeChen Lee, ViHang Tan
+* @Contact: leeseechen@petalmail.com,
+*/
+
 package com.LLLT.MobileInternet;
 
 import org.springframework.boot.SpringApplication;
