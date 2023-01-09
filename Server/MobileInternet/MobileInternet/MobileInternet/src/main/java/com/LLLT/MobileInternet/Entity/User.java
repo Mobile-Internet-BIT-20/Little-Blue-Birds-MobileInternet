@@ -4,43 +4,65 @@
  *   @Contact: leeseechen@petalmail.com,
  */
 
+//  这就是一个 User
+//                       .::::.
+//                     .::::::::.
+//                    :::::::::::
+//                 ..:::::::::::'
+//              '::::::::::::'
+//                .::::::::::
+//           '::::::::::::::..
+//                ..::::::::::::.
+//              ``::::::::::::::::
+//               ::::``:::::::::'        .:::.
+//              ::::'   ':::::'       .::::::::.
+//            .::::'      ::::     .:::::::'::::.
+//           .:::'       :::::  .:::::::::' ':::::.
+//          .::'        :::::.:::::::::'      ':::::.
+//         .::'         ::::::::::::::'         ``::::.
+//     ...:::           ::::::::::::'              ``::.
+//    ```` ':.          ':::::::::'                  ::::..
+//                       '.:::::'                    ':'````..
+//
+
 package com.LLLT.MobileInternet.Entity;
 
 import java.util.List;
 
 public class User {
 
-    List<String> userSexList = List.of("Male", "Female", "Secrecy");
+    List<String> userSexList = List.of( "None"  ,   // 表示未设置
+                                        "Male"  ,   // 表示男性
+                                        "Female",   // 表示女性
+                                        "Secrecy"); // 表示不显示
 
-    private Integer             userId; // 用户 ID ( 唯一值 )
-    private String            userName; // 用户名
-    private String            userPass; // 用户密码 MD5 加密形式
-    private String          dayOfBirth; // 用户生日
-    private Integer       userSexIndex; // 用户性别 暂时为 0, 1, 2
-    private String               email; // 用户邮箱
-    private List<Integer>     userPost; // 用户发布的帖子
+    private String             userId; // 用户 ID ( 唯一值 )
+    private String           userName; // 用户名
+    private String           userPass; // 用户密码 MD5 加密形式
+    private String         dayOfBirth; // 用户生日
+    private Integer      userSexIndex; // 用户性别 暂时为 0, 1, 2, 3
+    private String              email; // 用户邮箱
+    private List<String>     userPost; // 用户发布的帖子
 
     // getter 函数
-    public List<String>  getUserSexList()  { return userSexList;}
-    public Integer       getUserId()       { return userId; }
-    public String        getUserName()     { return userName; }
-    public String        getUserPass()     { return userPass; }
-    public String        getDayOfBirth()   { return dayOfBirth; }
-    public Integer       getUserSexIndex() { return userSexIndex; }
-    public String        getEmail()        { return email; }
-    public List<Integer> getUserPost()     { return userPost; }
+    public List<String> getUserSexList()  { return userSexList;}
+    public String       getUserId()       { return userId; }
+    public String       getUserName()     { return userName; }
+    public String       getUserPass()     { return userPass; }
+    public String       getDayOfBirth()   { return dayOfBirth; }
+    public Integer      getUserSexIndex() { return userSexIndex; }
+    public String       getEmail()        { return email; }
+    public List<String> getUserPost()     { return userPost; }
 
     // setter 函数
-
-
     public void setUserSexList(List<String> userSexList) { this.userSexList = userSexList; }
-    public void setUserId(Integer userId)                { this.userId = userId; }
+    public void setUserId(String userId)                 { this.userId = userId; }
     public void setUserName(String userName)             { this.userName = userName; }
     public void setUserPass(String userPass)             { this.userPass = userPass; }
     public void setDayOfBirth(String dayOfBirth)         { this.dayOfBirth = dayOfBirth; }
     public void setUserSexIndex(Integer userSexIndex)    { this.userSexIndex = userSexIndex; }
     public void setEmail(String email)                   { this.email = email; }
-    public void setUserPost(List<Integer> userPost)      { this.userPost = userPost; }
+    public void setUserPost(List<String> userPost)       { this.userPost = userPost; }
 
     // 构造函数
     public User() {}

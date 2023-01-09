@@ -68,6 +68,7 @@ public class Hello {
 
         List<Post> all = mongoTemplate.findAll(Post.class);
 
+        System.out.println(all);
         return all;
     }
 
