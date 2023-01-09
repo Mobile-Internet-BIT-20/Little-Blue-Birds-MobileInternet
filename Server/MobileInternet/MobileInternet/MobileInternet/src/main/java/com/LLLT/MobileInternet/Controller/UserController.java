@@ -22,7 +22,11 @@
  */
 package com.LLLT.MobileInternet.Controller;
 
-import com.LLLT.MobileInternet.DAO.UserDao;
+import com.LLLT.MobileInternet.Entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,15 +35,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-    // new 一个 userDao 对象
-    UserDao userDao = new UserDao();
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     // 用户主页
     // Modified by SeeChen Lee @ 09-Jan-2023 21:29
     @RequestMapping("/{code}")
-    public String UserSpace(@PathVariable("code") String userId) {
+    public User UserSpace(@PathVariable("code") String userId) {
 
-        return userId;
+        Query query     = Query.query(Criteria.where("userId").is(userId));
+        User checkEmpty = mongoTemplate.findOne(query, User.class, "user");
+        return checkEmpty;
     }
 
 }

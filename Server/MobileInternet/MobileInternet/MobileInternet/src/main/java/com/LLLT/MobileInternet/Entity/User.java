@@ -27,9 +27,10 @@
 
 package com.LLLT.MobileInternet.Entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
 
     List<String> userSexList = List.of( "None"  ,   // 表示未设置
                                         "Male"  ,   // 表示男性
