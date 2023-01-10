@@ -19,6 +19,7 @@ package com.LLLT.MobileInternet.Service.serviceImp;
 import com.LLLT.MobileInternet.Entity.User;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.bson.types.ObjectId;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -66,6 +67,34 @@ public class UserImp implements UserService {
         return userId;
     }
 
+    // 返回用户的个人资料 应用场景例子 用户的主页面
+    // Last Modified by SeeChen @ 10-Jan-2023 11:46
+    @Override
+    public User getUserInfo(String userId) {
+
+        // 定义一开始为空值
+        User userInfo = new User();
+        User findUser;
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+
+        // 从 user 数据库里面搜索 userId
+        findUser = mongoTemplate.findOne(query, User.class, "user");
+
+        // 判断返回值是否为 null 为 null 表示没有此用户
+        if (findUser != null) {
+
+            // 将找到的值赋值给返回值变量
+            BeanUtils.copyProperties(findUser, userInfo);
+        } else {
+
+            // 定义未找到的值的用户名未 UserNotFound
+            userInfo.setUserName("UserNotFound");
+        }
+
+        return userInfo;
+    }
+
     // 判断当前邮箱是否已经被注册 True 表示已被注册 False 表示尚未被注册
     // Last Modified by SeeChen Lee @ 10-Jan-2023 00:00
     @Override
@@ -74,6 +103,7 @@ public class UserImp implements UserService {
         Query query   = Query.query(Criteria.where("email").is(email));
         User  isEmpty = mongoTemplate.findOne(query, User.class, "user");
 
+        // 为 null 表示当前邮箱未被使用
         return isEmpty != null;
     }
 }

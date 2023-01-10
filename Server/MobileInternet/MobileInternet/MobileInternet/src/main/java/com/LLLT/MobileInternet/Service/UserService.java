@@ -34,12 +34,16 @@ package com.LLLT.MobileInternet.Service;
 import com.LLLT.MobileInternet.Entity.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 // 定义用户接口
 // Last Modified by SeeChen Lee @ 10-Jan-2023 00:10
 @Service
 public interface UserService {
 
     public String createUser(String userEmail, String userPass); // 用于创建新用户
+
+    public User getUserInfo(String userId);    // 用于获取用户资料
 
     public Boolean emailExists(String email); // 用于判断当前邮箱是否已经注册
 }

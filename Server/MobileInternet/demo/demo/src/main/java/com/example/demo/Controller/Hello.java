@@ -44,7 +44,7 @@ public class Hello {
     public List<User> findAll() {
 
         List<User> all = mongoTemplate.findAll(User.class);
-
+    
         return all;
     }
 

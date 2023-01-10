@@ -23,29 +23,35 @@
 package com.LLLT.MobileInternet.Controller;
 
 import com.LLLT.MobileInternet.Entity.User;
+import com.LLLT.MobileInternet.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    private MongoTemplate mongoTemplate;
+    private UserService userService;
 
     // 用户主页
-    // Modified by SeeChen Lee @ 09-Jan-2023 21:29
-    @RequestMapping("/{code}")
-    public User UserSpace(@PathVariable("code") String userId) {
+    // Last Modified by SeeChen Lee @ 10-Jan-2023 11:20
+    @RequestMapping("/{userId}")
+    public User UserSpace(@PathVariable("userId") String userId) {
 
-        Query query     = Query.query(Criteria.where("userId").is(userId));
-        User checkEmpty = mongoTemplate.findOne(query, User.class, "user");
-        return checkEmpty;
+        return userService.getUserInfo(userId);
+    }
+
+    // 获取用户的帖子
+    // Last Modified by SeeChen Lee @ 10-Jan-2023 11:59
+    @RequestMapping("/{userId}/post")
+    public List<String> test(@PathVariable("userId") String code) {
+
+        return userService.getUserInfo(code).getUserPost();
     }
 
 }
