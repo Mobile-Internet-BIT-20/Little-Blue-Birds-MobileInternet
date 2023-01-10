@@ -25,10 +25,9 @@ package com.LLLT.MobileInternet.Controller;
 import com.LLLT.MobileInternet.Entity.User;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -54,4 +53,69 @@ public class UserController {
         return userService.getUserInfo(code).getUserPost();
     }
 
+    // 用户删除
+    // Last Modified by ViHang Tan @ 10-Jan-2023 14:22
+    @RequestMapping("/{userId}/delete")
+    public String UserDelete(@PathVariable("userId") String userId){
+
+        //可以添加验证那些在这里
+        return userService.userDelete(userId);
+    }
+
+    // 更新用户基本信息
+    // Last Modified by ViHang Tan @ 10-Jan-2023 19:56
+    @CrossOrigin
+    @GetMapping("/update")
+    public Boolean UserUpdate(HttpServletRequest httpServletRequest){
+        String userId = httpServletRequest.getParameter("userId");
+        String userName = httpServletRequest.getParameter("userName");
+        String dob = httpServletRequest.getParameter("dob");
+        Integer sex = Integer.valueOf(httpServletRequest.getParameter("sex"));
+
+        User user = new User();
+        user.setUserName(userName);
+        user.setUserId(userId);
+        user.setUserSexIndex(sex);
+        user.setDayOfBirth(dob);
+
+        return userService.updateUserBasicInfo(user);
+    }
+
+    // 更新用户密码
+    // Last Modified by ViHang Tan @ 10-Jan-2023 19:56
+    @PostMapping("/update/password")
+    public Boolean updateUserPassword(HttpServletRequest httpServletRequest){
+        String id = httpServletRequest.getParameter("userId");
+        String password = httpServletRequest.getParameter("userPass");
+
+        User user = new User();
+        user.setUserPass(password);
+        user.setUserId(id);
+
+        return userService.updateUserPassword(user);
+    }
+
+    // 更新用户邮箱
+    // Last Modified by ViHang Tan @ 10-Jan-2023 19:56
+    @PostMapping("/update/email")
+    public Boolean updateUserEmail(HttpServletRequest httpServletRequest){
+        String id = httpServletRequest.getParameter("userId");
+        String email = httpServletRequest.getParameter("email");
+
+        User user = new User();
+        user.setEmail(email);
+        user.setUserId(id);
+
+        return userService.updateUserEmail(user);
+    }
+
+    // 关注其他用户
+    // Last Modified by ViHang Tan @ 10-Jan-2023 20:40
+    @GetMapping("/follow")
+    public Boolean userFollow(HttpServletRequest httpServletRequest){
+        String myId = httpServletRequest.getParameter("myUserId");
+        String followId = httpServletRequest.getParameter("followUserId");
+
+        return userService.updateFollow(myId,followId);
+    }
 }

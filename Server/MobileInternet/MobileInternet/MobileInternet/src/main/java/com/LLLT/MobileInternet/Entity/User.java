@@ -45,6 +45,10 @@ public class User implements Serializable {
     private String              email; // 用户邮箱
     private List<String>     userPost; // 用户发布的帖子
 
+    private List<UserPI>     follower; // 用户的关注者
+
+    private List<UserPI>    following; // 用户关注
+
     // getter 函数
     public List<String> getUserSexList()  { return userSexList;}
     public String       getUserId()       { return userId; }
@@ -54,6 +58,8 @@ public class User implements Serializable {
     public Integer      getUserSexIndex() { return userSexIndex; }
     public String       getEmail()        { return email; }
     public List<String> getUserPost()     { return userPost; }
+    public List<UserPI> getFollower()     {return follower; }
+    public List<UserPI> getFollowing()    { return following; }
 
     // setter 函数
     public void setUserSexList(List<String> userSexList) { this.userSexList = userSexList; }
@@ -64,6 +70,10 @@ public class User implements Serializable {
     public void setUserSexIndex(Integer userSexIndex)    { this.userSexIndex = userSexIndex; }
     public void setEmail(String email)                   { this.email = email; }
     public void setUserPost(List<String> userPost)       { this.userPost = userPost; }
+
+    public void setFollower(List<UserPI> follower)       { this.follower = follower; }
+
+    public void setFollowing(List<UserPI> following)    { this.following = following; }
 
     // 构造函数
     public User() {}

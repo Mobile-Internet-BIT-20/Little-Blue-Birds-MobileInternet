@@ -49,7 +49,7 @@ public class Controller {
     @RequestMapping("/")
     public String MainPage() {
 
-        return "Hello World";
+        return "Hello 写得开心点";
     }
 
     // 注册函数
@@ -68,6 +68,21 @@ public class Controller {
         } else {
 
             return userService.createUser(userEmail, userPass);
+        }
+    }
+
+    // 登录函数
+    // Last Modified by ViHang Tan @ 10-Jan-2023 14:22
+    @CrossOrigin
+    @PostMapping("login")
+    public String userLogin(HttpServletRequest httpServletRequest){
+        String userEmail = httpServletRequest.getParameter("userEmail");
+        String userPass  = httpServletRequest.getParameter("userPass" );
+
+        if(userService.emailExists(userEmail)){
+            return userService.userLogin(userEmail,userPass);
+        }else{
+            return "User do not exist";
         }
     }
 }
