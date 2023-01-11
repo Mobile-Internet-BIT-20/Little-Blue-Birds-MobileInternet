@@ -39,6 +39,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -104,5 +105,24 @@ public class PostImp implements PostService {
         }
 
         return postContent;
+    }
+
+    @Override
+    public Boolean likePost(String postId, String userId) {
+        Query query = new Query(Criteria.where("postId").is(postId));
+
+        Post targetPost = mongoTemplate.findOne(query, Post.class);
+
+        targetPost.setLikeNum(targetPost.getLikeNum()+1);
+        targetPost.getLikeUser().add(userId);
+
+        Update update = new Update();
+        update.set("likeUser",targetPost.getLikeUser()).set("likeNum",targetPost.getLikeNum());
+
+        mongoTemplate.upsert(query,update,Post.class);
+
+        userService.likePost(userId,postId);
+
+        return true;
     }
 }

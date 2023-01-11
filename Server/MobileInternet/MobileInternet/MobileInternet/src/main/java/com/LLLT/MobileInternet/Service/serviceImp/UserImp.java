@@ -69,6 +69,7 @@ public class UserImp implements UserService {
 
         List<UserPublicInformation> userFollower  = List.of();
         List<UserPublicInformation> userFollowing = List.of();
+        List<String> likedPost = List.of();
 
         // 新建一个用户
         User newUser = new User(userEmail, userPass);
@@ -86,6 +87,7 @@ public class UserImp implements UserService {
 
         newUser.setUserFollower(userFollower);
         newUser.setUserFollowing(userFollowing);
+        newUser.setLikedPost(likedPost);
 
         // 设置帖子数据 初始为空
         newUser.setUserPost(userPost);
@@ -269,6 +271,26 @@ public class UserImp implements UserService {
 
             // 删除账户
             mongoTemplate.remove(query, User.class, "user");
+
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public Boolean likePost(String userId, String postId) {
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+
+        User user = mongoTemplate.findOne(query,User.class);
+
+        if(user != null){
+            user.getLikedPost().add(postId);
+
+            Update update = new Update();
+            update.set("likedPost",user.getLikedPost());
+            mongoTemplate.upsert(query,update,User.class);
 
             return true;
         }

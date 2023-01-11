@@ -32,6 +32,7 @@ package com.LLLT.MobileInternet.Controller;
 
 import com.LLLT.MobileInternet.Entity.Post;
 import com.LLLT.MobileInternet.Service.PostService;
+import com.LLLT.MobileInternet.Service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,5 +66,12 @@ public class PostController {
     public Post postContent(@PathVariable("postId") String postId) {
 
         return postService.postContent(postId);
+    }
+
+    @GetMapping("{postId}/like")
+    public Boolean likePost(@PathVariable("postId") String postId, HttpServletRequest httpServletRequest) {
+        String userId = httpServletRequest.getParameter("userId");
+
+        return postService.likePost(postId,userId);
     }
 }

@@ -47,6 +47,8 @@ public class User implements Serializable {
     private List<UserPublicInformation> userFollower;   // 用户的粉丝列表
     private List<UserPublicInformation> userFollowing;  // 用户的关注列表
 
+    private List<String>                likedPost;
+
     // getter 函数
     public List<String>                getUserSexList()   { return userSexList;   }
     public String                      getUserId()        { return userId;        }
@@ -59,6 +61,10 @@ public class User implements Serializable {
     public List<UserPublicInformation> getUserFollower()  { return userFollower;  }
     public List<UserPublicInformation> getUserFollowing() { return userFollowing; }
 
+    public List<String> getLikedPost() {
+        return likedPost;
+    }
+
     // setter 函数
     public void setUserSexList(List<String> userSexList)                    { this.userSexList  = userSexList;  }
     public void setUserId(String userId)                                    { this.userId       = userId;       }
@@ -70,6 +76,10 @@ public class User implements Serializable {
     public void setUserPost(List<String> userPost)                          { this.userPost     = userPost;     }
     public void setUserFollower(List<UserPublicInformation> userFollower)   { this.userFollower = userFollower; }
     public void setUserFollowing(List<UserPublicInformation> userFollowing) { this.userFollowing = userFollowing; }
+
+    public void setLikedPost(List<String> likedPost) {
+        this.likedPost = likedPost;
+    }
 
     // 构造函数
     public User() {}

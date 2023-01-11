@@ -29,4 +29,6 @@ public interface UserService {
     public Boolean userFollow(String followerId, String targetId);                // 用户关注其它用户
     public Boolean updateUser(User updateUser);                                     // 用于更新用户的基本资料 ( 非保密性 )
     public Boolean userDelete(String userEmail, String userPass, String userId);    // 用于删除用户账号
+    public Boolean likePost(String userId, String postId);
+
 }

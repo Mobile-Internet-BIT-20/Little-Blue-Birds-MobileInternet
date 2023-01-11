@@ -13,5 +13,7 @@ public interface PostService {
 
     public String publishPost(String holderId, String postTitle, String postContent);
 
+    public Boolean likePost(String postId, String userId);
+
     public Post postContent(String postId);
 }
