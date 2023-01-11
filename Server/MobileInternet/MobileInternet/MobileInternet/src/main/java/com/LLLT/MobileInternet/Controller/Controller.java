@@ -1,7 +1,7 @@
 // Controller
 /*
- *   @Author : SeeChen Lee, ViHang Tan
- *   @Contact: leeseechen@petalmail.com,
+ *  @Author : SeeChen Lee, ViHang Tan
+ *  @Contact: leeseechen@petalmail.com, tvhang7@gmail.com
  */
 
 /*  代码和人 有一个能跑就行
@@ -30,10 +30,7 @@ import com.LLLT.MobileInternet.Entity.User;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -41,15 +38,10 @@ import java.util.List;
 @RestController
 public class Controller {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    // MainPage 函数 网页版默认主页
-    // Modified by SeeChen Lee @ 09-Jan-2023 11:36
-    @RequestMapping("/")
-    public String MainPage() {
-
-        return "Hello 写得开心点";
+    public Controller(UserService userService) {
+        this.userService = userService;
     }
 
     // 注册函数
@@ -71,18 +63,15 @@ public class Controller {
         }
     }
 
-    // 登录函数
-    // Last Modified by ViHang Tan @ 10-Jan-2023 14:22
+    // 用于获取用户登录信息
+    // Last Modified by SeeChen Lee @ 11-Jan-2023 06:37
     @CrossOrigin
-    @PostMapping("login")
-    public String userLogin(HttpServletRequest httpServletRequest){
+    @RequestMapping("/login")
+    public String userLogin(HttpServletRequest httpServletRequest) {
+
         String userEmail = httpServletRequest.getParameter("userEmail");
         String userPass  = httpServletRequest.getParameter("userPass" );
 
-        if(userService.emailExists(userEmail)){
-            return userService.userLogin(userEmail,userPass);
-        }else{
-            return "User do not exist";
-        }
+        return userService.userLogin(userEmail, userPass);
     }
 }

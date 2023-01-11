@@ -1,7 +1,7 @@
 // Main
 /*
 * @Author : SeeChen Lee, ViHang Tan
-* @Contact: leeseechen@petalmail.com,
+* @Contact: leeseechen@petalmail.com, tvhang7@gmail.com
 */
 
 /*

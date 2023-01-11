@@ -1,7 +1,7 @@
 // User Implement
 /*
  *  @Author : SeeChen Lee, ViHang Tan
- *  @Contact: leeseechen@petalmail.com,
+ *  @Contact: leeseechen@petalmail.com, tvhang7@gmail.com
  */
 
 //  读书使我快乐
@@ -17,11 +17,10 @@
 package com.LLLT.MobileInternet.Service.serviceImp;
 
 import com.LLLT.MobileInternet.Entity.User;
-import com.LLLT.MobileInternet.Entity.UserPI;
+import com.LLLT.MobileInternet.Entity.UserPublicInformation;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -34,26 +33,48 @@ import java.util.List;
 @Service("UserService")
 public class UserImp implements UserService {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
+    public UserImp(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
+
+    // 用于更新用户帖子
+    // Modified by SeeChen Lee @ 10-Jan-2023 17:28
+    @Override
+    public void publishPost(String userId, String postId) {
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+
+        User publishUser = mongoTemplate.findOne(query, User.class, "user");
+
+        assert publishUser != null;
+        publishUser.getUserPost().add(postId);
+
+        Update update = new Update();
+        update.set("userPost", publishUser.getUserPost());
+
+        mongoTemplate.upsert(query, update, User.class, "user");
+
+    }
 
 
     // 新用户保存函数
-    // Modified by SeeChen Lee @ 10-Jan-2023 00:16
+    // Modified by SeeChen Lee @ 11-Jan-2023 08:53
     @Override
     public String createUser(String userEmail, String userPass) {
 
         String userName, userId, dayOfBirth;
         Integer userSexIndex = 0;   // 默认未设置
         List<String> userPost = List.of();
-        List<UserPI> follower = List.of();
-        List<UserPI> following = List.of();
+
+        List<UserPublicInformation> userFollower  = List.of();
+        List<UserPublicInformation> userFollowing = List.of();
 
         // 新建一个用户
         User newUser = new User(userEmail, userPass);
 
         // 下列为默认设置 可以在创建用户完成后重新设置
-        userId = new ObjectId().toString();
+        userId = "U" + new ObjectId();
         userName = "用户" + userId;
         dayOfBirth = "1900-01-01";
 
@@ -62,9 +83,9 @@ public class UserImp implements UserService {
         newUser.setUserName(userName);
         newUser.setDayOfBirth(dayOfBirth);
         newUser.setUserSexIndex(userSexIndex);
-        newUser.setFollower(follower);
-        newUser.setFollowing(following);
 
+        newUser.setUserFollower(userFollower);
+        newUser.setUserFollowing(userFollowing);
 
         // 设置帖子数据 初始为空
         newUser.setUserPost(userPost);
@@ -72,6 +93,77 @@ public class UserImp implements UserService {
         mongoTemplate.insert(newUser);
 
         return userId;
+    }
+
+    // 用户登录函数
+    // Last Modified by SeeChen Lee @ 10-Jan-2023 13:58
+    @Override
+    public String userLogin(String userEmail, String userPass) {
+
+        if (!emailExists(userEmail)) {
+
+            return "User Not Exists";
+        } else {
+
+            Query query = new Query(Criteria.where("email").is(userEmail));
+
+            User loginUser = mongoTemplate.findOne(query, User.class, "user");
+
+            assert loginUser != null;
+            if (userPass.equals(loginUser.getUserPass())) {
+
+                return loginUser.getUserId();
+            } else {
+
+                return "Wrong Password";
+            }
+        }
+    }
+
+    // 用户更改邮箱
+    // Last Modified by SeeChen Lee @ 11-Jan-2023 07:57
+    @Override
+    public String updateEmail(String userId, String newEmail, String userPass) {
+
+        Query query      = new Query(Criteria.where("userId").is(userId));
+        User  updateUser = mongoTemplate.findOne(query, User.class, "user");
+
+        assert updateUser != null;
+        if (!updateUser.getUserPass().equals(userPass)) {
+
+            return "WrongPass";
+        } else {
+
+            Update update = new Update();
+            update.set("email", newEmail);
+
+            mongoTemplate.upsert(query, update, User.class, "user");
+
+            return "Updated";
+        }
+    }
+
+    // 用户修改密码
+    // Last Modified by SeeChen Lee @ 11-Jan-2023 07:36
+    @Override
+    public String updatePassword(String userId, String oldPass, String newPass) {
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+        User updateUser = mongoTemplate.findOne(query, User.class, "user");
+
+        assert updateUser != null;
+        if (!updateUser.getUserPass().equals(oldPass)) {
+
+            return "WrongPassword";
+        } else {
+
+            Update update = new Update();
+            update.set("userPass", newPass);
+
+            mongoTemplate.upsert(query, update, User.class, "user");
+
+            return "Updated";
+        }
     }
 
     // 返回用户的个人资料 应用场景例子 用户的主页面
@@ -107,129 +199,80 @@ public class UserImp implements UserService {
     @Override
     public Boolean emailExists(String email) {
 
-        Query query = Query.query(Criteria.where("email").is(email));
-        User isEmpty = mongoTemplate.findOne(query, User.class, "user");
+        Query query   = Query.query(Criteria.where("email").is(email));
+        User  isEmpty = mongoTemplate.findOne(query, User.class, "user");
 
         // 为 null 表示当前邮箱未被使用
         return isEmpty != null;
     }
 
-    // 用户登录实现
-    // Last Modified by ViHang Tan @ 10-Jan-2023 14:22
+    // 用户关注其它用户
+    // Last Modified by SeeChen Lee @ 11-Jan-2023 09:25
     @Override
-    public String userLogin(String email, String pass) {
+    public Boolean userFollow(String followerId, String targetId) {
 
-        Query query = Query.query(Criteria.where("email").is(email));
-        User user = mongoTemplate.findOne(query, User.class);
-        String password = user.getUserPass();
+        // 自己不能关注自己
+        if (followerId.equals(targetId)) return false;
 
-        if (pass.equals(password)) {
-            return user.getUserId();
+        Query followerQuery = new Query(Criteria.where("userId").is(followerId));
+        Query targetQuery   = new Query(Criteria.where("userId").is(targetId));
+
+        User followerUser = mongoTemplate.findOne(followerQuery, User.class, "user");
+        User targetUser   = mongoTemplate.findOne(targetQuery  , User.class, "user");
+
+        if (followerUser != null && targetUser != null) {
+
+            followerUser.getUserFollowing().add(new UserPublicInformation(targetUser.getUserId(), targetUser.getUserName()));
+            targetUser.getUserFollower().add(new UserPublicInformation(followerUser.getUserId(), followerUser.getUserName()));
+
+            mongoTemplate.upsert(followerQuery, new Update().set("userFollowing", followerUser.getUserFollowing()), User.class, "user");
+            mongoTemplate.upsert(targetQuery  , new Update().set("userFollower" , targetUser.getUserFollower()) , User.class, "user");
+
+            return true;
         } else {
-            return "false";
-        }
 
-    }
-
-    // 用户删除
-    // Last Modified by ViHang Tan @ 10-Jan-2023 14:22
-    @Override
-    public String userDelete(String userId) {
-        Query query = Query.query(Criteria.where("userId").is(userId));
-        mongoTemplate.remove(query, User.class);
-        return "User deleted from data";
-    }
-
-    // 更新用户基本信息
-    // Last Modified by ViHang Tan @ 10-Jan-2023 19:56
-    @Override
-    public Boolean updateUserBasicInfo(User user) {
-
-        Query query = Query.query(Criteria.where("userId").is(user.getUserId()));
-        System.out.println(user.getUserId());
-        if (query == null) {
             return false;
         }
+    }
+
+    // 用于更新用户的基本资料 ( 非保密性 )
+    // Last Modified by ViHang Tan @ 10-Jan-2023 19:56
+    @Override
+    public Boolean updateUser(User updateUser) {
+
+        Query query = new Query(Criteria.where("userId").is(updateUser.getUserId()));
 
         Update update = new Update();
-        update.set("userName", user.getUserName()).set("dayOfBirth", user.getDayOfBirth()).set("userSexIndex", user.getUserSexIndex());
-        mongoTemplate.upsert(query, update, User.class);
+
+        update.set(  "userName"   , updateUser.getUserName())
+                .set("dayOfBirth" , updateUser.getDayOfBirth())
+                .set("usrSexIndex", updateUser.getUserSexIndex());
+
+        mongoTemplate.upsert(query, update, User.class, "user");
 
         return true;
     }
 
-    // 更新用户密码
-    // Last Modified by ViHang Tan @ 10-Jan-2023 19:56
+    // 用于删除用户账号 返回 True 表示已经成功删除 False 表示删除失败
+    // Last Modified by SeeChen Lee @ 11-Jan-2023 07:00
     @Override
-    public Boolean updateUserPassword(User user) {
+    public Boolean userDelete(String userEmail, String userPass, String userId) {
 
-        Query query = Query.query(Criteria.where("userId").is(user.getUserId()));
-        User user1 = mongoTemplate.findOne(query, User.class);
+        Query query      = new Query(Criteria.where("userId").is(userId));
+        User  deleteUser = mongoTemplate.findOne(query, User.class, "user");
 
-        if (user1 != null) {
-            Update update = new Update();
-            update.set("userPass",user.getUserPass());
+        assert deleteUser != null;
+        String correctEmail = deleteUser.getEmail();
+        String correctPass  = deleteUser.getUserPass();
 
-            mongoTemplate.upsert(query,update, User.class);
+        if (correctEmail.equals(userEmail) && correctPass.equals(userPass)) {
+
+            // 删除账户
+            mongoTemplate.remove(query, User.class, "user");
 
             return true;
         }
 
         return false;
-    }
-
-    // 更新用户邮箱
-    // Last Modified by ViHang Tan @ 10-Jan-2023 19:56
-    @Override
-    public Boolean updateUserEmail(User user) {
-        Query query = Query.query(Criteria.where("userId").is(user.getUserId()));
-        User user1 = mongoTemplate.findOne(query, User.class);
-
-        if (user1 != null) {
-            Update update = new Update();
-            update.set("email",user.getEmail());
-
-            mongoTemplate.upsert(query,update, User.class);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    // 更新用户关注
-    // Last Modified by ViHang Tan @ 10-Jan-2023 20:40
-    @Override
-    public Boolean updateFollow(String myId, String followId) {
-        Query query1 = Query.query(Criteria.where("userId").is(myId));
-        Query query2 = Query.query(Criteria.where("userId").is(followId));
-
-        User user = mongoTemplate.findOne(query1,User.class);
-        User followUser = mongoTemplate.findOne(query2,User.class);
-
-        //获取用户最基本信息
-        UserPI userPi = new UserPI(user.getUserId(),user.getUserName());
-        UserPI followUserPi = new UserPI(followUser.getUserId(),followUser.getUserName());
-
-        if(user !=null && followUser!=null){
-            //关注的人
-            user.getFollowing().add(followUserPi);
-
-            Update update = new Update();
-            update.set("following",user.getFollowing());
-
-            mongoTemplate.upsert(query1,update,User.class);
-
-            //被关注的人
-            followUser.getFollower().add(userPi);
-            update.set("follower",followUser.getFollower());
-
-            mongoTemplate.upsert(query2,update, User.class);
-
-            return true;
-
-        }
-
-        return null;
     }
 }
