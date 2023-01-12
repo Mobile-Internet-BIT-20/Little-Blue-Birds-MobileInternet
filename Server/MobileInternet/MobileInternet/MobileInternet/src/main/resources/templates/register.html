@@ -9,10 +9,45 @@
 
         <link type = "text/css" rel = "stylesheet" href = "/css/register.css" />
 
-        <script type = "text/javascript">
-        </script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+        <script type = "text/javascript" href ="/js/register.js"></script>
     </head>
     <body>
-        <div></div>
+    <form action = "/api/register" id = "registerForm">
+        <div class="input_holder">
+            <input type="text" name="userEmail" id="userEmail" placeholder="输入用户注册邮箱" required>
+            <input type="password" name="userPass" id="userPass" placeholder="请输入密码" required>
+            <input type="password" name="userConfirmPass" id="userConfirmPass" placeholder="请重复输入密码" required>
+            <button id = "submit_button" class="submit_button" value="注册">注册</button>
+        </div>
+    </form>
+
     </body>
+
+    <script>
+        $("#registerForm").submit(function (event){
+            event.preventDefault();
+
+            var $form = $(this),
+                userEmail = $form.find("input[name='userEmail']").val(),
+                userPass = $form.find("input[name='userPass']").val(),
+                userConfirmPass = $form.find("input[name='userConfirmPass']").val(),
+                url = $form.attr("action");
+
+            var posting = $.post("http://127.0.0.1:8080/api/register",{
+                userEmail : userEmail,
+                userPass  : userPass,
+                userConfirmPass : userConfirmPass,
+            });
+
+            posting.done(function(data){
+                if(data != "Password Not Match" && data != "UserExists"){
+                    window.location.href="http://127.0.0.1:8080/login"
+                }
+                alert(data);
+            })
+
+        })
+
+    </script>
 </html>

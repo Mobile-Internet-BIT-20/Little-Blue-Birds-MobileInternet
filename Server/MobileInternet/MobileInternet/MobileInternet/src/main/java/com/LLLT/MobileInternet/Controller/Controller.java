@@ -59,13 +59,14 @@ public class Controller {
     }
 
     // 注册函数
-    // Modified by SeeChen Lee @ 09-Jan-2023 19:04
+    // Modified by ViHang Tan @ 12-Jan-2023 15:31
     @CrossOrigin
     @PostMapping("/register")
     public String userRegister(HttpServletRequest httpServletRequest) {
 
         String userEmail = httpServletRequest.getParameter("userEmail");
         String userPass  = httpServletRequest.getParameter("userPass" );
+        String userConfirmPass = httpServletRequest.getParameter("userConfirmPass" );
 
         if (userService.emailExists(userEmail)) {
 
@@ -73,7 +74,7 @@ public class Controller {
             return "UserExists";
         } else {
 
-            return userService.createUser(userEmail, userPass);
+            return userService.createUser(userEmail, userPass,userConfirmPass);
         }
     }
 

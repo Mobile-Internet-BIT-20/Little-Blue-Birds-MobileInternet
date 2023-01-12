@@ -18,7 +18,7 @@ public interface UserService {
 
     public void    publishPost(String userId, String postId);                       // 用户发帖函数
 
-    public String  createUser(String userEmail, String userPass);                   // 用于创建新用户
+    public String  createUser(String userEmail, String userPass, String userConfirmPass);                   // 用于创建新用户
     public String  userLogin(String userEmail, String userPass);                    // 用户登录函数
     public String  updateEmail(String userId, String newEmail, String usePass);     // 用户更改邮箱
     public String  updatePassword(String userId, String oldPass, String newPass);   // 用户更改密码
