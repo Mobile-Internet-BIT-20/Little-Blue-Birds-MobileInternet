@@ -68,6 +68,8 @@ public class PostController {
         return postService.postContent(postId);
     }
 
+    // 点赞
+    // Last Modified by ViHang Tan @ 11-Jan-2023 17:00
     @GetMapping("{postId}/like")
     public Boolean likePost(@PathVariable("postId") String postId, HttpServletRequest httpServletRequest) {
         String userId = httpServletRequest.getParameter("userId");

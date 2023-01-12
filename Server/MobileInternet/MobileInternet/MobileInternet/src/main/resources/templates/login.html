@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <head>
+      <link rel="stylesheet" type="text/css" href="/css/login.css">
+      <script src="js\login.js"></script>
+      <script src="js\cookie.js"></script>
+    </head>
+
+    <body>
+        <div id="hero">
+          <div id="background_animate"></div>
+          <h1>密码管理</h1>
+          <span class="img_holder">
+                                <img class="dr-glue-little" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/63425/drglue.png" alt="Dr Glue Little">
+                                <div class="left_arm">
+                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/63425/left-arm.png" alt="Left Arm">
+                                </div>
+                                <div class="right_arm">
+                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/63425/right-arm.png" alt="Right Arm">
+                                </div>
+                            </span>
+        </div>
+        <form action="#" method="post" accept-charset="utf-8">
+          <div class="input_holder">
+            <!--用户图标-->
+            <span><i class=""></i></span>
+            <input type="text" name="userEmail" id="userEmail" placeholder="用户名称/用户ID/邮箱" required>
+          </div>
+          <div class="input_holder">
+            <!--密码图标-->
+            <span><i class=""></i></span>
+            <input type="password" name="userPass" id="userPass" placeholder="请输入密码" required>
+          </div>
+          <div class="multiple_box">
+            <input type="checkbox" style="border: 1px solid purple">
+            <a href="#" id="remember_me">记住我</a>
+            <a href="#"><b>忘记密码？</b></a>
+          </div>
+            <button id = "submit_button" class="submit_button" value="登录"></button>
+          <div class="third">
+            <a href="#">立即注册</a>
+          </div>
+        </form>
+    </body>
+</html>

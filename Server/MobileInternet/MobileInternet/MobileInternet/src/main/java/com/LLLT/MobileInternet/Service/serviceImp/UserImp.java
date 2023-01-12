@@ -278,6 +278,8 @@ public class UserImp implements UserService {
         return false;
     }
 
+    // 用于用户点赞 返回 True 表示已经点赞 False 表示点赞失败
+    // Last Modified by ViHang Tan @ 11-Jan-2023 17:00
     @Override
     public Boolean likePost(String userId, String postId) {
 

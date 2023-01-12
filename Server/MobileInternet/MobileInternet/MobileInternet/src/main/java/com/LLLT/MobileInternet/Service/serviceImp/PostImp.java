@@ -107,6 +107,8 @@ public class PostImp implements PostService {
         return postContent;
     }
 
+    // 用于帖子被点赞 返回 True 表示已经点赞 False 表示点赞失败
+    // Last Modified by ViHang Tan @ 11-Jan-2023 17:00
     @Override
     public Boolean likePost(String postId, String userId) {
         Query query = new Query(Criteria.where("postId").is(postId));

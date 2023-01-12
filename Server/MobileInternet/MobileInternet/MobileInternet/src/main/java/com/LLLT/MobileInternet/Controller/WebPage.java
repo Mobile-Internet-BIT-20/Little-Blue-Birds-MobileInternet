@@ -38,7 +38,12 @@ public class WebPage {
     // Last Modified by SeeChen Lee @ 11-Jan-2023 09:56
     @GetMapping("/")
     public String MainPage() {
-
         return "index";
     }
+
+    @GetMapping("/login")
+    public String LoginPage() {
+        return "login";
+    }
+
 }
