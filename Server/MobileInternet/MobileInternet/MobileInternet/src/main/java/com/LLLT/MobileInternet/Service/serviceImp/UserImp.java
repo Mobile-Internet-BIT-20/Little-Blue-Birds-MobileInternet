@@ -69,7 +69,6 @@ public class UserImp implements UserService {
 
         List<UserPublicInformation> userFollower  = List.of();
         List<UserPublicInformation> userFollowing = List.of();
-        List<String> likedPost = List.of();
 
         // 新建一个用户
         User newUser = new User(userEmail, userPass);
@@ -87,7 +86,6 @@ public class UserImp implements UserService {
 
         newUser.setUserFollower(userFollower);
         newUser.setUserFollowing(userFollowing);
-        newUser.setLikedPost(likedPost);
 
         // 设置帖子数据 初始为空
         newUser.setUserPost(userPost);
@@ -279,24 +277,18 @@ public class UserImp implements UserService {
     }
 
     // 用于用户点赞 返回 True 表示已经点赞 False 表示点赞失败
-    // Last Modified by ViHang Tan @ 11-Jan-2023 17:00
+    // Last Modified by SeeChen Lee @ 12-Jan-2023 11:12
     @Override
     public Boolean likePost(String userId, String postId) {
 
-        Query query = new Query(Criteria.where("userId").is(userId));
+        Query query    = new Query(Criteria.where("userId").is(userId));
+        User  likeUser = mongoTemplate.findOne(query, User.class, "user");
 
-        User user = mongoTemplate.findOne(query,User.class);
+        assert likeUser != null;
+        likeUser.getLikePost().add(postId);
 
-        if(user != null){
-            user.getLikedPost().add(postId);
+        mongoTemplate.upsert(query, new Update().set("likePost", likeUser.getLikePost()), User.class, "user");
 
-            Update update = new Update();
-            update.set("likedPost",user.getLikedPost());
-            mongoTemplate.upsert(query,update,User.class);
-
-            return true;
-        }
-
-        return false;
+        return true;
     }
 }

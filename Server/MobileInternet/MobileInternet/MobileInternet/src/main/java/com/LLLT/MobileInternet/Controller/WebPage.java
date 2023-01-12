@@ -38,12 +38,23 @@ public class WebPage {
     // Last Modified by SeeChen Lee @ 11-Jan-2023 09:56
     @GetMapping("/")
     public String MainPage() {
+
         return "index";
     }
 
-    @GetMapping("/login")
-    public String LoginPage() {
-        return "login";
+    // Register 页面返回函数
+    // Last Modified by SeeChen Lee @ 11-Jan-2023 17:47
+    @GetMapping("/register")
+    public String RegisterPage() {
+
+        return "register";
     }
 
+    // Login 页面
+    // Last Modified by ViHang Tan @ 11-Jan-2023 19:00
+    @GetMapping("/login")
+    public String LoginPage() {
+
+        return "login";
+    }
 }

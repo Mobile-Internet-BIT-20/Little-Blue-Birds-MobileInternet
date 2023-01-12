@@ -84,6 +84,46 @@ public class PostImp implements PostService {
         return postId;
     }
 
+    // 用于帖子被点赞 返回 True 表示已经点赞 False 表示点赞失败
+    // Last Modified by ViHang Tan @ 11-Jan-2023 17:00
+    @Override
+    public Boolean likePost(String postId, String userId) {
+
+        Query query      = new Query(Criteria.where("postId").is(postId));
+        Post  targetPost = mongoTemplate.findOne(query, Post.class, "post");
+
+        assert targetPost != null;
+        targetPost.setLikeNum(targetPost.getLikeNum() + 1);
+        targetPost.getLikeUser().add(userId);
+
+        Update update = new Update();
+        update.set("likeUser", targetPost.getLikeUser()).set("likeNum", targetPost.getLikeNum());
+
+        mongoTemplate.upsert(query, update, Post.class, "post");
+
+        userService.likePost(userId,postId);
+
+        return true;
+    }
+
+    // 用户评论帖子
+    // Last Modified by SeeChen Lee @ 12-Jan-2023 11:18
+    @Override
+    public Boolean commentPost(String postId, String userId, String commentContent) {
+
+        Query query       = new Query(Criteria.where("postId").is(postId));
+        Post  currentPost = mongoTemplate.findOne(query, Post.class, "post");
+
+        Comment newComment = new Comment(userId, commentContent);
+
+        assert currentPost != null;
+        currentPost.getCommentInfo().add(newComment);
+
+        mongoTemplate.upsert(query, new Update().set("commentInfo", currentPost.getCommentInfo()), Post.class, "post");
+
+        return true;
+    }
+
     // 返回帖子内容
     // Last Modified by SeeChen Lee @ 10-Jan-2023 19:57
     @Override
@@ -107,24 +147,12 @@ public class PostImp implements PostService {
         return postContent;
     }
 
-    // 用于帖子被点赞 返回 True 表示已经点赞 False 表示点赞失败
-    // Last Modified by ViHang Tan @ 11-Jan-2023 17:00
+    // 从最后一条记录返回帖子 适用场景 home page
+    // Last Modified by SeeChen Lee @ 12-Jan-2023 12:05
     @Override
-    public Boolean likePost(String postId, String userId) {
-        Query query = new Query(Criteria.where("postId").is(postId));
+    public List<Post> newPost(Integer requestNum) {
 
-        Post targetPost = mongoTemplate.findOne(query, Post.class);
-
-        targetPost.setLikeNum(targetPost.getLikeNum()+1);
-        targetPost.getLikeUser().add(userId);
-
-        Update update = new Update();
-        update.set("likeUser",targetPost.getLikeUser()).set("likeNum",targetPost.getLikeNum());
-
-        mongoTemplate.upsert(query,update,Post.class);
-
-        userService.likePost(userId,postId);
-
-        return true;
+        // 修改中
+        return mongoTemplate.findAll(Post.class);
     }
 }

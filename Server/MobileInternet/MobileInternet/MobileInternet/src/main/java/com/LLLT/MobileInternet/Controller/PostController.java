@@ -32,13 +32,12 @@ package com.LLLT.MobileInternet.Controller;
 
 import com.LLLT.MobileInternet.Entity.Post;
 import com.LLLT.MobileInternet.Service.PostService;
-import com.LLLT.MobileInternet.Service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/api/post")
 public class PostController {
 
     private final PostService postService;
@@ -72,8 +71,21 @@ public class PostController {
     // Last Modified by ViHang Tan @ 11-Jan-2023 17:00
     @GetMapping("{postId}/like")
     public Boolean likePost(@PathVariable("postId") String postId, HttpServletRequest httpServletRequest) {
+
         String userId = httpServletRequest.getParameter("userId");
 
-        return postService.likePost(postId,userId);
+        return postService.likePost(postId, userId);
+    }
+
+    // 评论帖子
+    // Last Modified by SeeChen Lee @ 12-Jan-2023 11:19
+    @CrossOrigin
+    @RequestMapping("{postId}/comment")
+    public Boolean commentPost(@PathVariable("postId") String postId, HttpServletRequest httpServletRequest) {
+
+        String userId         = httpServletRequest.getParameter("userId");
+        String commentContent = httpServletRequest.getParameter("commentContent");
+
+        return postService.commentPost(postId, userId, commentContent);
     }
 }

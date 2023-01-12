@@ -26,7 +26,9 @@
 */
 package com.LLLT.MobileInternet.Controller;
 
+import com.LLLT.MobileInternet.Entity.Post;
 import com.LLLT.MobileInternet.Entity.User;
+import com.LLLT.MobileInternet.Service.PostService;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,17 +38,29 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class Controller {
 
     private final UserService userService;
+    private final PostService postService;
+    public Controller(UserService userService, PostService postService) {
 
-    public Controller(UserService userService) {
         this.userService = userService;
+        this.postService = postService;
+    }
+
+    @CrossOrigin
+    @RequestMapping("/newPost")
+    public List<Post> homePage(HttpServletRequest httpServletRequest) {
+
+        Integer num = Integer.valueOf(httpServletRequest.getParameter("requestNum"));
+
+        return postService.newPost(0);
     }
 
     // 注册函数
     // Modified by SeeChen Lee @ 09-Jan-2023 19:04
-    @CrossOrigin    // 允许跨域
+    @CrossOrigin
     @PostMapping("/register")
     public String userRegister(HttpServletRequest httpServletRequest) {
 
@@ -56,7 +70,7 @@ public class Controller {
         if (userService.emailExists(userEmail)) {
 
             // 若用户存在 则返回信息
-            return "User Exists";
+            return "UserExists";
         } else {
 
             return userService.createUser(userEmail, userPass);
@@ -66,7 +80,7 @@ public class Controller {
     // 用于获取用户登录信息
     // Last Modified by SeeChen Lee @ 11-Jan-2023 06:37
     @CrossOrigin
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String userLogin(HttpServletRequest httpServletRequest) {
 
         String userEmail = httpServletRequest.getParameter("userEmail");

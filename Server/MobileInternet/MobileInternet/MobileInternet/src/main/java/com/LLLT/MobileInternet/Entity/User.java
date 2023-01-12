@@ -46,8 +46,7 @@ public class User implements Serializable {
     private List<String>                userPost;       // 用户发布的帖子
     private List<UserPublicInformation> userFollower;   // 用户的粉丝列表
     private List<UserPublicInformation> userFollowing;  // 用户的关注列表
-
-    private List<String>                likedPost;
+    private List<String>                likePost;       // 用户所点赞的列表
 
     // getter 函数
     public List<String>                getUserSexList()   { return userSexList;   }
@@ -60,26 +59,20 @@ public class User implements Serializable {
     public List<String>                getUserPost()      { return userPost;      }
     public List<UserPublicInformation> getUserFollower()  { return userFollower;  }
     public List<UserPublicInformation> getUserFollowing() { return userFollowing; }
-
-    public List<String> getLikedPost() {
-        return likedPost;
-    }
+    public List<String>                getLikePost()      { return likePost;      }
 
     // setter 函数
-    public void setUserSexList(List<String> userSexList)                    { this.userSexList  = userSexList;  }
-    public void setUserId(String userId)                                    { this.userId       = userId;       }
-    public void setUserName(String userName)                                { this.userName     = userName;     }
-    public void setUserPass(String userPass)                                { this.userPass     = userPass;     }
-    public void setDayOfBirth(String dayOfBirth)                            { this.dayOfBirth   = dayOfBirth;   }
-    public void setUserSexIndex(Integer userSexIndex)                       { this.userSexIndex = userSexIndex; }
-    public void setEmail(String email)                                      { this.email        = email;        }
-    public void setUserPost(List<String> userPost)                          { this.userPost     = userPost;     }
-    public void setUserFollower(List<UserPublicInformation> userFollower)   { this.userFollower = userFollower; }
+    public void setUserSexList(List<String> userSexList)                    { this.userSexList  = userSexList;    }
+    public void setUserId(String userId)                                    { this.userId       = userId;         }
+    public void setUserName(String userName)                                { this.userName     = userName;       }
+    public void setUserPass(String userPass)                                { this.userPass     = userPass;       }
+    public void setDayOfBirth(String dayOfBirth)                            { this.dayOfBirth   = dayOfBirth;     }
+    public void setUserSexIndex(Integer userSexIndex)                       { this.userSexIndex = userSexIndex;   }
+    public void setEmail(String email)                                      { this.email        = email;          }
+    public void setUserPost(List<String> userPost)                          { this.userPost     = userPost;       }
+    public void setUserFollower(List<UserPublicInformation> userFollower)   { this.userFollower = userFollower;   }
     public void setUserFollowing(List<UserPublicInformation> userFollowing) { this.userFollowing = userFollowing; }
-
-    public void setLikedPost(List<String> likedPost) {
-        this.likedPost = likedPost;
-    }
+    public void setLikePost(List<String> likePost)                          { this.likePost      = likePost;      }
 
     // 构造函数
     public User() {}

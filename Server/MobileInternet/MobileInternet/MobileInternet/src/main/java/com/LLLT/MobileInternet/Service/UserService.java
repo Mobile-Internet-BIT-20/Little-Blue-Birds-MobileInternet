@@ -26,9 +26,8 @@ public interface UserService {
     public User    getUserInfo(String userId);                                      // 用于获取用户资料
 
     public Boolean emailExists(String email);                                       // 用于判断当前邮箱是否已经注册
-    public Boolean userFollow(String followerId, String targetId);                // 用户关注其它用户
+    public Boolean userFollow(String followerId, String targetId);                  // 用户关注其它用户
     public Boolean updateUser(User updateUser);                                     // 用于更新用户的基本资料 ( 非保密性 )
     public Boolean userDelete(String userEmail, String userPass, String userId);    // 用于删除用户账号
-    public Boolean likePost(String userId, String postId);
-
+    public Boolean likePost(String userId, String postId);                          // 用户点赞帖子
 }
