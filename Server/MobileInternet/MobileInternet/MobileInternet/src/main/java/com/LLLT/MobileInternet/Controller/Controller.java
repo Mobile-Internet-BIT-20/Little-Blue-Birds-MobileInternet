@@ -66,7 +66,6 @@ public class Controller {
 
         String userEmail = httpServletRequest.getParameter("userEmail");
         String userPass  = httpServletRequest.getParameter("userPass" );
-        String userConfirmPass = httpServletRequest.getParameter("userConfirmPass" );
 
         if (userService.emailExists(userEmail)) {
 
@@ -74,7 +73,7 @@ public class Controller {
             return "UserExists";
         } else {
 
-            return userService.createUser(userEmail, userPass,userConfirmPass);
+            return userService.createUser(userEmail, userPass);
         }
     }
 

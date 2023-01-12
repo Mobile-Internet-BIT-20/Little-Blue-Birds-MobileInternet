@@ -11,6 +11,7 @@
 
         <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
         <script type = "text/javascript" href ="/js/register.js"></script>
+        <script type = "text/javascript" src = "/Function/jquery.md5.js"></script>
     </head>
     <body>
     <form action = "/api/register" id = "registerForm">
@@ -31,21 +32,26 @@
             var $form = $(this),
                 userEmail = $form.find("input[name='userEmail']").val(),
                 userPass = $form.find("input[name='userPass']").val(),
-                userConfirmPass = $form.find("input[name='userConfirmPass']").val(),
-                url = $form.attr("action");
+                userConfirmPass = $form.find("input[name='userConfirmPass']").val();
+                //url = $form.attr("action");
 
-            var posting = $.post("http://127.0.0.1:8080/api/register",{
-                userEmail : userEmail,
-                userPass  : userPass,
-                userConfirmPass : userConfirmPass,
-            });
+            var md5Pass = $.md5(userPass)
 
-            posting.done(function(data){
-                if(data != "Password Not Match" && data != "UserExists"){
-                    window.location.href="http://127.0.0.1:8080/login"
-                }
-                alert(data);
-            })
+            if(userPass == userConfirmPass){
+                var posting = $.post("http://127.0.0.1:8080/api/register",{
+                    userEmail : userEmail,
+                    userPass  : md5Pass
+                });
+
+                posting.done(function(data){
+                    if(data != "UserExists"){
+                        alert("user registered :" + data)
+                        window.location.href="http://127.0.0.1:8080/login"
+                    }
+                })
+            }else{
+                alert("Password Not Match")
+            }
 
         })
 

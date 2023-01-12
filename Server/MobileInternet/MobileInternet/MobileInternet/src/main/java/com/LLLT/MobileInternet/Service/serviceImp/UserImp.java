@@ -61,9 +61,9 @@ public class UserImp implements UserService {
     // 新用户保存函数
     // Modified by ViHang Tan @ 12-Jan-2023 15:31
     @Override
-    public String createUser(String userEmail, String userPass,String userConfirmPass) {
+    public String createUser(String userEmail, String userPass) {
 
-        if(userPass.equals(userConfirmPass) ){
+
             String userName, userId, dayOfBirth;
             Integer userSexIndex = 0;   // 默认未设置
             List<String> userPost = List.of();
@@ -94,9 +94,6 @@ public class UserImp implements UserService {
             mongoTemplate.insert(newUser);
 
             return userId;
-        }
-
-        return "Password Not Match";
     }
 
     // 用户登录函数
@@ -105,17 +102,14 @@ public class UserImp implements UserService {
     public String userLogin(String userEmail, String userPass) {
 
         if (!emailExists(userEmail)) {
-
             return "User Not Exists";
         } else {
-
             Query query = new Query(Criteria.where("email").is(userEmail));
 
             User loginUser = mongoTemplate.findOne(query, User.class, "user");
 
             assert loginUser != null;
             if (userPass.equals(loginUser.getUserPass())) {
-
                 return loginUser.getUserId();
             } else {
 

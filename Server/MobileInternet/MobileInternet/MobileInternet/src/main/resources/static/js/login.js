@@ -1,7 +1,5 @@
 window.onload = function() {
 
-    cookie()
-
     var p = document.getElementById("password_field");
 
     p.onfocus = function() {
@@ -13,4 +11,10 @@ window.onload = function() {
     }
 
     document.querySelector("body").className = "";
+
+
 }
+
+
+
+

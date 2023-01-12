@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <head>
     <link rel="stylesheet" type="text/css" href="/css/login.css">
+
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
     <script src="/js/login.js"></script>
-    <script src="/js/cookie.js"></script>
+    <script type = "text/javascript" src = "/Function/jquery.md5.js"></script>
+
 </head>
 
 <body>
@@ -22,7 +25,8 @@
                                 </div>
                             </span>
 </div>
-<form action="/api/login" method="post" accept-charset="utf-8">
+
+<form action="/api/login" id="loginForm" accept-charset="utf-8">
     <div class="input_holder">
         <!--用户图标-->
         <span><i class=""></i></span>
@@ -40,8 +44,33 @@
     </div>
     <button id = "submit_button" class="submit_button" value="登录"></button>
     <div class="third">
-        <a href="#">立即注册</a>
+        <a href="http://127.0.0.1:8080/ register">立即注册</a>
     </div>
 </form>
+
+<script>
+    $("#loginForm").submit(function (event){
+        event.preventDefault();
+
+        var $form = $(this),
+            userEmail = $form.find("input[name = 'userEmail']").val(),
+            userPass = $form.find("input[name = 'userPass']").val();
+
+        var md5Pass = $.md5(userPass)
+
+        var posting = $.post("http://127.0.0.1:8080/api/login",{
+            userEmail : userEmail,
+            userPass : md5Pass
+        });
+
+        posting.done(function(data){
+            alert(data)
+            if(data != "Wrong Password" && data != "User Not Exists"){
+                window.location.href="http://127.0.0.1:8080/"
+            }
+        })
+    })
+</script>
+
 </body>
 </html>
