@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/createFragment"
-        android:icon="@drawable/ic_create"
-        android:title="Create"/>
 
     <item
         android:id="@+id/publicFragment"
-        android:icon="@drawable/ic_public"
-        android:title="Public" />
+        android:icon="@drawable/ic_home"
+        android:title="首页" />
+
+    <item
+    android:id="@+id/createFragment"
+    android:icon="@drawable/ic_add"
+    android:title="创建"/>
 
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
-        android:title="Profile"/>
+        android:title="我"/>
 
-    <item
-        android:id="@+id/postFragment"
-        android:icon="@drawable/ic_email"
-        android:title="Post"/>
 </menu>

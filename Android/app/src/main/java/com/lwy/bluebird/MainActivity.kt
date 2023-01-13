@@ -9,6 +9,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,11 +23,11 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener {_,destination,_ ->
-            if(destination.id == R.id.loginFragment || destination.id == R.id.signupFragment || destination.id == R.id.postFragment){
-                bottomNavigationView.visibility = View.GONE
+            if(destination.id == R.id.profileFragment || destination.id == R.id.publicFragment){
+                bottomNavigationView.visibility = View.VISIBLE
             }
             else{
-                bottomNavigationView.visibility = View.VISIBLE
+                bottomNavigationView.visibility = View.GONE
             }
         }
     }

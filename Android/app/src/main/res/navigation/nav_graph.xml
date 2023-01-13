@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/publicFragment"
+    maintainBackstack="true">
 
     <fragment
         android:id="@+id/publicFragment"
@@ -12,7 +13,8 @@
         tools:layout="@layout/fragment_public" >
         <action
             android:id="@+id/action_publicFragment_to_createFragment"
-            app:destination="@id/createFragment" />
+            app:destination="@id/createFragment"
+            app:launchSingleTop="false" />
         <action
             android:id="@+id/action_publicFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -30,10 +32,14 @@
             app:destination="@id/publicFragment" />
         <action
             android:id="@+id/action_profileFragment_to_createFragment"
-            app:destination="@id/createFragment" />
+            app:destination="@id/createFragment"
+            app:launchSingleTop="false" />
         <action
             android:id="@+id/action_profileFragment_to_postFragment"
             app:destination="@id/postFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/createFragment"
@@ -49,17 +55,11 @@
         <action
             android:id="@+id/action_createFragment_to_postFragment"
             app:destination="@id/postFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.lwy.bluebird.Fragment.login.LoginFragment"
-        android:label="LoginFragment" >
         <action
-            android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_publicFragment"
-            app:destination="@id/publicFragment" />
+            android:id="@+id/action_createFragment_to_publicFragment2"
+            app:destination="@id/publicFragment"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/postFragment"
@@ -76,11 +76,11 @@
             app:destination="@id/profileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.lwy.bluebird.Fragment.signup.SignupFragment"
-        android:label="SignupFragment" >
+        android:id="@+id/editFragment"
+        android:name="com.lwy.bluebird.Fragment.edit.EditFragment"
+        android:label="EditFragment" >
         <action
-            android:id="@+id/action_signupFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_editFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

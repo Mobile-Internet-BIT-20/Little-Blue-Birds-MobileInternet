@@ -1,6 +1,7 @@
 package com.lwy.bluebird.Fragment.publichome
 
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
@@ -8,24 +9,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lwy.bluebird.Data.User
 import com.lwy.bluebird.R
+import com.lwy.bluebird.databinding.ImageLayoutBinding
 import com.lwy.bluebird.databinding.PostLayoutBinding
 
-class PublicAdapter : RecyclerView.Adapter<PublicAdapter.MyViewHolder>() {
+class CreateAdapter : RecyclerView.Adapter<CreateAdapter.MyViewHolder>() {
 
-    var dataList = emptyList<User>()
+    var imageList = emptyList<Uri>()
 
-    class MyViewHolder(internal val binding: PostLayoutBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: User) {
+    class MyViewHolder(internal val binding: ImageLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(image: Uri) {
+            binding.createImage.setImageURI(image)
         }
 
         companion object{
             fun from(parent: ViewGroup): MyViewHolder{
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = PostLayoutBinding.inflate(layoutInflater,parent,false)
+                val binding = ImageLayoutBinding.inflate(layoutInflater,parent,false)
                 return MyViewHolder(binding)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -34,16 +36,17 @@ class PublicAdapter : RecyclerView.Adapter<PublicAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = dataList[position]
+        val item = imageList[position]
 
         holder.bind(item)
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        return imageList.size
     }
 
-    fun setData(data: List<User>){
-        this.dataList = data
+    fun setData(img: List<Uri>){
+        this.imageList = img
     }
+
 }

@@ -1,5 +1,6 @@
 package com.lwy.bluebird.Fragment.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ class LoginFragment : Fragment() {
     private val binding: FragmentLoginBinding
         get() = _binding!!
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +29,10 @@ class LoginFragment : Fragment() {
         }
 
         binding.loginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_publicFragment)
+            val email = binding.loginEmail.text
+            val password = binding.loginPassword.text
+
+            findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
         }
 
         return binding.root
