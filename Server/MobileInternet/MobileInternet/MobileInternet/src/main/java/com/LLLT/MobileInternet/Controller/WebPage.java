@@ -30,6 +30,7 @@ package com.LLLT.MobileInternet.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class WebPage {
@@ -64,5 +65,11 @@ public class WebPage {
     public String LoginPage() {
 
         return "login";
+    }
+
+    @GetMapping("{userId}")
+    public String UserPage(@PathVariable("userId") String userId){
+
+        return "index";
     }
 }

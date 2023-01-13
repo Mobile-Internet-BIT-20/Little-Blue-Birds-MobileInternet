@@ -70,8 +70,6 @@ function registerClick() {
             noneWrong = false;
         }
 
-        console.log(noneWrong);
-
         if (noneWrong) {
 
             $.post(defaultHost + "/api/register", {

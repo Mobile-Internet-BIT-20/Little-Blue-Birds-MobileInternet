@@ -15,7 +15,6 @@ export class _Language {
     #filterLanguage() {
 
         let systemLanguage = true;
-
         let name      = "usrLanguage=";
         let cookieArr = document.cookie.split(';');
 
