@@ -1,0 +1,31 @@
+{
+  "zh" : [{
+    "title"            : "小蓝鸟",
+    "goto_login"       : "登录",
+    "goto_register"    : "注册",
+    "downloadApp"      : "下载安卓版",
+    "switchLang"       : "切换语言",
+    "web_introduction" : "随心所欲地分享故事。",
+    "goto_home"        : "前往主页",
+    "project_members"  : "@ 项目成员 :",
+    "leye_lau"         : "刘 乐也",
+    "seechen_lee"      : "李 思净",
+    "winyi_lee"        : "李 沄澺",
+    "vihang_tan"       : "陈 誉航"
+  }],
+
+  "en" : [{
+    "title"            : "Little Blue Birds",
+    "goto_login"       : "Login",
+    "goto_register"    : "Register",
+    "downloadApp"      : "Download",
+    "switchLang"       : "Language",
+    "web_introduction" : "Share stories as you like.",
+    "goto_home"        : "Go Website",
+    "project_members"  : "@ Members :",
+    "leye_lau"         : "LeYe Lau",
+    "seechen_lee"      : "SeeChen Lee",
+    "winyi_lee"        : "WinYi Lee",
+    "vihang_tan"       : "ViHang Tan"
+  }]
+}

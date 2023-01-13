@@ -55,11 +55,11 @@ public class Controller {
 
         Integer num = Integer.valueOf(httpServletRequest.getParameter("requestNum"));
 
-        return postService.newPost(0);
+        return postService.newPost(num);
     }
 
     // 注册函数
-    // Modified by ViHang Tan @ 12-Jan-2023 15:31
+    // Modified by SeeChen Lee @ 09-Jan-2023 19:04
     @CrossOrigin
     @PostMapping("/register")
     public String userRegister(HttpServletRequest httpServletRequest) {

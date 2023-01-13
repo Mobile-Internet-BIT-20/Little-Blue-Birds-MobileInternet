@@ -42,7 +42,15 @@ public class WebPage {
         return "index";
     }
 
-    // Register 页面返回函数
+    // MainPage 函数 所有内容的默认主页
+    // Last Modified by SeeChen Lee @ 13-Jan-2023 01:39
+    @GetMapping("/home")
+    public String HomePage() {
+
+        return "home";
+    }
+
+    // Register 页面
     // Last Modified by SeeChen Lee @ 11-Jan-2023 17:47
     @GetMapping("/register")
     public String RegisterPage() {

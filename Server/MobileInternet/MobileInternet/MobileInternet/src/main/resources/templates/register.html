@@ -1,59 +1,110 @@
+<!--
+    index.html
+    网页注册页面
+    Author       : SeeChen Lee
+    Version      : 0.0.1
+    Last Modified: 12-Jan-2023 17:00
+-->
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name = "author" content = "SeeChen" />
-        <title>小蓝鸟 | 注册</title>
+        <meta name = "viewport"  content = "width = device-width, initial-scale = 1" />
 
-        <link type = "image/png" rel = "icon" href = "https://raw.githubusercontent.com/Mobile-Internet-BIT-20/TermProject/main/Element/Logo/Logo-transparentBg.png">
+        <meta charset = "UTF-8" />
+        <meta name = "copyright" content = "SeeChen Lee, LeYe Lau, WinYi Lee, ViHang Tan"/>
 
-        <link type = "text/css" rel = "stylesheet" href = "/css/register.css" />
+        <title></title>
 
-        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
-        <script type = "text/javascript" href ="/js/register.js"></script>
-        <script type = "text/javascript" src = "/Function/jquery.md5.js"></script>
+        <link rel = "icon"       type = "image/png" href = "/materials/logo.png" />
+
+        <link rel = "stylesheet" type = "text/css" href = "/css/publicSetting.css" />
+
+        <link rel = "stylesheet" type = "text/css" media = "screen and (min-width: 600px)" href = "/css/register.css?version=0.0.1" />
+
+        <script src = "http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+
+        <script type = "module" src = "/publicFunction/consoleMessage.js?version=1.0.0"></script>
+        <script type = "module" src = "/publicFunction/language.js?version=1.0.0"></script>
+        <script type = "module" src = "/js/register.js?version=0.0.1"></script>
     </head>
     <body>
-    <form action = "/api/register" id = "registerForm">
-        <div class="input_holder">
-            <input type="text" name="userEmail" id="userEmail" placeholder="输入用户注册邮箱" required>
-            <input type="password" name="userPass" id="userPass" placeholder="请输入密码" required>
-            <input type="password" name="userConfirmPass" id="userConfirmPass" placeholder="请重复输入密码" required>
-            <button id = "submit_button" class="submit_button" value="注册">注册</button>
+
+        <p style = "text-align: center;">
+            <img src = "/materials/logo.png" style = "height: 6em; width: auto; margin-top: 0.5em" />
+        </p>
+
+        <div id = "mainModule">
+            <p id = "register_title">register_title</p>
+
+
+            <table style = "width : 90%; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;" border = 1>
+                <tr><td>
+                    <p id = "userName_title"  class = "register_label">userName_title</p>
+                </td></tr>
+                <tr><td>
+                    <label>
+                        <input type = "text" />
+                    </label>
+                    <p id = "userWarning" class = "registerWarning"></p>
+                </td></tr>
+
+                <tr><td>
+                    <p id = "userPass_title"   class = "register_label">userPass_title</p>
+                </td></tr>
+                <tr><td>
+                    <label>
+                        <input type = "password"/>
+                    </label>
+                    <p id = "passWarning_first" class = "registerWarning"></p>
+                </td></tr>
+
+                <tr><td>
+                    <p id = "confirmPass_title" class = "register_label">confirmPass_title</p>
+                </td></tr>
+                <tr><td>
+                    <label>
+                        <input type = "password" />
+                    </label>
+                    <p id = "passWarning_second" class = "registerWarning"></p>
+                </td></tr>
+            </table>
         </div>
-    </form>
 
-    </body>
+<!--form action = "/api/register" id = "registerForm">
+    <div class="input_holder">
+        <input type="text" name="userEmail" id="userEmail" placeholder="输入用户注册邮箱" required>
+        <input type="password" name="userPass" id="userPass" placeholder="请输入密码" required>
+        <input type="password" name="userConfirmPass" id="userConfirmPass" placeholder="请重复输入密码" required>
+        <button id = "submit_button" class="submit_button" value="注册">注册</button>
+    </div>
+</form-->
 
-    <script>
-        $("#registerForm").submit(function (event){
-            event.preventDefault();
+</body>
 
-            var $form = $(this),
-                userEmail = $form.find("input[name='userEmail']").val(),
-                userPass = $form.find("input[name='userPass']").val(),
-                userConfirmPass = $form.find("input[name='userConfirmPass']").val();
-                //url = $form.attr("action");
+<!--script>
+    $("#registerForm").submit(function (event){
+        event.preventDefault();
 
-            var md5Pass = $.md5(userPass)
+        var $form = $(this),
+            userEmail = $form.find("input[name='userEmail']").val(),
+            userPass = $form.find("input[name='userPass']").val(),
+            userConfirmPass = $form.find("input[name='userConfirmPass']").val(),
+            url = $form.attr("action");
 
-            if(userPass == userConfirmPass){
-                var posting = $.post("http://127.0.0.1:8080/api/register",{
-                    userEmail : userEmail,
-                    userPass  : md5Pass
-                });
+        var posting = $.post("http://127.0.0.1:8080/api/register",{
+            userEmail : userEmail,
+            userPass  : userPass,
+            userConfirmPass : userConfirmPass,
+        });
 
-                posting.done(function(data){
-                    if(data != "UserExists"){
-                        alert("user registered :" + data)
-                        window.location.href="http://127.0.0.1:8080/login"
-                    }
-                })
-            }else{
-                alert("Password Not Match")
+        posting.done(function(data){
+            if(data != "Password Not Match" && data != "UserExists"){
+                window.location.href="http://127.0.0.1:8080/login"
             }
-
+            alert(data);
         })
 
-    </script>
+    })
+
+</script-->
 </html>

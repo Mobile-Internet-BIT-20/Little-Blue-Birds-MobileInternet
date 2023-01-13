@@ -36,6 +36,7 @@ import com.LLLT.MobileInternet.Service.PostService;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.mongodb.CodecRegistryProvider;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -148,11 +149,14 @@ public class PostImp implements PostService {
     }
 
     // 从最后一条记录返回帖子 适用场景 home page
-    // Last Modified by SeeChen Lee @ 12-Jan-2023 12:05
+    // Last Modified by SeeChen Lee @ 12-Jan-2023 16:17
     @Override
     public List<Post> newPost(Integer requestNum) {
 
-        // 修改中
-        return mongoTemplate.findAll(Post.class);
+        long skipNum = mongoTemplate.findAll(Post.class, "post").size() - (20L * requestNum);
+
+        Query query = new Query(Criteria.where("").is("")).skip(skipNum).limit(20);
+
+        return mongoTemplate.find(query, Post.class, "post");
     }
 }

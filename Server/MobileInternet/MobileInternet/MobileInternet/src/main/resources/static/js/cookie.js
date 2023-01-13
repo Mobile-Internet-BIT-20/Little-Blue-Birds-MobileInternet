@@ -1,4 +1,4 @@
-function cookie() {
+window.onload = function() {
     const name = document.querySelector("#userEmail")
     const pass = document.querySelector("#userPass")
     const submitbtn = document.querySelector("#submit_button")

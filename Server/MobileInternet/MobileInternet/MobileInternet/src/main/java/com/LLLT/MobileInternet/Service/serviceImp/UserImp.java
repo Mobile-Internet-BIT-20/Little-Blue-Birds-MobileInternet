@@ -59,41 +59,40 @@ public class UserImp implements UserService {
 
 
     // 新用户保存函数
-    // Modified by ViHang Tan @ 12-Jan-2023 15:31
+    // Modified by SeeChen Lee @ 11-Jan-2023 08:53
     @Override
     public String createUser(String userEmail, String userPass) {
 
+        String userName, userId, dayOfBirth;
+        Integer userSexIndex = 0;   // 默认未设置
+        List<String> userPost = List.of();
 
-            String userName, userId, dayOfBirth;
-            Integer userSexIndex = 0;   // 默认未设置
-            List<String> userPost = List.of();
+        List<UserPublicInformation> userFollower  = List.of();
+        List<UserPublicInformation> userFollowing = List.of();
 
-            List<UserPublicInformation> userFollower  = List.of();
-            List<UserPublicInformation> userFollowing = List.of();
+        // 新建一个用户
+        User newUser = new User(userEmail, userPass);
 
-            // 新建一个用户
-            User newUser = new User(userEmail, userPass);
+        // 下列为默认设置 可以在创建用户完成后重新设置
+        userId = "U" + new ObjectId();
+        userName = "用户" + userId;
+        dayOfBirth = "1900-01-01";
 
-            // 下列为默认设置 可以在创建用户完成后重新设置
-            userId = "U" + new ObjectId();
-            userName = "用户" + userId;
-            dayOfBirth = "1900-01-01";
+        // 进行设置
+        newUser.setUserId(userId);
+        newUser.setUserName(userName);
+        newUser.setDayOfBirth(dayOfBirth);
+        newUser.setUserSexIndex(userSexIndex);
 
-            // 进行设置
-            newUser.setUserId(userId);
-            newUser.setUserName(userName);
-            newUser.setDayOfBirth(dayOfBirth);
-            newUser.setUserSexIndex(userSexIndex);
+        newUser.setUserFollower(userFollower);
+        newUser.setUserFollowing(userFollowing);
 
-            newUser.setUserFollower(userFollower);
-            newUser.setUserFollowing(userFollowing);
+        // 设置帖子数据 初始为空
+        newUser.setUserPost(userPost);
 
-            // 设置帖子数据 初始为空
-            newUser.setUserPost(userPost);
+        mongoTemplate.insert(newUser);
 
-            mongoTemplate.insert(newUser);
-
-            return userId;
+        return userId;
     }
 
     // 用户登录函数
@@ -102,14 +101,17 @@ public class UserImp implements UserService {
     public String userLogin(String userEmail, String userPass) {
 
         if (!emailExists(userEmail)) {
+
             return "User Not Exists";
         } else {
+
             Query query = new Query(Criteria.where("email").is(userEmail));
 
             User loginUser = mongoTemplate.findOne(query, User.class, "user");
 
             assert loginUser != null;
             if (userPass.equals(loginUser.getUserPass())) {
+
                 return loginUser.getUserId();
             } else {
 
