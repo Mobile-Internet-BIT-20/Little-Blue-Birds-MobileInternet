@@ -70,6 +70,8 @@ public class UserImp implements UserService {
         List<UserPublicInformation> userFollower  = List.of();
         List<UserPublicInformation> userFollowing = List.of();
 
+        List<String> likePost = List.of();
+
         // 新建一个用户
         User newUser = new User(userEmail, userPass);
 
@@ -86,6 +88,8 @@ public class UserImp implements UserService {
 
         newUser.setUserFollower(userFollower);
         newUser.setUserFollowing(userFollowing);
+
+        newUser.setLikePost(likePost);
 
         // 设置帖子数据 初始为空
         newUser.setUserPost(userPost);

@@ -102,7 +102,7 @@ public class PostImp implements PostService {
 
         mongoTemplate.upsert(query, update, Post.class, "post");
 
-        userService.likePost(userId,postId);
+        userService.likePost(userId, postId);
 
         return true;
     }
@@ -151,12 +151,20 @@ public class PostImp implements PostService {
     // 从最后一条记录返回帖子 适用场景 home page
     // Last Modified by SeeChen Lee @ 12-Jan-2023 16:17
     @Override
-    public List<Post> newPost(Integer requestNum) {
+    public List<Post> allPost(Integer requestNum) {
 
         long skipNum = mongoTemplate.findAll(Post.class, "post").size() - (20L * requestNum);
 
-        Query query = new Query(Criteria.where("").is("")).skip(skipNum).limit(20);
 
-        return mongoTemplate.find(query, Post.class, "post");
+        if(skipNum<0){
+            Query query = new Query(Criteria.where("").is("")).skip(0).limit(20);
+
+            return mongoTemplate.find(query, Post.class, "post");
+        }else{
+            Query query = new Query(Criteria.where("").is("")).skip(skipNum).limit(20);
+
+            return mongoTemplate.find(query, Post.class, "post");
+        }
+
     }
 }

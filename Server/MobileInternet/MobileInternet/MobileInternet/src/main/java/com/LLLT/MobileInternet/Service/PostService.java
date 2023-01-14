@@ -20,5 +20,5 @@ public interface PostService {
     public Boolean    commentPost(String postId, String userId, String commentContent);     // 用户评论帖子
 
     public Post       postContent(String postId);                                           // 获取帖子的内容
-    public List<Post> newPost(Integer requestNum);                                          // 获取新帖子
+    public List<Post> allPost(Integer requestNum);                                          // 获取新帖子
 }

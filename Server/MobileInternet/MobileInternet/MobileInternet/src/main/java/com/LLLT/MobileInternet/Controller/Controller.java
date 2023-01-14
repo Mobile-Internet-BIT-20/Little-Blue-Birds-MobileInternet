@@ -50,12 +50,12 @@ public class Controller {
     }
 
     @CrossOrigin
-    @RequestMapping("/newPost")
+    @RequestMapping("/allPost")
     public List<Post> homePage(HttpServletRequest httpServletRequest) {
 
         Integer num = Integer.valueOf(httpServletRequest.getParameter("requestNum"));
 
-        return postService.newPost(num);
+        return postService.allPost(num);
     }
 
     // 注册函数
