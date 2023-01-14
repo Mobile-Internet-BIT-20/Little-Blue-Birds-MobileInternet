@@ -15,6 +15,8 @@ public interface PostService {
 
     public String     publishPost(String holderId, String postTitle, String postContent);   // 用户发布帖子
 
+    public String     publisherId(String postId);
+
     public Boolean    likePost(String postId, String userId);                               // 用户点赞帖子
 
     public Boolean    commentPost(String postId, String userId, String commentContent);     // 用户评论帖子

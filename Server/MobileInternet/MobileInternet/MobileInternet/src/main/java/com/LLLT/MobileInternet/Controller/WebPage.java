@@ -28,6 +28,7 @@
 
 package com.LLLT.MobileInternet.Controller;
 
+import com.LLLT.MobileInternet.Service.PostService;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class WebPage {
 
     private final UserService userService;
-    public WebPage(UserService userService) { this.userService = userService; }
+    private final PostService postService;
+    public WebPage(UserService userService, PostService postService) {
+        this.userService = userService;
+        this.postService = postService;
+    }
 
     // MainPage 函数 网页版默认的主页面
     // Last Modified by SeeChen Lee @ 11-Jan-2023 09:56
@@ -81,6 +86,26 @@ public class WebPage {
         }
     }
 
+    // 帖子页面
+    // Last Modified by ViHang Tan @ 17:12
+    @GetMapping("/post/{postId}")
+    public String postPage(@CookieValue(value = "userId"   , defaultValue = "null") String userId,
+                           @PathVariable("postId") String targetId){
+
+        if(postService.publisherId(targetId).equals(userId)){
+            return "postSpace/self";
+        }else{
+            return "postSpace/visitor";
+        }
+    }
+
+    //新建帖子页面
+    // Last Modified by ViHang Tan @ 17:54
+    @GetMapping("/newPost")
+    public String newPostPage(@CookieValue(value = "userId"   , defaultValue = "null") String userId){
+        return "home";
+    }
+
     // 用户个人主页面
     // Last Modified by SeeChen Lee @ 10:52
     @GetMapping("/{userId}")
@@ -97,4 +122,5 @@ public class WebPage {
             return "userSpace/visitor";
         }
     }
+
 }

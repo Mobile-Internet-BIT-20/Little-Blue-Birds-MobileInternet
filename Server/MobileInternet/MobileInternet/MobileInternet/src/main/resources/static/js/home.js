@@ -2,6 +2,26 @@ var host = "http://127.0.0.1:8080"
 
 window.onload = function (){
     loadPost();
+
+    let isLoggedIn = getCookie("userId").substring(0,1);
+
+    $("#userBtn").click(function(){
+        if(isLoggedIn !== "U"){
+            window.location.href = "/login";
+        }else{
+            window.location.href = "/"+getCookie("userId");
+        }
+    })
+
+    $("#postSmtBtn").click(function(){
+        let isLoggedIn = getCookie("userId").substring(0,1);
+
+        if(isLoggedIn !== "U"){
+            window.location.href = "/login";
+        }else{
+            window.location.href = "/newPost";
+        }
+    })
 }
 
 function loadPost(){
@@ -14,6 +34,7 @@ function loadPost(){
 }
 
 function showAllPost(data){
+    let isLoggedIn = getCookie("userId").substring(0,1);
     let i = 0
     for(i; i < data.length;i++){
         console.log(data[i].postId)
@@ -22,6 +43,7 @@ function showAllPost(data){
             "            <h1 class = 'postTitle'>"+data[i].postTitle+"</h1>\n" +
             "            <p class = 'publisher'>Publisher:"+ data[i].holderId+"</p>\n" +
             "            <p class = 'postContent'>"+data[i].postContent+"</p>\n" +
+            "            <div class = 'likeinfo'>"+data[i].likeNum+"</div>\n" +
             "            <button id = 'L"+data[i].postId+"' class='userInput'>Like</button>\n" +
             "            <button id = 'C"+data[i].postId+"' class='userInput'>Comment</button>\n" +
             "        </div>";
@@ -40,19 +62,24 @@ function showAllPost(data){
 
         }else if(option === "L"){
 
-            $.get(host + "/api/post/"+ postId +"/like",{
-                userId : getCookie("userId")
-            },function(data){
-                if(data === true){
-                    console.log("liked")
-                }else{
-                    console.log("did not liked")
-                }
-            })
-
+            if(isLoggedIn !== "U"){
+                window.location.href = "/login";
+            }else{
+                $.get(host + "/api/post/"+ postId +"/like",{
+                    userId : getCookie("userId")
+                },function(data){
+                    if(data === true){
+                        console.log("liked")
+                    }else{
+                        console.log("did not liked")
+                    }
+                })
+            }
         }else{
             console.log("not a selection")
         }
     })
 }
+
+
 

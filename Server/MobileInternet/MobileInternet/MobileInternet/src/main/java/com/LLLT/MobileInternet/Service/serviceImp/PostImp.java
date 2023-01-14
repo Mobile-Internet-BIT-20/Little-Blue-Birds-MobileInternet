@@ -90,21 +90,32 @@ public class PostImp implements PostService {
     @Override
     public Boolean likePost(String postId, String userId) {
 
+        //先判断当前用户是否已经对帖子点过赞
         Query query      = new Query(Criteria.where("postId").is(postId));
         Post  targetPost = mongoTemplate.findOne(query, Post.class, "post");
 
-        assert targetPost != null;
-        targetPost.setLikeNum(targetPost.getLikeNum() + 1);
-        targetPost.getLikeUser().add(userId);
+        List<String> likedUser = targetPost.getLikeUser();
+        Integer hasLiked = likedUser.indexOf(userId);
+        System.out.println(hasLiked);
 
-        Update update = new Update();
-        update.set("likeUser", targetPost.getLikeUser()).set("likeNum", targetPost.getLikeNum());
+        if(hasLiked == -1){
+            assert targetPost != null;
+            targetPost.setLikeNum(targetPost.getLikeNum() + 1);
+            targetPost.getLikeUser().add(userId);
 
-        mongoTemplate.upsert(query, update, Post.class, "post");
+            Update update = new Update();
+            update.set("likeUser", targetPost.getLikeUser()).set("likeNum", targetPost.getLikeNum());
 
-        userService.likePost(userId, postId);
+            mongoTemplate.upsert(query, update, Post.class, "post");
 
-        return true;
+            userService.likePost(userId, postId);
+
+            return true;
+        }else{
+            return false;
+        }
+
+
     }
 
     // 用户评论帖子
@@ -166,5 +177,14 @@ public class PostImp implements PostService {
             return mongoTemplate.find(query, Post.class, "post");
         }
 
+    }
+
+    @Override
+    public String publisherId(String postId) {
+        Query query = new Query(Criteria.where("postId").is(postId));
+
+        Post post = mongoTemplate.findOne(query, Post.class);
+
+        return post.getHolderId();
     }
 }
