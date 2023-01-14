@@ -102,7 +102,7 @@ public class PostImp implements PostService {
 
         mongoTemplate.upsert(query, update, Post.class, "post");
 
-        userService.likePost(userId,postId);
+        userService.likePost(userId, postId);
 
         return true;
     }
