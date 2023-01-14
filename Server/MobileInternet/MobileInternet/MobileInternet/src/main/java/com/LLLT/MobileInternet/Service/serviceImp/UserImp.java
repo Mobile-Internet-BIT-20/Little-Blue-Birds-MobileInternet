@@ -72,7 +72,6 @@ public class UserImp implements UserService {
         List<UserPublicInformation> userFollower  = List.of();
         List<UserPublicInformation> userFollowing = List.of();
 
-        List<String> likePost = List.of();
 
         // 新建一个用户
         User newUser = new User(userEmail, userPass);
