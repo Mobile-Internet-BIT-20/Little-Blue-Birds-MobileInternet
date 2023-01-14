@@ -32,5 +32,4 @@ class PublicFragment : Fragment() {
 
         return binding.root
     }
-
 }

@@ -1,6 +1,7 @@
 package com.lwy.bluebird.Fragment.publichome
 
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
@@ -12,10 +13,12 @@ import com.lwy.bluebird.databinding.PostLayoutBinding
 
 class PublicAdapter : RecyclerView.Adapter<PublicAdapter.MyViewHolder>() {
 
-    var dataList = emptyList<User>()
+    var dataList = emptyList<Uri>()
 
     class MyViewHolder(internal val binding: PostLayoutBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: User) {
+        fun bind(data: Uri) {
+            binding.postLayoutImage.setImageURI(data)
+            binding.postLayoutTitle.text = "Title"
         }
 
         companion object{
@@ -25,7 +28,6 @@ class PublicAdapter : RecyclerView.Adapter<PublicAdapter.MyViewHolder>() {
                 return MyViewHolder(binding)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -43,7 +45,7 @@ class PublicAdapter : RecyclerView.Adapter<PublicAdapter.MyViewHolder>() {
         return dataList.size
     }
 
-    fun setData(data: List<User>){
+    fun setData(data: List<Uri>){
         this.dataList = data
     }
 }

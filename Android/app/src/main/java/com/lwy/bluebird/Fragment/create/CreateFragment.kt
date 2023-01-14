@@ -1,32 +1,17 @@
 package com.lwy.bluebird.Fragment.create
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.lwy.bluebird.Fragment.publichome.CreateAdapter
-import com.lwy.bluebird.Fragment.publichome.PublicAdapter
-import com.lwy.bluebird.R
 import com.lwy.bluebird.databinding.FragmentCreateBinding
-import com.lwy.bluebird.databinding.FragmentProfileBinding
-import kotlin.math.log
 
 class CreateFragment : Fragment() {
 
@@ -62,7 +47,7 @@ class CreateFragment : Fragment() {
         }
 
         binding.closeButton.setOnClickListener {
-            Toast.makeText(requireContext(), "信息将不被保存", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), "信息将不被保存", Toast.LENGTH_SHORT).show()
             requireActivity().onBackPressed()
         }
 
@@ -89,9 +74,9 @@ class CreateFragment : Fragment() {
                     }
                     adapter.setData(img)
                     adapter.notifyDataSetChanged()
-                } else if (count == 1) {
-                    var url = data?.data!!.path
-                    img.add(Uri.parse(url))
+                } else {
+                    var uri = data?.data!!
+                    img.add(uri)
                     adapter.setData(img)
                 }
                 Toast.makeText(requireContext(), "选择了" + count + "张图片", Toast.LENGTH_SHORT).show()

@@ -23,7 +23,7 @@ class EditFragment : Fragment() {
         _binding = FragmentEditBinding.inflate(inflater, container, false)
 
         binding.buttonDone.setOnClickListener {
-            findNavController().navigate(R.id.action_editFragment_to_profileFragment)
+            requireActivity().onBackPressed()
         }
 
         return binding.root
