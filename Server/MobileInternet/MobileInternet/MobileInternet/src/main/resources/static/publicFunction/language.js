@@ -14,21 +14,9 @@ export class _Language {
 
     #filterLanguage() {
 
-        let systemLanguage = true;
-        let name      = "usrLanguage=";
-        let cookieArr = document.cookie.split(';');
+        this.#language = getCookie("userLanguage");
 
-        for (let i = 0; i < cookieArr.length; i++) {
-            var cookie = cookieArr[i].trim();
-
-            if (cookie.indexOf(name) === 0) {
-
-                this.#language = cookie.substring(name.length, cookie.length);
-                systemLanguage = false;
-            }
-        }
-
-        if (systemLanguage) {
+        if (this.#language === "NoResult") {
 
             switch (this.#language.substring(0, 2)) {
 

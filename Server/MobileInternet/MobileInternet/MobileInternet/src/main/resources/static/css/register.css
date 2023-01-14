@@ -99,3 +99,13 @@ table input::placeholder {
 #register_button:active {
     background: rgba(255, 201,  60, 0.8);
 }
+
+#goto_Login {
+    color       : #fff;
+    position    : absolute;
+    bottom      : 1.5em;
+    text-align  : center;
+    font-size   : 1em;
+    width       : 100%;
+    text-shadow : 1px 1px 1px #000;
+}

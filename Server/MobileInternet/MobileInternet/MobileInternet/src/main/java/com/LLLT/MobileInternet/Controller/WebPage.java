@@ -28,12 +28,17 @@
 
 package com.LLLT.MobileInternet.Controller;
 
+import com.LLLT.MobileInternet.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class WebPage {
+
+    private final UserService userService;
+    public WebPage(UserService userService) { this.userService = userService; }
 
     // MainPage 函数 网页版默认的主页面
     // Last Modified by SeeChen Lee @ 11-Jan-2023 09:56
@@ -60,16 +65,18 @@ public class WebPage {
     }
 
     // Login 页面
-    // Last Modified by ViHang Tan @ 11-Jan-2023 19:00
+    // Last Modified by SeeChen Lee @ 14-Jan-2023 10:32
     @GetMapping("/login")
-    public String LoginPage() {
+    public String LoginPage(@CookieValue(value = "userEmail", defaultValue = "null") String userEmail,
+                            @CookieValue(value = "userPass" , defaultValue = "null") String userPass,
+                            @CookieValue(value = "userId"   , defaultValue = "null") String userId) {
 
-        return "login";
-    }
+        if (userService.userLogin(userEmail, userPass).equals(userId)) {
 
-    @GetMapping("{userId}")
-    public String UserPage(@PathVariable("userId") String userId){
+            return "home";
+        } else {
 
-        return "index";
+            return "login";
+        }
     }
 }

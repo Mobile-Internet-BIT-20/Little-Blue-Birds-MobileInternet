@@ -18,10 +18,28 @@ window.onload = function () {
 
     languageUrl = "/json/language/register.json";
 
+    $("#userEmail_input").focus();
+
     consoleMessage();
     loadPageLanguage(languageUrl);
 
+    keyboardEvent();
+
     $("#register_button").click(function() { registerClick()});
+}
+
+function keyboardEvent() {
+
+    $("html:eq(0)").bind("keydown", function (e) {
+
+        let event   = e || window.event;
+        let keyCode = event.keyCode || event.which || event.charCode;
+
+        if (keyCode === 13) {
+
+            registerClick();
+        }
+    });
 }
 
 function registerClick() {
@@ -31,7 +49,7 @@ function registerClick() {
     let confirmPass = $("#confirmPass_input").val();
 
     let verifyEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
-    let verifyPass  = /^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[!|@|#|$|%|^|&|*|_])/;
+    let verifyPass  = /^(?=.*[a-zA-Z])(?=.*[1-9])/;
     let verifyZH    = /[\u4e00-\u9fa5]/ig;
 
     let noneWrong = true;
@@ -70,6 +88,8 @@ function registerClick() {
             noneWrong = false;
         }
 
+        console.log(noneWrong);
+
         if (noneWrong) {
 
             $.post(defaultHost + "/api/register", {
@@ -83,6 +103,7 @@ function registerClick() {
                     $("#userWarning").html(languageObj.userExists);
                 } else {
 
+                    alert(languageObj.registerFinished);
                     window.location.href = defaultHost + "/login";
                 }
             });
@@ -92,7 +113,7 @@ function registerClick() {
 
 function loadPageLanguage(languageUrl) {
 
-    document.cookie = "usrLanguage=" + language + ";"
+    setCookie("userLanguage", language, 365);
 
     $.getJSON(languageUrl, function(data) {
 
@@ -107,6 +128,7 @@ function loadPageLanguage(languageUrl) {
         $("#userPass_title").text(languageObj.userPass_title);
         $("#confirmPass_title").text(languageObj.confirmPass_title);
         $("#register_button").text(languageObj.register_button);
+        $("#goto_Login").html(languageObj.alreadyHaveAccount);
 
         $("#userEmail_input").attr("placeholder", languageObj.userEmail_placeholder);
         $("#userPass_input").attr("placeholder", languageObj.userPass_placeholder);

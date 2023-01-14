@@ -40,7 +40,7 @@ window.onload = function() {
 
 function loadPageLanguage(languageUrl) {
 
-    document.cookie = "usrLanguage=" + language + ";"
+    setCookie("userLanguage", language, 365);
 
     $.getJSON(languageUrl, function(data) {
 

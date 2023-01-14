@@ -102,7 +102,7 @@ public class UserImp implements UserService {
 
         if (!emailExists(userEmail)) {
 
-            return "User Not Exists";
+            return "UserNotExists";
         } else {
 
             Query query = new Query(Criteria.where("email").is(userEmail));
@@ -115,7 +115,7 @@ public class UserImp implements UserService {
                 return loginUser.getUserId();
             } else {
 
-                return "Wrong Password";
+                return "WrongPassword";
             }
         }
     }
