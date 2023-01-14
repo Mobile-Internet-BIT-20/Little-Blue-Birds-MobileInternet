@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class WebPage {
@@ -77,6 +78,23 @@ public class WebPage {
         } else {
 
             return "login";
+        }
+    }
+
+    // 用户个人主页面
+    // Last Modified by SeeChen Lee @ 10:52
+    @GetMapping("/{userId}")
+    public String userPage(@CookieValue(value = "userEmail", defaultValue = "null") String userEmail,
+                           @CookieValue(value = "userPass" , defaultValue = "null") String userPass,
+                           @CookieValue(value = "userId"   , defaultValue = "null") String userId,
+                           @PathVariable("userId") String targetId) {
+
+        if (userService.userLogin(userEmail, userPass).equals(userId) && userId.equals(targetId)) {
+
+            return "userSpace/self";
+        } else {
+
+            return "userSpace/visitor";
         }
     }
 }

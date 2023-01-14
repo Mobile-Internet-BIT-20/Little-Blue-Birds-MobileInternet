@@ -77,9 +77,11 @@ function loginClick() {
 
                 if (data === "UserNotExists") {
 
-                    console.log(data);
                     $("#userWarning").html(languageObj.userNotExists);
-                } else {
+                } else if (data === "WrongPassword") {
+
+                    $("#passWarning").text(languageObj.wrongPassword);
+                }else {
 
                     setCookie("userId"   , data           , 365);
                     setCookie("userEmail", userEmail      , 365);
