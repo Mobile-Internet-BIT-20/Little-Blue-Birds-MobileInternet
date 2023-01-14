@@ -67,6 +67,8 @@ public class UserImp implements UserService {
         Integer userSexIndex = 0;   // 默认未设置
         List<String> userPost = List.of();
 
+        List<String> likePost = List.of();
+
         List<UserPublicInformation> userFollower  = List.of();
         List<UserPublicInformation> userFollowing = List.of();
 
