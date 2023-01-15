@@ -27,11 +27,8 @@
 package com.LLLT.MobileInternet.Controller;
 
 import com.LLLT.MobileInternet.Entity.Post;
-import com.LLLT.MobileInternet.Entity.User;
 import com.LLLT.MobileInternet.Service.PostService;
 import com.LLLT.MobileInternet.Service.UserService;
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +47,7 @@ public class Controller {
     }
 
     @CrossOrigin
-    @RequestMapping("/allPost")
+    @RequestMapping("/newPost")
     public List<Post> homePage(HttpServletRequest httpServletRequest) {
 
         Integer num = Integer.valueOf(httpServletRequest.getParameter("requestNum"));

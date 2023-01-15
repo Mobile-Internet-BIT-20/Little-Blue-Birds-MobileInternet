@@ -69,7 +69,8 @@ public class PostController {
 
     // 点赞
     // Last Modified by ViHang Tan @ 11-Jan-2023 17:00
-    @GetMapping("/{postId}/like")
+    @CrossOrigin
+    @GetMapping("{postId}/like")
     public Boolean likePost(@PathVariable("postId") String postId, HttpServletRequest httpServletRequest) {
 
         String userId = httpServletRequest.getParameter("userId");
@@ -80,7 +81,7 @@ public class PostController {
     // 评论帖子
     // Last Modified by SeeChen Lee @ 12-Jan-2023 11:19
     @CrossOrigin
-    @RequestMapping("/{postId}/comment")
+    @RequestMapping("{postId}/comment")
     public Boolean commentPost(@PathVariable("postId") String postId, HttpServletRequest httpServletRequest) {
 
         String userId         = httpServletRequest.getParameter("userId");

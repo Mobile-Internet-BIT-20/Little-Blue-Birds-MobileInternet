@@ -1,12 +1,11 @@
-var host = "http://39.105.205.166:8080"
+var host = "http://39.105.205.166:8080/"
 
 window.onload = function (){
     loadPost();
 
+    let isLoggedIn = getCookie("userId").substring(0,1);
+
     $("#userBtn").click(function(){
-
-        let isLoggedIn = getCookie("userId").substring(0,1);
-
         if(isLoggedIn !== "U"){
             window.location.href = "/login";
         }else{
@@ -35,6 +34,7 @@ function loadPost(){
 }
 
 function showAllPost(data){
+    let isLoggedIn = getCookie("userId").substring(0,1);
     let i = 0
     for(i; i < data.length;i++){
         console.log(data[i].postId)
@@ -62,19 +62,24 @@ function showAllPost(data){
 
         }else if(option === "L"){
 
-            $.get(host + "/api/post/"+ postId +"/like",{
-                userId : getCookie("userId")
-            },function(data){
-                if(data === true){
-                    console.log("liked")
-                }else{
-                    console.log("did not liked")
-                }
-            })
-
+            if(isLoggedIn !== "U"){
+                window.location.href = "/login";
+            }else{
+                $.get(host + "/api/post/"+ postId +"/like",{
+                    userId : getCookie("userId")
+                },function(data){
+                    if(data === true){
+                        console.log("liked")
+                    }else{
+                        console.log("did not liked")
+                    }
+                })
+            }
         }else{
             console.log("not a selection")
         }
     })
 }
+
+
 

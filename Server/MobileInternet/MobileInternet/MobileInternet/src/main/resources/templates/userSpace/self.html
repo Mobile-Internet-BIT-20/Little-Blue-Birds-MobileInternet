@@ -32,6 +32,61 @@
         <script type = "module" src = "/js/userSpace/self.js?version=0.0.1"></script>
     </head>
     <body>
+    <div id = "headerArea">
+        <img src = "/materials/logo.png" style = "height: 100%; width: auto; margin-left: 1em; margin-top: 0.25em" />
+        <p id = "headerTitle">title</p>
 
+        <ul id = "menu1">
+            <li class = "menu_1" id = "goto_Home"   >goto_home</li>
+            <li class = "menu_1" id = "goto_Publish">goto_publish</li>
+            <li class = "menu_1" id = "setting_list">setting_list
+                <ul class = "menu2">
+                    <li class = "menu_2" id = "set_normal"  >set_normal</li>
+                    <li class = "menu_2" id = "set_security">set_security</li>
+                </ul>
+            </li>
+            <li class = "menu_1" id = "switch_lang"  >switch_lang
+                <ul class = "menu2">
+                    <li class = "menu_2" id = "switch_zh">中文</li>
+                    <li class = "menu_2" id = "switch_en">English</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id = "bodyArea">
+        <div id = "userAllShowInfo">
+            <table id = "userInformation" border = 0>
+                <tr>
+                    <td id = "userProfile"><img id = "profilePicture" src = "/materials/logo.png"/></td>
+                    <td id = "otherInfo" colspan = "3">
+                        <table id = "userProfileRight" border = 0>
+                            <tr>
+                                <td><span id = "showUserName">userName</span></td>
+                            </tr>
+                            <tr>
+                                <td><span id = "showUserSex"></span></td>
+                            </tr>
+                            <tr>
+                                <td id = "dayOfBirth">dayOfBirth</td>
+                            </tr>
+                            <tr>
+                                <td id = "userIntro">userIntro</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <p id = "rightSideButton">rightSideButton</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id = "profileDirectory">
+            <p id = "selfPost"  class = "fixedDir firstFixedDir">selfPost</p>
+            <p id = "likedPost" class = "fixedDir">likedPost</p>
+            <p id = "following" class = "fixedDir">following</p>
+            <p id = "follower"  class = "fixedDir lastFixedDir">follower</p>
+        </div>
+        <div id = "otherContentArea"></div>
+    </div>
     </body>
 </html>

@@ -90,32 +90,31 @@ public class PostImp implements PostService {
     @Override
     public Boolean likePost(String postId, String userId) {
 
-        //先判断当前用户是否已经对帖子点过赞
         Query query      = new Query(Criteria.where("postId").is(postId));
         Post  targetPost = mongoTemplate.findOne(query, Post.class, "post");
 
+        assert targetPost != null;
         List<String> likedUser = targetPost.getLikeUser();
-        Integer hasLiked = likedUser.indexOf(userId);
-        System.out.println(hasLiked);
+        Integer      hasLiked  = likedUser.indexOf(userId);
 
-        if(hasLiked == -1){
-            assert targetPost != null;
+        if (hasLiked == -1) {
+
             targetPost.setLikeNum(targetPost.getLikeNum() + 1);
             targetPost.getLikeUser().add(userId);
+        } else {
 
-            Update update = new Update();
-            update.set("likeUser", targetPost.getLikeUser()).set("likeNum", targetPost.getLikeNum());
-
-            mongoTemplate.upsert(query, update, Post.class, "post");
-
-            userService.likePost(userId, postId);
-
-            return true;
-        }else{
-            return false;
+            targetPost.setLikeNum(targetPost.getLikeNum() - 1);
+            targetPost.getLikeUser().remove(hasLiked);
         }
 
+        Update update = new Update();
+        update.set("likeUser", targetPost.getLikeUser()).set("likeNum", targetPost.getLikeNum());
 
+        mongoTemplate.upsert(query, update, Post.class, "post");
+
+        userService.likePost(userId, postId);
+
+        return true;
     }
 
     // 用户评论帖子
@@ -166,25 +165,29 @@ public class PostImp implements PostService {
 
         long skipNum = mongoTemplate.findAll(Post.class, "post").size() - (20L * requestNum);
 
+        Query query;
 
-        if(skipNum<0){
-            Query query = new Query(Criteria.where("").is("")).skip(0).limit(20);
+        if (skipNum < 0){
 
-            return mongoTemplate.find(query, Post.class, "post");
-        }else{
-            Query query = new Query(Criteria.where("").is("")).skip(skipNum).limit(20);
+            query = new Query(Criteria.where("").is("")).skip(0).limit(20);
+        } else {
 
-            return mongoTemplate.find(query, Post.class, "post");
+            query = new Query(Criteria.where("").is("")).skip(skipNum).limit(20);
         }
 
+        return mongoTemplate.find(query, Post.class, "post");
     }
 
+    // 获取帖子发布者的 ID
+    // Last Modified by SeeChen Lee @ 15-Jan-2023 10:23
     @Override
     public String publisherId(String postId) {
+
         Query query = new Query(Criteria.where("postId").is(postId));
 
         Post post = mongoTemplate.findOne(query, Post.class);
 
+        assert post != null;
         return post.getHolderId();
     }
 }

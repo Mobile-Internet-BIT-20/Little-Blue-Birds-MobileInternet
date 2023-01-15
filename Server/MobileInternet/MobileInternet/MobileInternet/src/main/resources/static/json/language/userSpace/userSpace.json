@@ -1,9 +1,25 @@
 {
   "zh" : [{
-    "title"            : "小蓝鸟"
+    "title"            : "小蓝鸟",
+    "goto_Home"        : "首页",
+    "goto_Publish"     : "分享故事",
+    "setting_list"     : "个人设置",
+    "set_normal"       : "普通设置",
+    "set_security"     : "安全设置",
+    "switch_lang"      : "切换语言",
+    "switch_zh"        : "中文",
+    "switch_en"        : "English"
   }],
 
   "en" : [{
-    "title"            : "Little Blue Birds"
+    "title"            : "Little Blue Birds",
+    "goto_Home"        : "Home",
+    "goto_Publish"     : "Share",
+    "setting_list"     : "Setting",
+    "set_normal"       : "Normal",
+    "set_security"     : "Security",
+    "switch_lang"      : "Language",
+    "switch_zh"        : "中文",
+    "switch_en"        : "English"
   }]
 }

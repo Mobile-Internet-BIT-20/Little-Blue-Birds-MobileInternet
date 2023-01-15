@@ -63,7 +63,7 @@ public class UserImp implements UserService {
     @Override
     public String createUser(String userEmail, String userPass) {
 
-        String userName, userId, dayOfBirth;
+        String userName, userId, dayOfBirth, userIntro;
         Integer userSexIndex = 0;   // 默认未设置
         List<String> userPost = List.of();
 
@@ -72,19 +72,20 @@ public class UserImp implements UserService {
         List<UserPublicInformation> userFollower  = List.of();
         List<UserPublicInformation> userFollowing = List.of();
 
-
         // 新建一个用户
         User newUser = new User(userEmail, userPass);
 
         // 下列为默认设置 可以在创建用户完成后重新设置
-        userId = "U" + new ObjectId();
-        userName = "用户" + userId;
+        userId     = "U" + new ObjectId();
+        userName   = "用户" + userId;
         dayOfBirth = "1900-01-01";
+        userIntro  = "~ 这个小可爱很神秘，不想介绍自己 ~ ^_^";
 
         // 进行设置
         newUser.setUserId(userId);
         newUser.setUserName(userName);
         newUser.setDayOfBirth(dayOfBirth);
+        newUser.setUserIntro(userIntro);
         newUser.setUserSexIndex(userSexIndex);
 
         newUser.setUserFollower(userFollower);
@@ -251,7 +252,8 @@ public class UserImp implements UserService {
 
         update.set(  "userName"   , updateUser.getUserName())
                 .set("dayOfBirth" , updateUser.getDayOfBirth())
-                .set("usrSexIndex", updateUser.getUserSexIndex());
+                .set("usrSexIndex", updateUser.getUserSexIndex())
+                .set("userIntro"  , updateUser.getUserIntro());
 
         mongoTemplate.upsert(query, update, User.class, "user");
 
@@ -295,5 +297,14 @@ public class UserImp implements UserService {
         mongoTemplate.upsert(query, new Update().set("likePost", likeUser.getLikePost()), User.class, "user");
 
         return true;
+    }
+
+    @Override
+    public String getUserName(String userId) {
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+        User  user  = mongoTemplate.findOne(query,User.class);
+
+        return user.getUserName();
     }
 }

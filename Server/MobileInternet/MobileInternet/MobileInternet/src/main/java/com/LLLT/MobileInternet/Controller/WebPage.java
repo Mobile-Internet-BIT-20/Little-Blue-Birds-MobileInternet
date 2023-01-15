@@ -28,13 +28,15 @@
 
 package com.LLLT.MobileInternet.Controller;
 
+import com.LLLT.MobileInternet.Entity.Post;
 import com.LLLT.MobileInternet.Service.PostService;
 import com.LLLT.MobileInternet.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class WebPage {
@@ -42,6 +44,7 @@ public class WebPage {
     private final UserService userService;
     private final PostService postService;
     public WebPage(UserService userService, PostService postService) {
+
         this.userService = userService;
         this.postService = postService;
     }
@@ -49,17 +52,11 @@ public class WebPage {
     // MainPage 函数 网页版默认的主页面
     // Last Modified by SeeChen Lee @ 11-Jan-2023 09:56
     @GetMapping("/")
-    public String MainPage() {
+    public String MainPage(HttpServletRequest httpServletRequest) {
+
+        System.out.println(httpServletRequest.getRemoteAddr());
 
         return "index";
-    }
-
-    // MainPage 函数 所有内容的默认主页
-    // Last Modified by SeeChen Lee @ 13-Jan-2023 01:39
-    @GetMapping("/home")
-    public String HomePage() {
-
-        return "home";
     }
 
     // Register 页面
@@ -101,8 +98,9 @@ public class WebPage {
 
     //新建帖子页面
     // Last Modified by ViHang Tan @ 17:54
-    @GetMapping("/newPost")
-    public String newPostPage(@CookieValue(value = "userId"   , defaultValue = "null") String userId){
+    @GetMapping("/home")
+    public String newPostPage(@CookieValue(value = "userId", defaultValue = "null") String userId){
+
         return "home";
     }
 
@@ -122,5 +120,4 @@ public class WebPage {
             return "userSpace/visitor";
         }
     }
-
 }
