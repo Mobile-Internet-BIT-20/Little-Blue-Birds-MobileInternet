@@ -18,6 +18,8 @@ public interface PostService {
 
     public Boolean    likePost(String postId, String userId);                               // 用户点赞帖子
 
+    public Boolean editPost(String postId, String newPostTitle, String newPostContent);
+
     public Boolean    commentPost(String postId, String userId, String commentContent);     // 用户评论帖子
 
     public Post       postContent(String postId);                                           // 获取帖子的内容

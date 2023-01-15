@@ -87,13 +87,19 @@ public class WebPage {
     // Last Modified by ViHang Tan @ 17:12
     @GetMapping("/post/{postId}")
     public String postPage(@CookieValue(value = "userId"   , defaultValue = "null") String userId,
-                           @PathVariable("postId") String targetId){
+                           @PathVariable("postId") String targetId) {
 
-        if(postService.publisherId(targetId).equals(userId)){
+        if (postService.publisherId(targetId).equals(userId)) {
             return "postSpace/self";
-        }else{
+        } else {
             return "postSpace/visitor";
         }
+    }
+
+    //更改帖子页面
+    @GetMapping("/post/{postId}/edit")
+    public String editPostPage(@PathVariable("postId") String postId){
+        return  "postSpace/edit";
     }
 
     //新建帖子页面

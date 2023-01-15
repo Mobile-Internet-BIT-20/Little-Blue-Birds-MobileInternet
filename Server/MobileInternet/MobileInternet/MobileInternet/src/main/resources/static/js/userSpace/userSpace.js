@@ -6,7 +6,7 @@
  *  Last Modified: 13-Jan-2023 03:29
  */
 
-var defaultHost = "http://127.0.0.1:8080:8080";
+var defaultHost = "http://127.0.0.1:8080";
 var languageUrl = "/json/language/userSpace/userSpace.json";
 
 function loadPublicPage() {

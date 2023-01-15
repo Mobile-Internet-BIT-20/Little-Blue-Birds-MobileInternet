@@ -190,4 +190,21 @@ public class PostImp implements PostService {
         assert post != null;
         return post.getHolderId();
     }
+
+    @Override
+    public Boolean editPost(String postId, String newPostTitle, String newPostContent) {
+
+        Query query = new Query(Criteria.where("postId").is(postId));
+
+        Post post = mongoTemplate.findOne(query,Post.class);
+
+        assert post != null;
+        post.setPostContent(newPostContent);
+        post.setPostTitle(newPostTitle);
+
+        mongoTemplate.upsert(query,new Update().set("postContent",post.getPostContent()),Post.class);
+        mongoTemplate.upsert(query,new Update().set("postTitle",post.getPostTitle()),Post.class);
+
+        return true;
+    }
 }

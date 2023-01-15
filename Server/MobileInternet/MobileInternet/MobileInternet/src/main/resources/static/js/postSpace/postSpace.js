@@ -19,6 +19,8 @@ window.onload = function(){
             console.log(data)
         })
     })
+
+    editButtonClick()
 }
 
 function loadPost(postId){

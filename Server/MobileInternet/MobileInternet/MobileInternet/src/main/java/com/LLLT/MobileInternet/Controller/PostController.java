@@ -89,4 +89,16 @@ public class PostController {
 
         return postService.commentPost(postId, userId, commentContent);
     }
+
+    //更改帖子
+    // Last Modified by SeeChen Lee @ 15-Jan-2023 14:14
+    @CrossOrigin
+    @PostMapping("{postId}/edit")
+    public Boolean editPost(@PathVariable("postId") String postId, HttpServletRequest httpServletRequest){
+
+        String newPostTitle = httpServletRequest.getParameter("newPostTitle");
+        String newPostContent = httpServletRequest.getParameter("newPostContent");
+
+        return postService.editPost(postId,newPostTitle,newPostContent);
+    }
 }

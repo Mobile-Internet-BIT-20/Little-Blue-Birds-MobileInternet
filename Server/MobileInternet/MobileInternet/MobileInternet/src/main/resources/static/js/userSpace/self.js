@@ -10,7 +10,7 @@ import {consoleMessage} from "../../publicFunction/consoleMessage.js";
 import {_Language} from "../../publicFunction/language.js";
 
 var pageUserId;
-var defaultHost = "http://39.105.205.166:8080/";
+var defaultHost = "http://127.0.0.1:8080";
 var language;
 var languageUrl = "/json/language/userSpace/self.json";
 

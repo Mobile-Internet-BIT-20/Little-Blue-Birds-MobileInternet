@@ -56,7 +56,6 @@ function showAllPost(data){
         let postId = id.substring(1,id.length);
 
         if(option === 'C'){
-
             window.location.href = "/post/"+postId;
 
         }else if(option === "L"){
