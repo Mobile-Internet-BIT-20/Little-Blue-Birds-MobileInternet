@@ -43,6 +43,7 @@ public class User implements Serializable {
     private String                      dayOfBirth;     // 用户生日
     private Integer                     userSexIndex;   // 用户性别 暂时为 0, 1, 2, 3
     private String                      email;          // 用户邮箱
+    private String                      userIntro;      // 用户简介
     private List<String>                userPost;       // 用户发布的帖子
     private List<UserPublicInformation> userFollower;   // 用户的粉丝列表
     private List<UserPublicInformation> userFollowing;  // 用户的关注列表
@@ -56,6 +57,7 @@ public class User implements Serializable {
     public String                      getDayOfBirth()    { return dayOfBirth;    }
     public Integer                     getUserSexIndex()  { return userSexIndex;  }
     public String                      getEmail()         { return email;         }
+    public String                      getUserIntro()     { return userIntro; }
     public List<String>                getUserPost()      { return userPost;      }
     public List<UserPublicInformation> getUserFollower()  { return userFollower;  }
     public List<UserPublicInformation> getUserFollowing() { return userFollowing; }
@@ -69,6 +71,9 @@ public class User implements Serializable {
     public void setDayOfBirth(String dayOfBirth)                            { this.dayOfBirth   = dayOfBirth;     }
     public void setUserSexIndex(Integer userSexIndex)                       { this.userSexIndex = userSexIndex;   }
     public void setEmail(String email)                                      { this.email        = email;          }
+
+    public void setUserIntro(String userIntro)                              { this.userIntro    = userIntro;      }
+
     public void setUserPost(List<String> userPost)                          { this.userPost     = userPost;       }
     public void setUserFollower(List<UserPublicInformation> userFollower)   { this.userFollower = userFollower;   }
     public void setUserFollowing(List<UserPublicInformation> userFollowing) { this.userFollowing = userFollowing; }

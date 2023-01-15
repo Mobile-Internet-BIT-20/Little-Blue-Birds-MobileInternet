@@ -23,10 +23,7 @@
 package com.LLLT.MobileInternet.Controller;
 
 import com.LLLT.MobileInternet.Entity.User;
-import com.LLLT.MobileInternet.Service.PostService;
 import com.LLLT.MobileInternet.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +40,7 @@ public class UserController {
 
     // 用户主页
     // Last Modified by SeeChen Lee @ 10-Jan-2023 11:20
+    @CrossOrigin
     @RequestMapping("/{userId}")
     public User UserSpace(@PathVariable("userId") String userId) {
 
@@ -51,6 +49,7 @@ public class UserController {
 
     // 获取用户的帖子
     // Last Modified by SeeChen Lee @ 10-Jan-2023 11:59
+    @CrossOrigin
     @RequestMapping("/{userId}/post")
     public List<String> getUserPost(@PathVariable("userId") String userId) {
 
@@ -82,6 +81,7 @@ public class UserController {
         String  userName   = httpServletRequest.getParameter("userName");
         String  dayOfBirth = httpServletRequest.getParameter("dob");
         Integer sexIndex   = Integer.valueOf(httpServletRequest.getParameter("sexIndex"));
+        String userIntro  = httpServletRequest.getParameter("userIntro");
 
         User updateUser = new User();
 
@@ -89,6 +89,7 @@ public class UserController {
         updateUser.setUserName(userName);
         updateUser.setDayOfBirth(dayOfBirth);
         updateUser.setUserSexIndex(sexIndex);
+        updateUser.setUserIntro(userIntro);
 
         return userService.updateUser(updateUser);
     }
@@ -131,9 +132,14 @@ public class UserController {
         return userService.userFollow(followerId, targetId);
     }
 
+    // 通过用户 ID 获取用户名
+    // Last Modified by SeeChen Lee @ 15-Jan-2023 10:31
     @CrossOrigin
-    @GetMapping("/getUserName/{userId}")
-    public String getUserName(@PathVariable("userId") String userId){
+    @GetMapping("/getUserName")
+    public String getUserName(HttpServletRequest httpServletRequest){
+
+        String userId = httpServletRequest.getParameter("userId");
+
         return userService.getUserName(userId);
     }
 }

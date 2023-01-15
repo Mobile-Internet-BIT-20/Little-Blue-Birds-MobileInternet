@@ -1,10 +1,11 @@
+
 var host = "http://127.0.0.1:8080"
+
 
 window.onload = function (){
     loadPost();
 
     let isLoggedIn = getCookie("userId").substring(0,1);
-    console.log(isLoggedIn)
 
     $("#userBtn").click(function(){
         if(isLoggedIn !== "U"){
@@ -35,6 +36,7 @@ function loadPost(){
 function showAllPost(data){
     let isLoggedIn = getCookie("userId").substring(0,1);
     let i = 0
+    console.log("hello")
     for(i; i < data.length;i++){
         console.log(data[i].postId)
         let oriHtml = $("#postArea").html();

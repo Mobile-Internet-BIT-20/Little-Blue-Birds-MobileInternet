@@ -22,6 +22,7 @@ public interface UserService {
     public String  userLogin(String userEmail, String userPass);                    // 用户登录函数
     public String  updateEmail(String userId, String newEmail, String usePass);     // 用户更改邮箱
     public String  updatePassword(String userId, String oldPass, String newPass);   // 用户更改密码
+    public String  getUserName(String userId);                                      // 获取用户名
 
     public String getUserName(String userId);                                        //获取用户的名字
 
