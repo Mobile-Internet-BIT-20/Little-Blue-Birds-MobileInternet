@@ -1,0 +1,15 @@
+{
+  "zh" : [{
+    "title"            : "小蓝鸟",
+    "followUser"       : "关注",
+    "unfollowUser"     : "取消关注",
+    "switch_lang"      : "切换语言"
+  }],
+
+  "en" : [{
+    "title"            : "Little Blue Birds",
+    "followUser"       : "Follow",
+    "unfollowUser"     : "Unfollow",
+    "switch_lang"      : "Language"
+  }]
+}

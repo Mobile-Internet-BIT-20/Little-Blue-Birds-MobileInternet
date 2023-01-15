@@ -1,0 +1,111 @@
+/*
+    register.css
+    注册界面样式
+    Author       : SeeChen Lee
+    Version      : 0.0.1
+    Last Modified: 13-Jan-2023 03:29
+*/
+*, html, body {
+    padding : 0;
+    margin  : 0;
+}
+
+body {
+    background : #5BC0F8;
+}
+
+#mainModule {
+    position      : absolute;
+    left          : 0;
+    right         : 0;
+    top           : 0;
+    bottom        : 0;
+    background    : #0081C9;
+    width         : 30%;
+    height        : 60%;
+    margin        : auto;
+    border-radius : 1em;
+    box-shadow    : 2px 2px 2px #000;
+}
+
+#mainModule table td {
+    padding : 0.15em;
+}
+
+#register_title {
+    text-align : center;
+    color      : #fff;
+    font-size  : 2em;
+    margin-top : -1.5em;
+}
+
+.register_label {
+    color        : #FFC93C;
+    font-size    : 1.5em;
+    text-shadow  : 1px 1px 1px #000000;
+}
+
+table input {
+    background    : #5BC0F8;
+    border-radius : 0.25em;
+    color         : #fff;
+    width         : 100%;
+    font-size     : 1.5em;
+    padding       : 0.15em 0.15em;
+    border        : 0.05em solid #ccc;
+    box-sizing    : border-box;
+    transition    : all 0.5s;
+}
+
+table input:focus {
+    background : rgba( 0, 0, 0, 0.2);
+    border     : 0.05em solid #fff;
+    outline    : none;
+    transition : all 0.5s;
+}
+
+table input::placeholder {
+    color : rgba(255, 255, 255, 0.5);
+}
+
+.registerWarning {
+    color       : #f00;
+    text-shadow : 1px 1px 1px #000;
+    margin-top  : 0.25em;
+    font-size   : 1.15em;
+    margin-left : 0.5em;
+}
+
+#register_button {
+    background    : rgba(255, 255, 255, 0.5);
+    border-radius : 0.5em;
+    height        : 2em;
+    line-height   : 2em;
+    text-align    : center;
+    border        : 1px solid #fff;
+    color         : #fff;
+    text-shadow   : 1px 1px 1px #000;
+    transition    : all 0.5s;
+    user-select   : none;
+    margin-top    : 0.25em;
+}
+
+#register_button:hover {
+    cursor     : pointer;
+    background : rgba(255, 255, 255, 0.7);
+    transition : all 0.5s;
+}
+
+#register_button:active {
+    background: rgba(255, 201,  60, 0.8);
+}
+
+#goto_Login {
+    color       : #fff;
+    position    : absolute;
+    bottom      : 1.5em;
+    text-align  : center;
+    font-size   : 1em;
+    width       : 100%;
+    text-shadow : 1px 1px 1px #000;
+}

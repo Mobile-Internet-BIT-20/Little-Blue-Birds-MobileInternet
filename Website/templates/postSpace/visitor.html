@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visitor Post</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/postSpace/postSpace.css">
+
+    <script src = "http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <script type="text/javascript" src = "/js/postSpace/postSpace.js"></script>
+    <script type="text/javascript" src = "/js/postSpace/visitor.js"></script>
+    <script type="text/javascript" src = "/publicFunction/cookie.js"></script>
+
+</head>
+<body>
+
+<div id = "headerArea">
+    <img src = "/materials/logo.png" style = "height: 100%; width: auto; margin-left: 1em; margin-top: 0.25em" />
+    <p id = "headerTitle">title</p>
+
+    <ul id = "menu1">
+        <li class = "menu_1" id = "goto_Home"   >goto_home</li>
+        <li class = "menu_1" id = "goto_Publish">goto_publish</li>
+        <li class = "menu_1" id = "setting_list">setting_list
+            <ul class = "menu2">
+                <li class = "menu_2" id = "set_normal"  >set_normal</li>
+                <li class = "menu_2" id = "set_security">set_security</li>
+            </ul>
+        </li>
+        <li class = "menu_1" id = "switch_lang"  >switch_lang
+            <ul class = "menu2">
+                <li class = "menu_2" id = "switch_zh">中文</li>
+                <li class = "menu_2" id = "switch_en">English</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class = "postbox">
+    <div class = "contentArea">
+        <h1 id="postTitle"></h1>
+        <p id="publisher"></p>
+        <p id="postContent"></p>
+        <p ><span id="likeCount"></span></p>
+        <br>
+    </div>
+    <div class = "commentArea">
+        <div class = "commentHistory" id="commentHistory">
+            <div class = "commentBox">
+                <p id = "commentUserId"></p>
+                <p id="commentContent"></p>
+            </div>
+        </div>
+
+        <textarea id="commentBox" name="textArea" rows="3" cols="20">input text here</textarea>
+        <button id="commentBtn">Comment!</button>
+    </div>
+</div>
+</body>
+</html>
