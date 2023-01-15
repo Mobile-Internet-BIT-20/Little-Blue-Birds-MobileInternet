@@ -4,10 +4,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.lwy.bluebird.Data.User
-import com.lwy.bluebird.R
 import com.lwy.bluebird.databinding.ImageLayoutBinding
-import com.lwy.bluebird.databinding.PostLayoutBinding
 
 class CreateAdapter : RecyclerView.Adapter<CreateAdapter.MyViewHolder>() {
 

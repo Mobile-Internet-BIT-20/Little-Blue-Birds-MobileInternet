@@ -4,9 +4,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.lwy.bluebird.Data.User
 import com.lwy.bluebird.databinding.PostImageLayoutBinding
-import com.lwy.bluebird.databinding.PostLayoutBinding
 
 class PostImageAdapter(private var images: List<Uri>)
     : RecyclerView.Adapter<PostImageAdapter.PostImageViewHolder>(){

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.lwy.bluebird.Service.bbWebService
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,8 +15,6 @@ class LoginActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host2)
         val navController = navHostFragment!!.findNavController()
-
-
 
     }
 }
