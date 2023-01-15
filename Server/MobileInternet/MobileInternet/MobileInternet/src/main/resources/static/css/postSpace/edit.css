@@ -90,15 +90,21 @@ body {
     background : rgba(255, 255, 255, 0.5);
 }
 
-#bodyArea {
+.container{
     margin : 4.5em auto;
     width  : 70%;
     border-bottom: 2px solid #ccc;
     padding-bottom : 1em;
 }
 
-.label{
+#title{
     color       : #FFC93C;
     font-size   : 1.5em;
+    text-shadow : 1px 1px 1px #000;
+}
+
+#content{
+    color       : #FFC93C;
+    font-size   : 1em;
     text-shadow : 1px 1px 1px #000;
 }

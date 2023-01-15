@@ -42,7 +42,7 @@ function showAllPost(data){
             "            <h1 class = 'postTitle'>"+data[i].postTitle+"</h1>\n" +
             "            <p class = 'publisher'>Publisher:"+ data[i].holderId+"</p>\n" +
             "            <p class = 'postContent'>"+data[i].postContent+"</p>\n" +
-            "            <div class = 'likeinfo'>"+data[i].likeNum+"</div>\n" +
+            "            <span class = 'likeinfo'>"+data[i].likeNum+"</span>\n" +
             "            <button id = 'L"+data[i].postId+"' class='userInput'>Like</button>\n" +
             "            <button id = 'C"+data[i].postId+"' class='userInput'>Comment</button>\n" +
             "        </div>";

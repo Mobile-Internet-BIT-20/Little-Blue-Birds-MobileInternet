@@ -39,7 +39,7 @@ function loadPost(postId){
 
             let oriHtml = $("#commentHistory").html();
             let newHtml = "<div class = 'commentBox'>\n" +
-                "                <p id = '"+ i +""+ comments[i].commentUserId +"' >"+comments[i].commentUserId+"</p>\n" +
+                "                <p class = 'commentUserId' id = '"+ i +""+ comments[i].commentUserId +"' >"+comments[i].commentUserId+"</p>\n" +
                 "                <p id= '"+ i +"content"+comments[i].commentUserId+"'>"+comments[i].commentContent+"</p>\n" +
                 "            </div>";
             $("#commentHistory").html(oriHtml + newHtml);
