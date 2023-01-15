@@ -1,14 +1,9 @@
 package com.lwy.bluebird.Fragment.publichome
 
-import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.lwy.bluebird.Data.User
-import com.lwy.bluebird.R
 import com.lwy.bluebird.databinding.PostLayoutBinding
 
 class PublicAdapter : RecyclerView.Adapter<PublicAdapter.MyViewHolder>() {
