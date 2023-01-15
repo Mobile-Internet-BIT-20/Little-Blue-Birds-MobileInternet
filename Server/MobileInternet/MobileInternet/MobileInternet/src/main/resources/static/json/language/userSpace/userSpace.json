@@ -8,7 +8,8 @@
     "set_security"     : "安全设置",
     "switch_lang"      : "切换语言",
     "switch_zh"        : "中文",
-    "switch_en"        : "English"
+    "switch_en"        : "English",
+    "user_logout"      : "退出登录"
   }],
 
   "en" : [{
@@ -20,6 +21,7 @@
     "set_security"     : "Security",
     "switch_lang"      : "Language",
     "switch_zh"        : "中文",
-    "switch_en"        : "English"
+    "switch_en"        : "English",
+    "user_logout"      : "Logout"
   }]
 }

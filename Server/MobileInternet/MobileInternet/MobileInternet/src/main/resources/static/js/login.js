@@ -9,9 +9,7 @@ import {consoleMessage} from "../publicFunction/consoleMessage.js";
 import {_Language}      from "../publicFunction/language.js";
 
 var language;
-
 var defaultHost = "http://127.0.0.1:8080";
-
 var languageUrl;
 
 window.onload = function () {

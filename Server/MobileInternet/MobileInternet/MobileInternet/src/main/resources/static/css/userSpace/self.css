@@ -3,5 +3,34 @@
     当前用户个人主页共享代码
     Author       : SeeChen Lee
     Version      : 0.0.1
-    Last Modified: 12-Jan-2023 21:42
+    Last Modified: 15-Jan-2023 14:16
 */
+
+.userFollow {
+    width         : 100%;
+    table-layout  : fixed;
+    border-bottom : 1px solid #ccc;
+}
+
+.userProfilePicture {
+    text-align : center;
+}
+
+.userProfilePicture img {
+    width         : 4em;
+    height        : 4em;
+    border-radius : 100%;
+    box-shadow    : 2px 2px 2px #000;
+}
+
+.userName {
+    color       : #FFC93C;
+    text-shadow : 1px 1px 1px #000;
+    font-size   : 1.5em;
+}
+
+.userName a {
+    color           : #FFC93C;
+    text-shadow     : 1px 1px 1px #000;
+    text-decoration : none;
+}

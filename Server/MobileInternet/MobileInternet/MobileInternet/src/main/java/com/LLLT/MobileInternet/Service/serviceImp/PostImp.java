@@ -36,7 +36,6 @@ import com.LLLT.MobileInternet.Service.PostService;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.mongodb.CodecRegistryProvider;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -104,7 +103,7 @@ public class PostImp implements PostService {
         } else {
 
             targetPost.setLikeNum(targetPost.getLikeNum() - 1);
-            targetPost.getLikeUser().remove(hasLiked);
+            targetPost.getLikeUser().removeIf(i -> i.equals(userId));
         }
 
         Update update = new Update();
@@ -202,8 +201,8 @@ public class PostImp implements PostService {
         post.setPostContent(newPostContent);
         post.setPostTitle(newPostTitle);
 
-        mongoTemplate.upsert(query,new Update().set("postContent",post.getPostContent()),Post.class);
-        mongoTemplate.upsert(query,new Update().set("postTitle",post.getPostTitle()),Post.class);
+        mongoTemplate.upsert(query,new Update().set("postContent", post.getPostContent()), Post.class, "post");
+        mongoTemplate.upsert(query,new Update().set("postTitle"  , post.getPostTitle())  , Post.class, "post");
 
         return true;
     }

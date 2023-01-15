@@ -28,7 +28,6 @@
 
 package com.LLLT.MobileInternet.Controller;
 
-import com.LLLT.MobileInternet.Entity.Post;
 import com.LLLT.MobileInternet.Service.PostService;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.springframework.stereotype.Controller;
@@ -87,11 +86,11 @@ public class WebPage {
     // Last Modified by ViHang Tan @ 17:12
     @GetMapping("/post/{postId}")
     public String postPage(@CookieValue(value = "userId"   , defaultValue = "null") String userId,
-                           @PathVariable("postId") String targetId) {
+                           @PathVariable("postId") String targetId){
 
-        if (postService.publisherId(targetId).equals(userId)) {
+        if(postService.publisherId(targetId).equals(userId)){
             return "postSpace/self";
-        } else {
+        }else{
             return "postSpace/visitor";
         }
     }
@@ -99,6 +98,7 @@ public class WebPage {
     //更改帖子页面
     @GetMapping("/post/{postId}/edit")
     public String editPostPage(@PathVariable("postId") String postId){
+
         return  "postSpace/edit";
     }
 
@@ -113,13 +113,28 @@ public class WebPage {
     //分享帖子页面
     // Last Modified by ViHang Tan @ 10:23
     @GetMapping("/publish")
-    public String publishPage(@CookieValue(value = "userId"   , defaultValue = "null") String userId){
-        if(userId.substring(0,1) == "null"){
+    public String publishPage(@CookieValue(value = "userId", defaultValue = "null") String userId) {
+
+        if(userId.substring(0, 1) == "null"){
+
             return "login";
         }else{
+
             return "publish";
         }
 
+    }
+
+    @GetMapping("/settings/normal")
+    public String settingNormal() {
+
+        return "setting/normal";
+    }
+
+    @GetMapping("/settings/security")
+    public String settingSecurity() {
+
+        return "setting/security";
     }
 
     // 用户个人主页面

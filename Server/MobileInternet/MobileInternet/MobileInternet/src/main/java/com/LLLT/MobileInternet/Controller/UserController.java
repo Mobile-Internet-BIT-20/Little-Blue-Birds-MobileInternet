@@ -81,7 +81,7 @@ public class UserController {
         String  userName   = httpServletRequest.getParameter("userName");
         String  dayOfBirth = httpServletRequest.getParameter("dob");
         Integer sexIndex   = Integer.valueOf(httpServletRequest.getParameter("sexIndex"));
-        String userIntro  = httpServletRequest.getParameter("userIntro");
+        String  userIntro  = httpServletRequest.getParameter("userIntro");
 
         User updateUser = new User();
 

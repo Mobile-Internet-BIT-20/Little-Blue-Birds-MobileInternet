@@ -28,9 +28,24 @@ function loadPublicPage() {
             $("#setting_list").html(languageObj.setting_list + "<ul class = \"menu2\">\n" +
                 "                    <li class = \"menu_2\" id = \"set_normal\"  >set_normal</li>\n" +
                 "                    <li class = \"menu_2\" id = \"set_security\">set_security</li>\n" +
+                "                    <li class = \"menu_2\" id = \"user_logout\">user_logout</li>\n" +
                 "                </ul>");
-            $("#set_normal").text(languageObj.set_normal);
+            $("#set_normal"  ).text(languageObj.set_normal);
             $("#set_security").text(languageObj.set_security);
+            $("#user_logout" ).text(languageObj.user_logout);
+
+            $("#set_normal").click(function() {
+
+                window.location.href = defaultHost + "/settings/normal";
+            });
+            $("#set_security").click(function() {
+
+                window.location.href = defaultHost + "/settings/security";
+            });
+            $("#user_logout").click(function() {
+
+                userLogout();
+            });
 
             $("#showUserName").text(data.userName);
 
@@ -41,6 +56,11 @@ function loadPublicPage() {
             $("#dayOfBirth").text(data.dayOfBirth);
             $("#userIntro").text(data.userIntro);
         });
+    });
+
+    $("#goto_Home").click(function () {
+
+        window.location.href = defaultHost + "/home";
     });
 }
 

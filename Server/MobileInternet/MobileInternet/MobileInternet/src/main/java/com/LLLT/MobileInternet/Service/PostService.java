@@ -18,7 +18,7 @@ public interface PostService {
 
     public Boolean    likePost(String postId, String userId);                               // 用户点赞帖子
 
-    public Boolean editPost(String postId, String newPostTitle, String newPostContent);
+    public Boolean    editPost(String postId, String newPostTitle, String newPostContent);  // 用户编辑帖子
 
     public Boolean    commentPost(String postId, String userId, String commentContent);     // 用户评论帖子
 

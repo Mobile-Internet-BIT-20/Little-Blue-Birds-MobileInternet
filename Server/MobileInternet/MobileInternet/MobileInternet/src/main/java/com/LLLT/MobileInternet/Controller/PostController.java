@@ -96,9 +96,9 @@ public class PostController {
     @PostMapping("{postId}/edit")
     public Boolean editPost(@PathVariable("postId") String postId, HttpServletRequest httpServletRequest){
 
-        String newPostTitle = httpServletRequest.getParameter("newPostTitle");
+        String newPostTitle   = httpServletRequest.getParameter("newPostTitle");
         String newPostContent = httpServletRequest.getParameter("newPostContent");
 
-        return postService.editPost(postId,newPostTitle,newPostContent);
+        return postService.editPost(postId, newPostTitle, newPostContent);
     }
 }

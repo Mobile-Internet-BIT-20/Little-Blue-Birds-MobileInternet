@@ -24,7 +24,7 @@
     "login_button"            : "Login",
     "emailFormatWrong"        : "Please input correct email format",
     "passwordNull"            : "Please input Password",
-    "userNotExists"           : "User Not Exists, Go to <a href = 'http://127.0.0.1:8080/register'>Register</a>",
+    "userNotExists"           : "User Not Exists, Go to <a href = 'http://127.0.0.1:8080/login'>Register</a>",
     "wrongPassword"           : "Wrong Password, Please input again",
     "notYetAccount"           : "New to Little Blue Birds? <a style = 'color: #FFC93C' href = 'http://127.0.0.1:8080/register'>Create an account</a>"
   }]
