@@ -9,9 +9,9 @@
     "login_button"            : "登录",
     "emailFormatWrong"        : "请输入正确邮箱格式",
     "passwordNull"            : "请输入密码",
-    "userNotExists"           : "用户不存在，前往<a href = 'http://39.105.205.166:8080/register'>注册</a>",
+    "userNotExists"           : "用户不存在，前往<a href = 'http://127.0.0.1:8080/register'>注册</a>",
     "wrongPassword"           : "密码错误，请重新输入密码",
-    "notYetAccount"           : "还没有账户？<a style = 'color: #FFC93C' href = 'http://39.105.205.166:8080/register'>创建新账号</a>"
+    "notYetAccount"           : "还没有账户？<a style = 'color: #FFC93C' href = 'http://127.0.0.1:8080/register'>创建新账号</a>"
   }],
 
   "en" : [{
@@ -24,8 +24,8 @@
     "login_button"            : "Login",
     "emailFormatWrong"        : "Please input correct email format",
     "passwordNull"            : "Please input Password",
-    "userNotExists"           : "User Not Exists, Go to <a href = 'http://39.105.205.166:8080/login'>Register</a>",
+    "userNotExists"           : "User Not Exists, Go to <a href = 'http://127.0.0.1:8080/register'>Register</a>",
     "wrongPassword"           : "Wrong Password, Please input again",
-    "notYetAccount"           : "New to Little Blue Birds? <a style = 'color: #FFC93C' href = 'http://39.105.205.166:8080/register'>Create an account</a>"
+    "notYetAccount"           : "New to Little Blue Birds? <a style = 'color: #FFC93C' href = 'http://127.0.0.1:8080/register'>Create an account</a>"
   }]
 }

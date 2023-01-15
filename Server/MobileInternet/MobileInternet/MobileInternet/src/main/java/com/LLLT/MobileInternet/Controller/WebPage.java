@@ -106,6 +106,18 @@ public class WebPage {
         return "home";
     }
 
+    //分享帖子页面
+    // Last Modified by ViHang Tan @ 10:23
+    @GetMapping("/publish")
+    public String publishPage(@CookieValue(value = "userId"   , defaultValue = "null") String userId){
+        if(userId.substring(0,1) == "null"){
+            return "login";
+        }else{
+            return "publish";
+        }
+
+    }
+
     // 用户个人主页面
     // Last Modified by SeeChen Lee @ 10:52
     @GetMapping("/{userId}")
