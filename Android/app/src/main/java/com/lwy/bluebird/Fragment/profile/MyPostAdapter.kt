@@ -1,16 +1,14 @@
-package com.lwy.bluebird.Fragment.publichome
+package com.lwy.bluebird.Fragment.profile
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.lwy.bluebird.Data.postPublic
 import com.lwy.bluebird.R
 import com.lwy.bluebird.databinding.PostLayoutBinding
 
-class PublicAdapter : RecyclerView.Adapter<PublicAdapter.MyViewHolder>() {
+class MyPostAdapter : RecyclerView.Adapter<MyPostAdapter.MyViewHolder>() {
 
     var dataList = emptyList<postPublic>()
 
@@ -36,12 +34,6 @@ class PublicAdapter : RecyclerView.Adapter<PublicAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = dataList[position]
-
-
-        holder.itemView.findViewById<ConstraintLayout>(R.id.post_row).setOnClickListener {
-            val action = PublicFragmentDirections.actionPublicFragmentToPostFragment()
-            holder.itemView.findNavController().navigate(action)
-        }
 
         holder.bind(item)
     }

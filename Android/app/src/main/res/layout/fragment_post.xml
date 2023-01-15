@@ -34,10 +34,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_profilepic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonBack"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/custom_profilepic"
+            app:srcCompat="@drawable/logo"
             tools:src="@tools:sample/avatars" />
 
 
@@ -47,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:text="UserName"
+            android:text="无名氏"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/postUserImage"
             app:layout_constraintTop_toTopOf="parent" />
@@ -84,18 +85,18 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:maxLength="20"
-                android:text="TextView"
+                android:text="标题"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:textSize="16sp"/>
+                android:text="文字"
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 

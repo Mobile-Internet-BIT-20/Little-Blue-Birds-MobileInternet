@@ -44,12 +44,12 @@ class SignupFragment : Fragment() {
                     call: Call<responseModel>,
                     response: Response<responseModel>
                 ) {
-                    Toast.makeText(requireContext(), response.message().toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "注册成功", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
                 }
 
                 override fun onFailure(call: Call<responseModel>, t: Throwable) {
-                    Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "用户已注册，请前往登入界面进行登入", Toast.LENGTH_SHORT).show()
                 }
 
             })

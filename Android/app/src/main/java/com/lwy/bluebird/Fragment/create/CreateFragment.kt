@@ -51,6 +51,12 @@ class CreateFragment : Fragment() {
             requireActivity().onBackPressed()
         }
 
+
+        binding.postButton.setOnClickListener {
+            Toast.makeText(requireContext(), "发布成功", Toast.LENGTH_SHORT).show()
+        }
+
+
         return binding.root
     }
 

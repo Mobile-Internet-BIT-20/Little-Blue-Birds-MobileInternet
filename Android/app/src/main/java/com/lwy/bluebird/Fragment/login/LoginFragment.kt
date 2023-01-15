@@ -52,14 +52,13 @@ class LoginFragment : Fragment() {
                     call: Call<responseModel>,
                     response: Response<responseModel>
                 ) {
-                    //Toast.makeText(requireContext(), response.message().toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "登入成功", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
                 }
 
                 override fun onFailure(call: Call<responseModel>, t: Throwable) {
-                    //Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "登入失败，请重新尝试", Toast.LENGTH_SHORT).show()
                 }
-
             })
         }
 

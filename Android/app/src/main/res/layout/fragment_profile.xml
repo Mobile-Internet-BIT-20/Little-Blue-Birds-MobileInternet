@@ -28,6 +28,7 @@
                     android:background="@drawable/custom_profilepic"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo"
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
@@ -36,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="16dp"
-                    android:text="TextView"
+                    android:text="无名氏"
                     android:textColor="@color/white"
                     android:textSize="24sp"
                     app:layout_constraintStart_toEndOf="@+id/profilePic"
@@ -48,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="8dp"
-                    android:text="TextView"
+                    android:text="000001"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/profilePic"
@@ -60,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="8dp"
-                    android:text="TextView"
+                    android:text="女"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/profilePic"
@@ -72,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="TextView"
+                    android:text="20岁"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/userGender"
