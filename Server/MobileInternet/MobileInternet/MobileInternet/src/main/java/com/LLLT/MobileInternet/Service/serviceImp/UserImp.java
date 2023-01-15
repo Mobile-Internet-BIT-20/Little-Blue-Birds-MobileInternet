@@ -296,12 +296,4 @@ public class UserImp implements UserService {
 
         return true;
     }
-
-    @Override
-    public String getUserName(String userId) {
-        Query query = new Query(Criteria.where("userId").is(userId));
-        User user = mongoTemplate.findOne(query,User.class);
-
-        return user.getUserName();
-    }
 }

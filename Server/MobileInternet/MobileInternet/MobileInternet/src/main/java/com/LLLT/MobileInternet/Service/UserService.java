@@ -23,8 +23,6 @@ public interface UserService {
     public String  updateEmail(String userId, String newEmail, String usePass);     // 用户更改邮箱
     public String  updatePassword(String userId, String oldPass, String newPass);   // 用户更改密码
 
-    public String getUserName(String userId);                                        //获取用户的名字
-
     public User    getUserInfo(String userId);                                      // 用于获取用户资料
 
     public Boolean emailExists(String email);                                       // 用于判断当前邮箱是否已经注册

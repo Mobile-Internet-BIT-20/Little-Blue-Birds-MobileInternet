@@ -9,13 +9,13 @@
     "userPass_placeholder"    : "请输入您想要设置的密码",
     "confirmPass_placeholder" : "请再次输入密码",
     "register_button"         : "注册",
-    "userExists"              : "当前邮箱已被注册，前往<a href = 'http://127.0.0.1:8080/login'>登录</a>",
+    "userExists"              : "当前邮箱已被注册，前往<a href = 'http://39.105.205.166:8080/login'>登录</a>",
     "emailFormatWrong"        : "请输入正确邮箱格式",
     "passLeast8Digit"         : "密码至少需要 8 位",
     "passMustInclude"         : "密码至少需要包含 1 个大写英文、 小写英文、 1 个数字",
     "passWithoutZH"           : "密码中不能包含中文",
     "passMustSame"            : "两次输入的密码必须相同",
-    "alreadyHaveAccount"      : "已有账户？点击<a style = 'color: #FFC93C' href = 'http://127.0.0.1:8080/login'>登录</a>",
+    "alreadyHaveAccount"      : "已有账户？点击<a style = 'color: #FFC93C' href = 'http://39.105.205.166:8080/login'>登录</a>",
     "registerFinished"        : "注册完成前往登录"
   }],
 
@@ -29,12 +29,12 @@
     "userPass_placeholder"    : "Please input your password",
     "confirmPass_placeholder" : "Please confirm your password",
     "register_button"         : "Register",
-    "userExists"              : "User Exists, go to <a href = 'http://127.0.0.1:8080/login'>Login</a>",
+    "userExists"              : "User Exists, go to <a href = 'http://39.105.205.166:8080/login'>Login</a>",
     "emailFormatWrong"        : "Please input correct email format",
     "passLeast8Digit"         : "Password least 8 digit",
     "passMustInclude"         : "Password must be include uppercase, lowercase, and 1 numbers",
     "passMustSame"            : "Confirm password must same as password",
-    "alreadyHaveAccount"      : "Already have an account? Click to <a style = 'color: #FFC93C' href = 'http://127.0.0.1:8080/login'>Login</a>",
+    "alreadyHaveAccount"      : "Already have an account? Click to <a style = 'color: #FFC93C' href = 'http://39.105.205.166:8080/login'>Login</a>",
     "registerFinished"        : "Register Success, Go to Login"
   }]
 }

@@ -130,10 +130,4 @@ public class UserController {
 
         return userService.userFollow(followerId, targetId);
     }
-
-    @CrossOrigin
-    @GetMapping("/getUserName/{userId}")
-    public String getUserName(@PathVariable("userId") String userId){
-        return userService.getUserName(userId);
-    }
 }
