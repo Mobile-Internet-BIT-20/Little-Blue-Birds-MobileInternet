@@ -1,3 +1,5 @@
+var host = "http://127.0.0.1:8080"
+
 window.onload = function(){
     let CurrentUrl = window.location.href;
     let postId = CurrentUrl.split("/")[4];
@@ -20,6 +22,24 @@ window.onload = function(){
         })
     })
 
+    $("#likeCount").click(function(){
+        $.get(host + "/api/post/"+ postId +"/like",{
+            userId : getCookie("userId")
+        },function(data){
+            if(data === true){
+                //get post info
+                $.getJSON(host+"/api/post/"+postId,function(data){
+                    let likeNum = data.likeNum
+                    $("#likeCount").text(likeNum)
+                })
+
+            }else{
+                console.log("did not liked")
+            }
+        })
+    })
+
+    //调用/postSpace/self.js的功能
     editButtonClick()
 }
 

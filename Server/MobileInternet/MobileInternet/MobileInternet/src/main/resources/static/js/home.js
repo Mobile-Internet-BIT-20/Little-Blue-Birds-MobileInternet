@@ -42,7 +42,7 @@ function showAllPost(data){
             "            <h1 class = 'postTitle'>"+data[i].postTitle+"</h1>\n" +
             "            <p class = 'publisher'>Publisher:"+ data[i].holderId+"</p>\n" +
             "            <p class = 'postContent'>"+data[i].postContent+"</p>\n" +
-            "            <span class = 'likeinfo'>"+data[i].likeNum+"</span>\n" +
+            "            <span class = 'likeinfo' id='"+data[i].postId+"'>"+data[i].likeNum+"</span>\n" +
             "            <button id = 'L"+data[i].postId+"' class='userInput'>Like</button>\n" +
             "            <button id = 'C"+data[i].postId+"' class='userInput'>Comment</button>\n" +
             "        </div>";
@@ -67,7 +67,13 @@ function showAllPost(data){
                     userId : getCookie("userId")
                 },function(data){
                     if(data === true){
-                        console.log("liked")
+                        //get post info
+                        $.getJSON(host+"/api/post/"+postId,function(data){
+                            let likeNum = data.likeNum
+                            console.log(likeNum)
+                            $("#"+postId).text(likeNum)
+                        })
+
                     }else{
                         console.log("did not liked")
                     }
