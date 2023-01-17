@@ -4,6 +4,6 @@
 |变量类型|变量名|变量含义|备注|
 |:---:|:---:|:---:|:---:|
 |Integer|verifyCode|后端向后端发送请求的响应代码||
-|String|Message|返回的信息||
+|String|responseMessage|返回的信息||
 ---
 `Last Modified`&nbsp;&nbsp;[SeeChen Lee](https://github.com/SeeChen) @ 18-Jan-2023 02：11
