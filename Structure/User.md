@@ -11,6 +11,7 @@
 |String|userIntro|用户简介||
 |String|dayOfBirth|用户生日|YYYY-MM-DD|
 |Integer|userSexIndex|用户性别|为性别下标 暂时为 0: 不显示; 1: 男性; 2: 女性; 3: 保密|
+|List\<String\>|userPost|用户发布的帖子|存储帖子的 PID|
 |List\<String\>|userFollower|用户关注的列表|存储用户的 UID|
 |List\<String\>|userFollowing|用户的粉丝列表|存储用户的 UID|
 |List\<String\>|userLike|用户所点赞的帖子|存储帖子的 PID|
