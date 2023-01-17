@@ -17,4 +17,4 @@
 |List\<String\>|userFav|用户收藏的帖子|存储帖子的 PID|
 |String|joinDay|用户注册的时间|YYYY-MM-DD|
 ---
-`Last Modified`&nbsp;&nbsp;[SeeChen Lee](https://github.com/SeeChen) @ 18-Jan-2023 01:34
+`Last Modified`&nbsp;&nbsp;[SeeChen Lee](https://github.com/SeeChen) @ 18-Jan-2023 02:18
