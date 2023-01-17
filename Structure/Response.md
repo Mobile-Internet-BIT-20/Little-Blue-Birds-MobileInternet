@@ -6,4 +6,4 @@
 |Integer|verifyCode|后端向后端发送请求的响应代码||
 |String|responseMessage|返回的信息||
 ---
-`Last Modified`&nbsp;&nbsp;[SeeChen Lee](https://github.com/SeeChen) @ 18-Jan-2023 02：11
+`Last Modified`&nbsp;&nbsp;[SeeChen Lee](https://github.com/SeeChen) @ 18-Jan-2023 02:11
