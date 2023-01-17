@@ -1,9 +1,3 @@
-// User Implement
-/*
- *  @Author : SeeChen Lee, ViHang Tan
- *  @Contact: leeseechen@petalmail.com, tvhang7@gmail.com
- */
-
 //  读书使我快乐
 //                .-~~~~~~~~~-._       _.-~~~~~~~~~-.
 //            __.'              ~.   .~              `.__
@@ -14,10 +8,17 @@
 //  .'//______.============-..   \ | /   ..-============.______\\`.
 //.'______________________________\|/______________________________`.
 
+/*
+ *  com.LLLT.MobileInternet.Service.serviceImp.UserImp.java
+ *  用户服务的代码内容
+ *  Author : SeeChen Lee, ViHang Tan
+ *  Contact: leeseechen@petalmail.com, tvhang7@gmail.com
+ */
+
 package com.LLLT.MobileInternet.Service.serviceImp;
 
+import com.LLLT.MobileInternet.Entity.Response;
 import com.LLLT.MobileInternet.Entity.User;
-import com.LLLT.MobileInternet.Entity.UserPublicInformation;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
@@ -27,15 +28,95 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-// 接口实现类
 @Service("UserService")
 public class UserImp implements UserService {
 
     private final MongoTemplate mongoTemplate;
     public UserImp(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
+    }
+
+    @Override
+    public Response userRegister(String userEmail, String userPass) {
+
+        /*
+         *  userRegister
+         *  用户注册函数
+         *  参数:
+         *      userEmail : 用户注册邮箱
+         *      userPass  : 用户注册密码, 通过前端进行 MD5 加密后
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 18-Jan-2023 02:40
+         * ---------------- 修改内容 -----------------------------------------
+         *  18-Jan-2023 02:40
+         *      1. 修改了返回的类型
+         *      2. 增加了一些变量
+         */
+
+        String       userId, userPhoto, userName, userIntro, dayOfBirth;
+        int          userSexIndex;
+        List<String> userPost, userFollower, userFollowing, userLike, userFav;
+        String       joinDay;
+
+        userId        = "U" + new ObjectId();
+
+        userPhoto     = "None";
+        userName      = "用户 " + userId;
+        userIntro     = "~ 这位小可爱想保留自己的神秘感, 不想介绍自己哦 ~";
+        dayOfBirth    = "1900-01-01";
+        userSexIndex  = 0;
+
+        userPost      = List.of();
+        userFollower  = List.of();
+        userFollowing = List.of();
+
+        userLike      = List.of();
+        userFav       = List.of();
+
+        joinDay       = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+        Response response = new Response();
+
+        if (emailExists(userEmail)) {
+
+            response.setVerifyCode(-1);
+            response.setResponseMessage("EmailExists");
+        } else {
+
+            User newUser  = new User(userEmail, userPass);
+
+            newUser.setUserId(userId);
+            newUser.setUserEmail(userEmail);
+            newUser.setUserPass(userPass);
+
+            newUser.setUserPhoto(userPhoto);
+            newUser.setUserName(userName);
+            newUser.setUserIntro(userIntro);
+            newUser.setDayOfBirth(dayOfBirth);
+            newUser.setUserSexIndex(userSexIndex);
+
+            newUser.setUserPost(userPost);
+            newUser.setUserFollower(userFollower);
+            newUser.setUserFollowing(userFollowing);
+
+            newUser.setUserLike(userLike);
+            newUser.setUserFav(userFav);
+
+            newUser.setJoinDay(joinDay);
+
+            response.setVerifyCode(1);
+            response.setResponseMessage(userId);
+
+            mongoTemplate.insert(newUser);
+        }
+
+        return response;
     }
 
     // 用于更新用户帖子
@@ -55,50 +136,6 @@ public class UserImp implements UserService {
 
         mongoTemplate.upsert(query, update, User.class, "user");
 
-    }
-
-
-    // 新用户保存函数
-    // Modified by SeeChen Lee @ 11-Jan-2023 08:53
-    @Override
-    public String createUser(String userEmail, String userPass) {
-
-        String userName, userId, dayOfBirth, userIntro;
-        Integer userSexIndex = 0;   // 默认未设置
-        List<String> userPost = List.of();
-
-        List<String> likePost = List.of();
-
-        List<UserPublicInformation> userFollower  = List.of();
-        List<UserPublicInformation> userFollowing = List.of();
-
-        // 新建一个用户
-        User newUser = new User(userEmail, userPass);
-
-        // 下列为默认设置 可以在创建用户完成后重新设置
-        userId     = "U" + new ObjectId();
-        userName   = "用户" + userId;
-        dayOfBirth = "1900-01-01";
-        userIntro  = "~ 这个小可爱很神秘，不想介绍自己 ~ ^_^";
-
-        // 进行设置
-        newUser.setUserId(userId);
-        newUser.setUserName(userName);
-        newUser.setDayOfBirth(dayOfBirth);
-        newUser.setUserIntro(userIntro);
-        newUser.setUserSexIndex(userSexIndex);
-
-        newUser.setUserFollower(userFollower);
-        newUser.setUserFollowing(userFollowing);
-
-        newUser.setLikePost(likePost);
-
-        // 设置帖子数据 初始为空
-        newUser.setUserPost(userPost);
-
-        mongoTemplate.insert(newUser);
-
-        return userId;
     }
 
     // 用户登录函数
@@ -228,8 +265,8 @@ public class UserImp implements UserService {
 
         if (followerUser != null && targetUser != null) {
 
-            followerUser.getUserFollowing().add(new UserPublicInformation(targetUser.getUserId(), targetUser.getUserName()));
-            targetUser.getUserFollower().add(new UserPublicInformation(followerUser.getUserId(), followerUser.getUserName()));
+            //followerUser.getUserFollowing().add(new UserPublicInformation(targetUser.getUserId(), targetUser.getUserName()));
+            //targetUser.getUserFollower().add(new UserPublicInformation(followerUser.getUserId(), followerUser.getUserName()));
 
             mongoTemplate.upsert(followerQuery, new Update().set("userFollowing", followerUser.getUserFollowing()), User.class, "user");
             mongoTemplate.upsert(targetQuery  , new Update().set("userFollower" , targetUser.getUserFollower()) , User.class, "user");
@@ -269,7 +306,7 @@ public class UserImp implements UserService {
         User  deleteUser = mongoTemplate.findOne(query, User.class, "user");
 
         assert deleteUser != null;
-        String correctEmail = deleteUser.getEmail();
+        String correctEmail = deleteUser.getUserEmail();
         String correctPass  = deleteUser.getUserPass();
 
         if (correctEmail.equals(userEmail) && correctPass.equals(userPass)) {
@@ -292,9 +329,9 @@ public class UserImp implements UserService {
         User  likeUser = mongoTemplate.findOne(query, User.class, "user");
 
         assert likeUser != null;
-        likeUser.getLikePost().add(postId);
+        likeUser.getUserLike().add(postId);
 
-        mongoTemplate.upsert(query, new Update().set("likePost", likeUser.getLikePost()), User.class, "user");
+        mongoTemplate.upsert(query, new Update().set("likePost", likeUser.getUserLike()), User.class, "user");
 
         return true;
     }

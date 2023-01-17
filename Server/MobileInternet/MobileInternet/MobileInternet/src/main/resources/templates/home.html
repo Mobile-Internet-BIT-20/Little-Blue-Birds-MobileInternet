@@ -12,11 +12,37 @@
 
 </head>
 <body>
-    <button id = "userBtn">Go to user page</button>
-    <button id = "postSmtBtn">Post something</button>
+    <div id = "headerArea">
+        <img src = "/materials/logo.png" style = "height: 100%; width: auto; margin-left: 1em; margin-top: 0.25em" />
+        <p id = "headerTitle">title</p>
 
-    <div id = "postArea">
+        <ul id = "menu1">
+            <li class = "menu_1" id = "goto_Home"   >goto_home</li>
+            <li class = "menu_1" id = "goto_Publish">goto_publish</li>
+            <li class = "menu_1" id = "setting_list">setting_list
+                <ul class = "menu2">
+                    <li class = "menu_2" id = "set_normal"  >set_normal</li>
+                    <li class = "menu_2" id = "set_security">set_security</li>
+                </ul>
+            </li>
+            <li class = "menu_1" id = "switch_lang"  >switch_lang
+                <ul class = "menu2">
+                    <li class = "menu_2" id = "switch_zh">中文</li>
+                    <li class = "menu_2" id = "switch_en">English</li>
+                </ul>
+            </li>
+        </ul>
     </div>
+
+    <div id="contentArea">
+        <button id = "userBtn">Go to user page</button>
+        <button id = "publishStoryBtn">Publish Your Story</button>
+
+        <div id = "postArea">
+        </div>
+    </div>
+
+
 
 </body>
 </html>

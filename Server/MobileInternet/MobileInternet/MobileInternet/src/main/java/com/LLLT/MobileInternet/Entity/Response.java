@@ -1,9 +1,3 @@
-// User Public Information
-/*
- *  @Author : SeeChen Lee, ViHang Tan
- *  @Contact: leeseechen@petalmail.com, tvhang7@gmail.com
- */
-
 /*
  * ░░░░░░░░░░░░░░░░░░░░░░░░▄░░
  * ░░░░░░░░░▐█░░░░░░░░░░░▄▀▒▌░
@@ -19,29 +13,24 @@
  * 单身狗就这样默默地看着你，一句话也不说。
  */
 
+/*
+ *  com.LLLT.MobileInternet.Entity.Response.java
+ *  用于响应请求的返回信息的结构
+ *  Author : SeeChen Lee, ViHang Tan
+ *  Contact: leeseechen@petalmail.com, tvhang7@gmail.com
+ */
 package com.LLLT.MobileInternet.Entity;
 
-import java.io.Serializable;
+public class Response {
 
-public class UserPublicInformation implements Serializable {
+    private Integer verifyCode     ;
+    private String  responseMessage;
 
-    private String userId;
-    private String userName;
+    public Integer      getVerifyCode() { return verifyCode     ; }
+    public String  getResponseMessage() { return responseMessage; }
 
-    // getter
-    public String getUserId()   { return userId;   }
-    public String getUserName() { return userName; }
+    public void      setVerifyCode(Integer verifyCode)      { this.verifyCode      = verifyCode     ; }
+    public void setResponseMessage(String  responseMessage) { this.responseMessage = responseMessage; }
 
-    // setter
-    public void setUserId(String userId)     { this.userId   = userId;   }
-    public void setUserName(String userName) { this.userName = userName; }
-
-    // 构造函数
-    public UserPublicInformation() {}
-
-    public UserPublicInformation(String userId, String userName) {
-
-        this.userId   = userId;
-        this.userName = userName;
-    }
+    public Response() {}
 }
