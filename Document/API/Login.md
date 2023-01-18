@@ -1,9 +1,9 @@
 <img src = "https://raw.githubusercontent.com/Mobile-Internet-BIT-20/TermProject/main/Element/Logo/loading.png" width = "100px" height = "100px"/>
 
-# Register API
+# Login API
 
 ### Request URL
-`http://127.0.0.1:8080/api/userRegister`
+`http://127.0.0.1:8080/api/userLogin`
 
 ### Request Method
 - [ ] GET
@@ -12,8 +12,8 @@
 ### Request Parameters
 |参数名|参数类型|参数说明|备注|必填|
 |:---:|:---:|:---:|:---:|:---:|
-|userEmail|String|用户注册所使用的邮箱||:heavy_check_mark:|
-|userPass|String|用户所设置的密码|由前端进行 MD5 加密|:heavy_check_mark:|
+|userEmail|String|用户登录所使用的邮箱||:heavy_check_mark:|
+|userPass|String|用户注册时设置的密码|由前端进行 MD5 加密|:heavy_check_mark:|
 
 ### Return Parameter
 |参数名|参数类型|参数说明|
@@ -24,21 +24,30 @@
 About Vertify Code: [Status Code](https://github.com/Mobile-Internet-BIT-20/TermProject/tree/main/Document/VerifyCode)
 
 #### Register Success
-> 注册成功 返回用户的 UID
+> 登录成功 返回用户的 UID
 ```json
 {
-  "verifyCode"      : 1,
+  "verifyCode"      : 2,
   "responseMessage" : "%UID%"
 }
 ```
 
-#### Email Duplicate
-> 注册失败 Email 已被使用
+#### User Not Exists
+> 登录失败 未找到所使用的 Email
 ```json
 {
-  "verifyCode"      : -1,
-  "responseMessage" : "EmailExists"
+  "verifyCode"      : -2,
+  "responseMessage" : "UserNotExists"
+}
+```
+
+#### Wrong Password
+> 登录失败 密码错误
+```json
+{
+  "verifyCode"      : -3,
+  "responseMessage" : "WrongPassword"
 }
 ```
 ---
-*Last Modified: SeeChen Lee @ 18-Jan-2023 19:58*
+*Last Modified: SeeChen Lee @ 18-Jan-2023 20:04*
