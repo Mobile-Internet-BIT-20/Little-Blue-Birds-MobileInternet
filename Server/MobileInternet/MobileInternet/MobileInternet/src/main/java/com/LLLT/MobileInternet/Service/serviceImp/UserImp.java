@@ -119,6 +119,99 @@ public class UserImp implements UserService {
         return response;
     }
 
+    @Override
+    public Response userLogin(String userEmail, String userPass) {
+
+        /*
+         *  userLogin
+         *  用户登录函数
+         *  参数:
+         *      userEmail : 用户注册邮箱
+         *      userPass  : 用户注册密码, 通过前端进行 MD5 加密后
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 18-Jan-2023 02:40
+         * ---------------- 修改内容 -----------------------------------------
+         *  18-Jan-2023 02:40
+         *      1. 修改了返回的类型
+         *      2. 增加了一些变量
+         */
+
+        Response response = new Response();
+
+        if (!emailExists(userEmail)) {
+
+            response.setVerifyCode(-2);
+            response.setResponseMessage("UserNotExists");
+        } else {
+
+            Query loginQuery = new Query(Criteria.where("userEmail").is(userEmail));
+            User  loginUser  = mongoTemplate.findOne(loginQuery, User.class, "user");
+
+            assert loginUser != null;
+            if (loginUser.getUserPass().equals(userPass)) {
+
+                response.setVerifyCode(2);
+                response.setResponseMessage(loginUser.getUserId());
+            } else {
+
+                response.setVerifyCode(-3);
+                response.setResponseMessage("WrongPassword");
+            }
+
+        }
+
+        return response;
+    }
+
+    @Override
+    public Response userDelete(String userId, String userEmail, String userPass) {
+
+        /*
+         *  userDelete
+         *  用户删除账号函数
+         *  参数:
+         *      userId    : 用户 ID
+         *      userEmail : 用户注册邮箱
+         *      userPass  : 用户注册密码, 通过前端进行 MD5 加密后
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 18-Jan-2023 20:48
+         * ---------------- 修改内容 -----------------------------------------
+         *  18-Jan-2023 20:48
+         *      1. 修改了返回的类型
+         */
+
+        Response response = new Response();
+
+        Query deleteQuery = new Query(Criteria.where("userId").is(userId));
+        User  userDelete  = mongoTemplate.findOne(deleteQuery, User.class, "user");
+
+        assert userDelete != null;
+        String correctEmail = userDelete.getUserEmail();
+        String correctPass  = userDelete.getUserPass();
+
+        if (userEmail.equals(correctEmail) && userPass.equals(correctPass)) {
+
+            mongoTemplate.remove(deleteQuery, User.class, "user");
+
+            response.setVerifyCode(3);
+            response.setResponseMessage("DeleteSuccess");
+        } else if (!userEmail.equals(correctEmail)) {
+
+            response.setVerifyCode(-4);
+            response.setResponseMessage("WrongEmail");
+        } else if (!userPass.equals(correctPass)) {
+
+            response.setVerifyCode(-3);
+            response.setResponseMessage("WrongPassword");
+        }
+
+        return response;
+    }
+
     // 用于更新用户帖子
     // Modified by SeeChen Lee @ 10-Jan-2023 17:28
     @Override
@@ -136,31 +229,6 @@ public class UserImp implements UserService {
 
         mongoTemplate.upsert(query, update, User.class, "user");
 
-    }
-
-    // 用户登录函数
-    // Last Modified by SeeChen Lee @ 10-Jan-2023 13:58
-    @Override
-    public String userLogin(String userEmail, String userPass) {
-
-        if (!emailExists(userEmail)) {
-
-            return "UserNotExists";
-        } else {
-
-            Query query = new Query(Criteria.where("email").is(userEmail));
-
-            User loginUser = mongoTemplate.findOne(query, User.class, "user");
-
-            assert loginUser != null;
-            if (userPass.equals(loginUser.getUserPass())) {
-
-                return loginUser.getUserId();
-            } else {
-
-                return "WrongPassword";
-            }
-        }
     }
 
     // 用户更改邮箱
@@ -242,7 +310,7 @@ public class UserImp implements UserService {
     @Override
     public Boolean emailExists(String email) {
 
-        Query query   = Query.query(Criteria.where("email").is(email));
+        Query query   = Query.query(Criteria.where("userEmail").is(email));
         User  isEmpty = mongoTemplate.findOne(query, User.class, "user");
 
         // 为 null 表示当前邮箱未被使用
@@ -297,29 +365,6 @@ public class UserImp implements UserService {
         return true;
     }
 
-    // 用于删除用户账号 返回 True 表示已经成功删除 False 表示删除失败
-    // Last Modified by SeeChen Lee @ 11-Jan-2023 07:00
-    @Override
-    public Boolean userDelete(String userEmail, String userPass, String userId) {
-
-        Query query      = new Query(Criteria.where("userId").is(userId));
-        User  deleteUser = mongoTemplate.findOne(query, User.class, "user");
-
-        assert deleteUser != null;
-        String correctEmail = deleteUser.getUserEmail();
-        String correctPass  = deleteUser.getUserPass();
-
-        if (correctEmail.equals(userEmail) && correctPass.equals(userPass)) {
-
-            // 删除账户
-            mongoTemplate.remove(query, User.class, "user");
-
-            return true;
-        }
-
-        return false;
-    }
-
     // 用于用户点赞 返回 True 表示已经点赞 False 表示点赞失败
     // Last Modified by SeeChen Lee @ 12-Jan-2023 11:12
     @Override
@@ -342,6 +387,7 @@ public class UserImp implements UserService {
         Query query = new Query(Criteria.where("userId").is(userId));
         User  user  = mongoTemplate.findOne(query,User.class);
 
+        assert user != null;
         return user.getUserName();
     }
 }

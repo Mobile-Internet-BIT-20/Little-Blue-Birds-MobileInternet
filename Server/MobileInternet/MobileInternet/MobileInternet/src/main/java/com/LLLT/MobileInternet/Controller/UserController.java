@@ -1,9 +1,3 @@
-// All about Controller for /user page
-/*
- *  @Author : SeeChen Lee, ViHang Tan
- *  @Contact: leeseechen@petalmail.com, tvhang7@gmail.com
- */
-
 /*  知道 Crtl, C, V 为啥不见了吗 这就是这个项目的由来
  * ┌───┐   ┌───┬───┬───┬───┐ ┌───┬───┬───┬───┐ ┌───┬───┬───┬───┐ ┌───┬───┬───┐
  * │Esc│   │ F1│ F2│ F3│ F4│ │ F5│ F6│ F7│ F8│ │ F9│F10│F11│F12│ │P/S│S L│P/B│  ┌┐    ┌┐    ┌┐
@@ -20,8 +14,16 @@
  * │     │    │Alt │         Space         │ Alt│    │    │Ctrl│ │ ← │ ↓ │ → │ │   0   │ . │←─┘│
  * └─────┴────┴────┴───────────────────────┴────┴────┴────┴────┘ └───┴───┴───┘ └───────┴───┴───┘
  */
+
+/*
+ *  com.LLLT.MobileInternet.Controller.UserController.java
+ *  http://IPAddress/api/user 底下的接口代码
+ *  Author : SeeChen Lee, ViHang Tan
+ *  Contact: leeseechen@petalmail.com, tvhang7@gmail.com
+ */
 package com.LLLT.MobileInternet.Controller;
 
+import com.LLLT.MobileInternet.Entity.Response;
 import com.LLLT.MobileInternet.Entity.User;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +38,47 @@ public class UserController {
     private final UserService userService;
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @CrossOrigin
+    @PostMapping("/userDelete")
+    public Response userDelete(HttpServletRequest httpServletRequest) {
+
+        /*
+         *  userDelete
+         *  用户删除账号函数
+         *  请求参数:
+         *      userId    : 用户 ID
+         *      userEmail : 用户注册邮箱
+         *      userPass  : 用户注册密码, 通过前端进行 MD5 加密后
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 18-Jan-2023 20:48
+         * ---------------- 修改内容 -----------------------------------------
+         *  18-Jan-2023 20:48
+         *      1. 重写函数, 修改返回值的数据类型
+         *      2. 打印请求源的 IP 地址以及请求结果
+         */
+
+        String userId    = httpServletRequest.getParameter("userId");
+        String userEmail = httpServletRequest.getParameter("userEmail");
+        String userPass  = httpServletRequest.getParameter("userPass");
+
+        Response deleteResponse = userService.userDelete(userId, userEmail, userPass);
+
+        switch (deleteResponse.getVerifyCode()) {
+
+            case 3:
+                System.out.println(httpServletRequest.getRemoteAddr() + ": Request Delete " + userId + " Success.");
+                break;
+
+            default:
+                System.out.println(httpServletRequest.getRemoteAddr() + ": Request Delete Failed. " + deleteResponse.getResponseMessage());
+                break;
+        }
+
+        return deleteResponse;
     }
 
     // 用户主页
@@ -54,21 +97,6 @@ public class UserController {
     public List<String> getUserPost(@PathVariable("userId") String userId) {
 
         return userService.getUserInfo(userId).getUserPost();
-    }
-
-    // 删除账号
-    // Last Modified by SeeChen Lee @ 11-Jan-2023 06:51
-    @CrossOrigin
-    @PostMapping("/{userId}/delete")
-    public Boolean UserDelete(HttpServletRequest httpServletRequest, @PathVariable("userId") String userId) {
-
-        // 用于验证账号的安全性 账号邮箱以及密码需要输入正确
-        String userEmail = httpServletRequest.getParameter("userEmail");
-        String userPass  = httpServletRequest.getParameter("userPass" );
-
-        // 删除用户所发布的帖子 待实现 @SeeChen Lee
-
-        return userService.userDelete(userEmail, userPass, userId);
     }
 
     // 更新用户的基本信息
