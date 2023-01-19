@@ -81,23 +81,117 @@ public class UserController {
         return deleteResponse;
     }
 
-    // 用户主页
-    // Last Modified by SeeChen Lee @ 10-Jan-2023 11:20
     @CrossOrigin
-    @RequestMapping("/{userId}")
-    public User UserSpace(@PathVariable("userId") String userId) {
+    @RequestMapping("/{userId}/space/all")
+    public Response userSpaceAll(@PathVariable("userId") String userId, HttpServletRequest httpServletRequest) {
 
-        return userService.getUserInfo(userId);
+        /*
+         *  userSpaceAll
+         *  获取用户的所有信息
+         *  请求参数:
+         *      userEmail : 用户的邮箱
+         *      userPass  : 用户的密码
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 19-Jan-2023 16:50
+         * ---------------- 修改内容 -----------------------------------------
+         *  19-Jan-2023 16:50
+         *      1. 新增验证信息
+         */
+
+        String userEmail = httpServletRequest.getParameter("userEmail");
+        String userPass  = httpServletRequest.getParameter("userPass" );
+
+        Response userInfo = userService.userLogin(userEmail, userPass);
+
+        if (userInfo.getVerifyCode() == 2) {
+
+            System.out.println(httpServletRequest.getRemoteAddr() + ": Request " + userId + " All Information Success.");
+
+            userInfo = userService.getUserAllInfo(userId);
+        } else {
+
+            System.out.println(httpServletRequest.getRemoteAddr() + ": Request " + userId + " Information Failed. " + userInfo.getResponseMessage());
+        }
+
+        return userInfo;
+    }
+
+    @CrossOrigin
+    @RequestMapping("/{userId}/space/visitor")
+    public Response userSpaceVisitor(@PathVariable String userId, HttpServletRequest httpServletRequest) {
+
+        /*
+         *  userSpaceVisitor
+         *  获取用户访客视角的信息
+         *  请求参数:
+         *      None
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 19-Jan-2023 16:50
+         * ---------------- 修改内容 -----------------------------------------
+         *  19-Jan-2023 16:50
+         *      1. 创建此函数
+         */
+
+        Response response = userService.getVisitorInfo(userId);
+
+        if (response.getVerifyCode() == 5) {
+
+            System.out.println(httpServletRequest.getRemoteAddr() + ": Request " + userId + " Visitor Information Success.");
+        } else {
+
+            System.out.println(httpServletRequest.getRemoteAddr() + ": Request " + userId + " Information Failed. " + response.getResponseMessage());
+        }
+
+        return response;
+    }
+
+    @CrossOrigin
+    @RequestMapping("/{userId}/space/post")
+    public Response getUserPost(@PathVariable String userId, HttpServletRequest httpServletRequest) {
+
+        /*
+         *  getUserPost
+         *  获取用户的帖子
+         *  请求参数:
+         *      None
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 20-Jan-2023 01:40
+         * ---------------- 修改内容 -----------------------------------------
+         *  20-Jan-2023 01:40
+         *      1. 修改返回类型
+         *      2. 打印请求结果
+         */
+
+        Response response = userService.getUserPost(userId);
+
+        if (response.getVerifyCode() == 6) {
+
+            System.out.println(httpServletRequest.getRemoteAddr() + ": Request " + userId + " Post Success.");
+        } else {
+
+            System.out.println(httpServletRequest.getRemoteAddr() + ": Request " + userId + " Post Failed. " + response.getResponseMessage());
+        }
+
+        return response;
     }
 
     // 获取用户的帖子
     // Last Modified by SeeChen Lee @ 10-Jan-2023 11:59
+    /*
     @CrossOrigin
     @RequestMapping("/{userId}/post")
     public List<String> getUserPost(@PathVariable("userId") String userId) {
 
         return userService.getUserInfo(userId).getUserPost();
     }
+
+     */
 
     // 更新用户的基本信息
     // Last Modified by ViHang Tan @ 10-Jan-2023 19:56

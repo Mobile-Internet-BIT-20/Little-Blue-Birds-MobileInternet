@@ -17,8 +17,10 @@
 
 package com.LLLT.MobileInternet.Service.serviceImp;
 
+import com.LLLT.MobileInternet.Entity.Post;
 import com.LLLT.MobileInternet.Entity.Response;
 import com.LLLT.MobileInternet.Entity.User;
+import com.LLLT.MobileInternet.Service.PostService;
 import com.LLLT.MobileInternet.Service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
@@ -212,6 +214,137 @@ public class UserImp implements UserService {
         return response;
     }
 
+    @Override
+    public Response getUserAllInfo(String userId) {
+
+        /*
+         *  getUserAllInfo
+         *  获取用户的所有信息
+         *  参数:
+         *      userId    : 用户 ID
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 19-Jan-2023 16:50
+         * ---------------- 修改内容 -----------------------------------------
+         *  19-Jan-2023 16:50
+         *      1. 修改了返回的类型
+         */
+
+        Response infoResponse = new Response();
+
+        User userInfo = new User();
+        User findUser;
+
+        Query infoQuery = new Query(Criteria.where("userId").is(userId));
+
+        findUser = mongoTemplate.findOne(infoQuery, User.class, "user");
+
+        if (findUser != null) {
+
+            BeanUtils.copyProperties(findUser, userInfo);
+
+            infoResponse.setVerifyCode(4);
+            infoResponse.setResponseMessage("RequestSuccess");
+            infoResponse.setUserResponse(userInfo);
+        } else {
+
+            infoResponse.setVerifyCode(-5);
+            infoResponse.setResponseMessage("UserNotFound");
+        }
+
+        return infoResponse;
+    }
+
+    @Override
+    public Response getVisitorInfo(String userId) {
+
+        /*
+         *  getVisitorInfo
+         *  获取用户访客视角可以看到的信息
+         *  参数:
+         *      userId    : 用户 ID
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 19-Jan-2023 17:12
+         * ---------------- 修改内容 -----------------------------------------
+         *  19-Jan-2023 17:12
+         *      1. 新增此函数
+         */
+
+        Response response = new Response();
+
+        User visitorView = new User();
+        User findUser;
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+
+        findUser = mongoTemplate.findOne(query, User.class, "user");
+
+        if (findUser != null) {
+
+            BeanUtils.copyProperties(findUser, visitorView);
+            visitorView.setUserFollower (List.of());
+            visitorView.setUserFollowing(List.of());
+            visitorView.setUserLike     (List.of());
+            visitorView.setUserFav      (List.of());
+
+            response.setVerifyCode(5);
+            response.setResponseMessage("RequestSuccess");
+            response.setUserResponse(visitorView);
+        } else {
+
+            response.setVerifyCode(-5);
+            response.setResponseMessage("UserNotFound");
+        }
+
+        return response;
+    }
+
+    @Override
+    public Response getUserPost(String userId) {
+
+        /*
+         *  getUserPost
+         *  获取用户所有的帖子
+         *  参数:
+         *      userId    : 用户 ID
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 20-Jan-2023 02:01
+         * ---------------- 修改内容 -----------------------------------------
+         *  20-Jan-2023 02:01
+         *      1. 修改返回的类型
+         */
+
+        Response response = new Response();
+
+        List<String> findPost;
+
+        User findUser;
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+
+        findUser = mongoTemplate.findOne(query, User.class, "user");
+
+        if (findUser != null) {
+
+            findPost = findUser.getUserPost();
+
+            response.setVerifyCode(6);
+            response.setResponseMessage("RequestSuccess");
+            response.setUserPostResponse(findPost);
+        } else {
+
+            response.setVerifyCode(-5);
+            response.setResponseMessage("UserNotFound");
+        }
+
+        return response;
+    }
+
     // 用于更新用户帖子
     // Modified by SeeChen Lee @ 10-Jan-2023 17:28
     @Override
@@ -277,6 +410,7 @@ public class UserImp implements UserService {
         }
     }
 
+    /*
     // 返回用户的个人资料 应用场景例子 用户的主页面
     // Last Modified by SeeChen @ 10-Jan-2023 11:46
     @Override
@@ -304,6 +438,8 @@ public class UserImp implements UserService {
 
         return userInfo;
     }
+
+     */
 
     // 判断当前邮箱是否已经被注册 True 表示已被注册 False 表示尚未被注册
     // Last Modified by SeeChen Lee @ 10-Jan-2023 00:00

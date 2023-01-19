@@ -21,16 +21,24 @@
  */
 package com.LLLT.MobileInternet.Entity;
 
+import java.util.List;
+
 public class Response {
 
-    private Integer verifyCode     ;
-    private String  responseMessage;
+    private Integer      verifyCode      ;
+    private String       responseMessage ;
+    private User         userResponse    ;
+    private List<String> userPostResponse;
 
-    public Integer      getVerifyCode() { return verifyCode     ; }
-    public String  getResponseMessage() { return responseMessage; }
+    public Integer            getVerifyCode() { return verifyCode      ; }
+    public String        getResponseMessage() { return responseMessage ; }
+    public User             getUserResponse() { return userResponse    ; }
+    public List<String> getUserPostResponse() { return userPostResponse; }
 
-    public void      setVerifyCode(Integer verifyCode)      { this.verifyCode      = verifyCode     ; }
-    public void setResponseMessage(String  responseMessage) { this.responseMessage = responseMessage; }
+    public void       setVerifyCode(Integer      verifyCode      ) { this.verifyCode       = verifyCode      ; }
+    public void  setResponseMessage(String       responseMessage ) { this.responseMessage  = responseMessage ; }
+    public void     setUserResponse(User         userResponse    ) { this.userResponse     = userResponse    ; }
+    public void setUserPostResponse(List<String> userPostResponse) { this.userPostResponse = userPostResponse; }
 
     public Response() {}
 }
