@@ -5,8 +5,7 @@
 <details>
   <summary>User API</summary>
   
-  ![[注册接口](https://github.com/Mobile-Internet-BIT-20/TermProject/blob/main/Document/API/Register.md)](https://img.shields.io/badge/注册接口-red?style=flat)
-  
-  [注册接口](https://github.com/Mobile-Internet-BIT-20/TermProject/blob/main/Document/API/Register.md) </br>
-  [登录接口](https://github.com/Mobile-Internet-BIT-20/TermProject/blob/main/Document/API/Login.md)
+  <a href = "https://github.com/Mobile-Internet-BIT-20/TermProject/blob/main/Document/API/Register.md">![注册接口](https://img.shields.io/badge/注册接口-5BC0F8?style=flat)</a></br>
+  <a href = "https://github.com/Mobile-Internet-BIT-20/TermProject/blob/main/Document/API/Login.md">![登录接口](https://img.shields.io/badge/登录接口-5BC0F8?style=flat)</a></br>
+  <a href = "https://github.com/Mobile-Internet-BIT-20/TermProject/blob/main/Document/API/deleteAccount.md">![账号删除接口](https://img.shields.io/badge/账号删除接口-5BC0F8?style=flat)</a>
 </details>
