@@ -345,6 +345,162 @@ public class UserImp implements UserService {
         return response;
     }
 
+    @Override
+    public Response updateUserBasicInfo(User updateMsg) {
+
+        /*
+         *  getUserPost
+         *  获取用户所有的帖子
+         *  参数:
+         *      updateMsg    : User 数据结构的更新信息
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 20-Jan-2023 02:01
+         * ---------------- 修改内容 -----------------------------------------
+         *  20-Jan-2023 02:01
+         *      1. 修改返回的类型
+         */
+
+        Response response = new Response();
+
+        Query query      = new Query(Criteria.where("userId").is(updateMsg.getUserId()));
+        User  updateUser = mongoTemplate.findOne(query, User.class, "user");
+
+
+        if (updateUser == null) {
+
+            response.setVerifyCode(-5);
+            response.setResponseMessage("UserNotFound");
+        } else if (!updateUser.getUserEmail().equals(updateMsg.getUserEmail())) {
+
+            response.setVerifyCode(-4);
+            response.setResponseMessage("WrongEmail");
+        } else if (!updateUser.getUserPass().equals(updateMsg.getUserPass())) {
+
+            response.setVerifyCode(-3);
+            response.setResponseMessage("WrongPass");
+        } else {
+
+            Update update = new Update();
+
+            String updateUserName   = updateMsg.getUserName().equals("")   ? updateUser.getUserName()   : updateMsg.getUserName()  ;
+            String updateUserPhoto  = updateMsg.getUserPhoto().equals("")  ? updateUser.getUserPhoto()  : updateMsg.getUserPhoto() ;
+            String updateUserIntro  = updateMsg.getUserIntro().equals("")  ? updateUser.getUserIntro()  : updateMsg.getUserIntro() ;
+            String updateDayOfBirth = updateMsg.getDayOfBirth().equals("") ? updateUser.getDayOfBirth() : updateMsg.getDayOfBirth();
+
+            update.set(  "userName"    , updateUserName)
+                    .set("userPhoto"   , updateUserPhoto)
+                    .set("userIntro"   , updateUserIntro)
+                    .set("dayOfBirth"  , updateDayOfBirth)
+                    .set("userSexIndex", updateMsg.getUserSexIndex());
+
+            mongoTemplate.upsert(query, update, User.class, "user");
+
+            response.setVerifyCode(7);
+            response.setResponseMessage("UpdateSuccess");
+        }
+
+        return response;
+    }
+
+    @Override
+    public Response updateEmail(String userId, String oldEmail, String newEmail, String userPass) {
+
+        /*
+         *  updateEmail
+         *  更新用户的电子邮箱
+         *  参数:
+         *      userId      : 用户的 UID
+         *      oldEmail    : 用户旧的电子邮箱  ( 需用户自行输入 )
+         *      newEmail    : 用户新的电子邮箱  ( 需用户自行输入 )
+         *      userPass    : 用户的密码       ( 需用户自行输入 )
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 21-Jan-2023 01:40
+         * ---------------- 修改内容 -----------------------------------------
+         *  21-Jan-2023 01:40
+         *      1. 修改返回的类型
+         */
+
+        Response response = new Response();
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+        User  user  = mongoTemplate.findOne(query, User.class, "user");
+
+        if (user == null) {
+
+            response.setVerifyCode(-5);
+            response.setResponseMessage("UserNotFound");
+        } else if (user.getUserEmail().equals(oldEmail) && user.getUserPass().equals(userPass)) {
+
+            Update update = new Update();
+            update.set("userEmail", newEmail);
+
+            mongoTemplate.upsert(query, update, User.class, "user");
+
+            response.setVerifyCode(8);
+            response.setResponseMessage("UpdatedEmail");
+        } else if (!user.getUserEmail().equals(oldEmail)) {
+
+            response.setVerifyCode(-4);
+            response.setResponseMessage("WrongEmail");
+        } else if (!user.getUserPass().equals(userPass)) {
+
+            response.setVerifyCode(-3);
+            response.setResponseMessage("WrongPassword");
+        }
+
+        return response;
+    }
+
+    @Override
+    public Response updatePassword(String userId, String oldPass, String newPass) {
+
+        /*
+         *  updatePassword
+         *  更新用户的密码
+         *  参数:
+         *      userId      : 用户的 UID
+         *      newPass     : 用户的旧密码
+         *      oldPass     : 用户的新密码
+         *
+         *  Author       : SeeChen Lee, ViHang Tan
+         *  Contact      : leeseechen@petalmail.com, tvhang7@gmail.com
+         *  Last Modified: SeeChen Lee @ 21-Jan-2023 01:51
+         * ---------------- 修改内容 -----------------------------------------
+         *  21-Jan-2023 01:51
+         *      1. 修改返回的类型
+         */
+
+        Response response = new Response();
+
+        Query query = new Query(Criteria.where("userId").is(userId));
+        User  user  = mongoTemplate.findOne(query, User.class, "user");
+
+        if (user == null) {
+
+            response.setVerifyCode(-5);
+            response.setResponseMessage("UserNotFound");
+        } else if (user.getUserPass().equals(oldPass)) {
+
+            Update update = new Update();
+            update.set("userPass", newPass);
+
+            mongoTemplate.upsert(query, update, User.class, "user");
+
+            response.setVerifyCode(9);
+            response.setResponseMessage("UpdatedPassword");
+        } else if (!user.getUserPass().equals(oldPass)) {
+
+            response.setVerifyCode(-3);
+            response.setResponseMessage("WrongPassword");
+        }
+
+        return response;
+    }
+
     // 用于更新用户帖子
     // Modified by SeeChen Lee @ 10-Jan-2023 17:28
     @Override
@@ -364,29 +520,7 @@ public class UserImp implements UserService {
 
     }
 
-    // 用户更改邮箱
-    // Last Modified by SeeChen Lee @ 11-Jan-2023 07:57
-    @Override
-    public String updateEmail(String userId, String newEmail, String userPass) {
-
-        Query query      = new Query(Criteria.where("userId").is(userId));
-        User  updateUser = mongoTemplate.findOne(query, User.class, "user");
-
-        assert updateUser != null;
-        if (!updateUser.getUserPass().equals(userPass)) {
-
-            return "WrongPass";
-        } else {
-
-            Update update = new Update();
-            update.set("email", newEmail);
-
-            mongoTemplate.upsert(query, update, User.class, "user");
-
-            return "Updated";
-        }
-    }
-
+    /*
     // 用户修改密码
     // Last Modified by SeeChen Lee @ 11-Jan-2023 07:36
     @Override
@@ -408,35 +542,6 @@ public class UserImp implements UserService {
 
             return "Updated";
         }
-    }
-
-    /*
-    // 返回用户的个人资料 应用场景例子 用户的主页面
-    // Last Modified by SeeChen @ 10-Jan-2023 11:46
-    @Override
-    public User getUserInfo(String userId) {
-
-        // 定义一开始为空值
-        User userInfo = new User();
-        User findUser;
-
-        Query query = new Query(Criteria.where("userId").is(userId));
-
-        // 从 user 数据库里面搜索 userId
-        findUser = mongoTemplate.findOne(query, User.class, "user");
-
-        // 判断返回值是否为 null 为 null 表示没有此用户
-        if (findUser != null) {
-
-            // 将找到的值赋值给返回值变量
-            BeanUtils.copyProperties(findUser, userInfo);
-        } else {
-
-            // 定义未找到的值的用户名未 UserNotFound
-            userInfo.setUserName("UserNotFound");
-        }
-
-        return userInfo;
     }
 
      */
@@ -480,25 +585,6 @@ public class UserImp implements UserService {
 
             return false;
         }
-    }
-
-    // 用于更新用户的基本资料 ( 非保密性 )
-    // Last Modified by ViHang Tan @ 10-Jan-2023 19:56
-    @Override
-    public Boolean updateUser(User updateUser) {
-
-        Query query = new Query(Criteria.where("userId").is(updateUser.getUserId()));
-
-        Update update = new Update();
-
-        update.set(  "userName"   , updateUser.getUserName())
-                .set("dayOfBirth" , updateUser.getDayOfBirth())
-                .set("usrSexIndex", updateUser.getUserSexIndex())
-                .set("userIntro"  , updateUser.getUserIntro());
-
-        mongoTemplate.upsert(query, update, User.class, "user");
-
-        return true;
     }
 
     // 用于用户点赞 返回 True 表示已经点赞 False 表示点赞失败
