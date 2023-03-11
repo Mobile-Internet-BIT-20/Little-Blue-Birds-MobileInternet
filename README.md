@@ -13,7 +13,7 @@
 
 <hr width="20%"/>
 
-## **INTRODUCTION**
+### **INTRODUCTION**
 <hr width="20%"/>
 
 北京理工大学 2022-2023 学期
@@ -22,11 +22,11 @@
 
 <hr width="20%"/>
 
-## **GROUP MEMBERS**
+### **GROUP MEMBERS**
 <hr width="20%"/>
 
 <hr width="20%"/>
 
-## **LICENSE**
+### **LICENSE**
 <hr width="20%"/>
 </div>
