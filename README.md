@@ -8,7 +8,7 @@
 
 <br/>
 <a href="https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/blob/main/LICENSE">
-<img src="https://img.shields.io/github/license/Mobile-Internet-BIT-20/TermProject?color=1AA260&label=LICENSE"/></a>
+<img src="https://img.shields.io/github/license/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet?color=1AA260&label=LICENSE"/></a>
 <a href="https://gitter.im/Mobile-Internet-BIT-20/TermProject" target="_blank"><img src = "https://img.shields.io/badge/CHAT-GITTER-FF5CF7?style=flat&logo=gitter"/></a><br/><br/>
 
 
@@ -20,13 +20,22 @@
 ![lines](https://img.shields.io/tokei/lines/github/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet?style=flat&label=Lines&color=gray)
 ![repo size](https://img.shields.io/github/repo-size/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet?style=flat&label=Size&color=gray)
 
-北京理工大学 2022-2023 第一学期移动互联设计与开发大作业
+[![schedule](https://img.shields.io/badge/-Project_Schedule-5D5D5D?style=flat&logo=googlecalendar)](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/blob/main/Schedule.md)
+
+```
+北京理工大学 2022-2023 第一学期移动互联设计与开发大作业。
+
+本项目涵盖了基本的数据库增删改查的功能，和一些基本的接口实现。
+
+项目为一个简单的分享故事的网站，后端未图形化，前端为安卓平台以及网页平台的实现。
+```
 
 <br/>
 
 `框架使用`
 
 <kbd><img src="https://raw.githubusercontent.com/github/explore/5b3600551e122a3277c2c5368af2ad5725ffa9a1/topics/java/java.png" width="75" height="75"/></kbd>
+<kbd><img src="https://raw.githubusercontent.com/github/explore/4479d2a2c854198cb00160f8593519c14dc3b905/topics/kotlin/kotlin.png" width="75" height="75"/></kbd>
 <kbd><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/spring-boot/spring-boot.png" width="75" height="75"/></kbd>
 <kbd><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png" width="75" height="75"/></kbd>
 <kbd><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png" width="75" height="75"/></kbd>
