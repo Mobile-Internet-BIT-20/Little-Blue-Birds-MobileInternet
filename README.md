@@ -53,16 +53,16 @@
 [![schedule](https://img.shields.io/badge/-Project_Schedule-5D5D5D?style=flat&logo=googlecalendar)](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/blob/main/Schedule.md)
 
 `接口文档`
-> 所有关于接口说明的内容，戳[这里](https://https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/Document/API)。
+> 所有关于接口说明的内容，戳[这里](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/tree/main/Document/API)。
 
 `数据结构`
-> [这里](https://https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/Structure)写明了在本项目中所有的数据结构，其类型、定义等等。
+> [这里](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/tree/main/Structure)写明了在本项目中所有的数据结构，其类型、定义等等。
 
 `代码`
-> [本目录](https://https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/Code)下存储了本项目中的所有代码，包括 Java, Kotlin, HTML 代码等等。<br/>
-> [安卓端代码](https://https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/Code/Android)，本次开发使用了 Android Studio 集成环境进行开发。<br/>
-> [网页端代码](https://https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/Code/Website)，未使用任何集成环境，代码均在服务器成功运行。<br/>
-> [后端代码](https://https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/Code/Server)，使用 IDEA 集成环境进行开发。
+> [本目录](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/tree/main/Code)下存储了本项目中的所有代码，包括 Java, Kotlin, HTML 代码等等。<br/>
+> [安卓端代码](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/tree/main/Code/Android)，本次开发使用了 Android Studio 集成环境进行开发。<br/>
+> [网页端代码](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/tree/main/Code/Website)，未使用任何集成环境，代码均在服务器成功运行。<br/>
+> [后端代码](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/tree/main/Code/Server)，使用 IDEA 集成环境进行开发。
 
 <hr width="20%"/>
 
@@ -107,16 +107,18 @@
 ### **END**
 <hr width="20%"/>
 
-`
-This Repository is for us to learn. If you have any suggestions, please submit an issue or email a member of our group, or you can go to gitter chat with us.
+```
+This Repository is for us to learn. If you have any suggestions
+Please submit an issue or email a member of our group
+or you can go to gitter chat with us.
 This is very important to us.
 Thanks for your advice. Have a great day today.
-`
+```
 
 </div>
 
 ---
 <div align="right">
 
-###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 13-Mar-2023 21:02*
+###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 13-Mar-2023 21:08*
 </div>
