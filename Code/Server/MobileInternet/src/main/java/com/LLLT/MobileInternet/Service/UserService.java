@@ -1,6 +1,5 @@
 package com.LLLT.MobileInternet.Service;
 
-import com.LLLT.MobileInternet.Entity.User;
 import com.LLLT.MobileInternet.Entity.UserIndex;
 import com.LLLT.MobileInternet.Util.Result.Result;
 import org.springframework.stereotype.Service;

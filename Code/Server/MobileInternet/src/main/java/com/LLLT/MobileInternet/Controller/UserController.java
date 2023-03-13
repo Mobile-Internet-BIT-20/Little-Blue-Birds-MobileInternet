@@ -44,20 +44,27 @@ public class UserController {
             int Expired = Time.year2sec(1);
             String path = "/";
 
-            Cookie cookie1 = new Cookie("userId", result.getData().getUserId());
-            cookie1.setHttpOnly(true);
-            cookie1.setMaxAge(Expired);
-            cookie1.setPath(path);
+            Cookie cookie1, cookie2, cookie3;
+            cookie1 = new Cookie("userId", result.getData().getUserId()) {{
 
-            Cookie cookie2 = new Cookie("userEmail", result.getData().getUserEmail());
-            cookie2.setHttpOnly(true);
-            cookie2.setMaxAge(Expired);
-            cookie2.setPath(path);
+                setHttpOnly(true);
+                setMaxAge(Expired);
+                setPath(path);
+            }};
 
-            Cookie cookie3 = new Cookie("userPassword", result.getData().getUserPassword());
-            cookie3.setHttpOnly(true);
-            cookie3.setMaxAge(Expired);
-            cookie3.setPath(path);
+            cookie2 = new Cookie("userEmail", result.getData().getUserEmail()) {{
+
+                setHttpOnly(true);
+                setMaxAge(Expired);
+                setPath(path);
+            }};
+
+            cookie3 = new Cookie("userPassword", result.getData().getUserPassword()) {{
+
+                setHttpOnly(true);
+                setMaxAge(Expired);
+                setPath(path);
+            }};
 
             httpServletResponse.addCookie(cookie1);
             httpServletResponse.addCookie(cookie2);
@@ -83,20 +90,24 @@ public class UserController {
             int Expired = 0;
             String path = "/";
 
-            Cookie cookie1 = new Cookie("userId", null);
-            cookie1.setHttpOnly(true);
-            cookie1.setMaxAge(Expired);
-            cookie1.setPath(path);
+            Cookie cookie1, cookie2, cookie3;
+            cookie1 = new Cookie("userId", null) {{
+                setHttpOnly(true);
+                setMaxAge(Expired);
+                setPath(path);
+            }};
 
-            Cookie cookie2 = new Cookie("userEmail", null);
-            cookie2.setHttpOnly(true);
-            cookie2.setMaxAge(Expired);
-            cookie2.setPath(path);
+            cookie2 = new Cookie("userEmail", null) {{
+                setHttpOnly(true);
+                setMaxAge(Expired);
+                setPath(path);
+            }};
 
-            Cookie cookie3 = new Cookie("userPassword", null);
-            cookie3.setHttpOnly(true);
-            cookie3.setMaxAge(Expired);
-            cookie3.setPath(path);
+            cookie3 = new Cookie("userPassword", null) {{
+                setHttpOnly(true);
+                setMaxAge(Expired);
+                setPath(path);
+            }};
 
             httpServletResponse.addCookie(cookie1);
             httpServletResponse.addCookie(cookie2);

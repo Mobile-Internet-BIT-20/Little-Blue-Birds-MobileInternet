@@ -61,9 +61,12 @@ public class UserUpdateController {
 
         if (result.getResultCode() == ResultCode.UPDATE_SUCCESS.getCode()) {
 
-            Cookie cookie = new Cookie("userEmail", result.getData().getUserEmail());
-            cookie.setPath("/");
-            cookie.setMaxAge(Time.year2sec(1));
+            Cookie cookie = new Cookie("userEmail", result.getData().getUserEmail()) {{
+                setPath("/");
+                setMaxAge(Time.year2sec(1));
+                setHttpOnly(true);
+            }};
+
             httpServletResponse.addCookie(cookie);
         }
 
@@ -84,9 +87,12 @@ public class UserUpdateController {
 
         if (result.getResultCode() == ResultCode.UPDATE_SUCCESS.getCode()) {
 
-            Cookie cookie = new Cookie("userPassword", result.getData().getUserPassword());
-            cookie.setPath("/");
-            cookie.setMaxAge(Time.year2sec(1));
+            Cookie cookie = new Cookie("userPassword", result.getData().getUserPassword()){{
+                setPath("/");
+                setMaxAge(Time.year2sec(1));
+                setHttpOnly(true);
+            }};
+
             httpServletResponse.addCookie(cookie);
         }
 
@@ -100,10 +106,11 @@ public class UserUpdateController {
 
         Cookie[] cookies = httpServletRequest.getCookies();
 
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("userId"      , "");
-        hashMap.put("userEmail"   , "");
-        hashMap.put("userPassword", "");
+        HashMap<String, String> hashMap = new HashMap<String, String>() {{
+            put("userId"      , "");
+            put("userEmail"   , "");
+            put("userPassword", "");
+        }};
 
         for (Cookie c : cookies) hashMap.replace(c.getName(), c.getValue());
 
