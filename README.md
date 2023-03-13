@@ -48,7 +48,7 @@
 ### **REPOSITORY GUIDE**
 <hr width="20%"/><br/>
 
-`开发日历`
+`开发日志`
 
 [![schedule](https://img.shields.io/badge/-Project_Schedule-5D5D5D?style=flat&logo=googlecalendar)](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/blob/main/Schedule.md)
 
