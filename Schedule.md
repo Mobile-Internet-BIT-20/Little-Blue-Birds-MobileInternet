@@ -61,6 +61,7 @@ All Date Format follow [ YYYY - MM - DD ]
 ``` 
 1. Start Developer this Project.
 ```
+</details>
 
 ---
 
