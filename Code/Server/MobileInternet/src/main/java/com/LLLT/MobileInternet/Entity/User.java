@@ -1,8 +1,11 @@
 package com.LLLT.MobileInternet.Entity;
 
+import com.LLLT.MobileInternet.Util.Sex.SexList;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +24,11 @@ public class User implements Serializable {
     private List<String> userFollowing;
     private List<String> userLike     ;
     private List<String> userCollect  ;
+    private int postCount     ;
+    private int followerCount ;
+    private int followingCount;
+    private int likeCount     ;
+    private int collectCount  ;
 
     public String getUserId() {
         return userId;
@@ -68,6 +76,26 @@ public class User implements Serializable {
 
     public List<String> getUserCollect() {
         return userCollect;
+    }
+
+    public int getPostCount() {
+        return postCount;
+    }
+
+    public int getFollowerCount() {
+        return followerCount;
+    }
+
+    public int getFollowingCount() {
+        return followingCount;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public int getCollectCount() {
+        return collectCount;
     }
 
     public void setUserId(String userId) {
@@ -118,6 +146,26 @@ public class User implements Serializable {
         this.userCollect = userCollect;
     }
 
+    public void setPostCount(int postCount) {
+        this.postCount = postCount;
+    }
+
+    public void setFollowerCount(int followerCount) {
+        this.followerCount = followerCount;
+    }
+
+    public void setFollowingCount(int followingCount) {
+        this.followingCount = followingCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public void setCollectCount(int collectCount) {
+        this.collectCount = collectCount;
+    }
+
     public User() {}
     public User(String userId) {
         this.userId = userId;
@@ -125,6 +173,16 @@ public class User implements Serializable {
     public User setPrivateContent() {
 
         this.userCollect = this.userFollower = this.userFollowing = this.userLike = Collections.emptyList();
+        return this;
+    }
+
+    public User init() {
+
+        this.userName    = this.userIntro = this.userPhoto = this.userBirthDay = "_DEFAULT_";
+        this.userSex     = SexList.NONE.getCode();
+        this.userJoinDay = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Timestamp(System.currentTimeMillis()));
+        this.userPost    = this.userCollect  = this.userFollower  = this.userFollowing  = this.userLike  = Collections.emptyList();
+        this.postCount   = this.collectCount = this.followerCount = this.followingCount = this.likeCount = 0;
         return this;
     }
 }

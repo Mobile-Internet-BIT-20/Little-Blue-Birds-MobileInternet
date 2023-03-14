@@ -37,34 +37,10 @@ public class UserImp implements UserService {
 
         if (userIndexDao.findOneByEmail(userEmail) == null) {
 
-            String userId;
-            String userName, userPhoto, userIntro;
-            int    userSex;
-            String userBirthDay, userJoinDay;
-            List<String> userPost, userFollower, userFollowing, userLike, userCollect;
-
-            userId = "U" + new ObjectId();
-            userName = userPhoto = userIntro = "_DEFAULT_";
-            userSex = SexList.NONE.getCode();
-            userBirthDay = "_DEFAULT_";
-            userJoinDay = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Timestamp(System.currentTimeMillis()));
-
-            userPost = userFollower = userFollowing = userLike = userCollect = Collections.emptyList();
+            String userId = "U" + new ObjectId();
 
             UserIndex userIndex = new UserIndex(userId, userEmail, userPassword);
-            User      user      = new User(userId);
-
-            user.setUserName(userName);
-            user.setUserPhoto(userPhoto);
-            user.setUserIntro(userIntro);
-            user.setUserSex(userSex);
-            user.setUserBirthDay(userBirthDay);
-            user.setUserJoinDay(userJoinDay);
-            user.setUserPost(userPost);
-            user.setUserFollowing(userFollowing);
-            user.setUserFollower(userFollower);
-            user.setUserLike(userLike);
-            user.setUserCollect(userCollect);
+            User      user      = new User(userId).init();
 
             userIndexDao.Save(userIndex);
             userDao.Save(user);
