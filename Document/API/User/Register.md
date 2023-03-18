@@ -3,14 +3,11 @@
 # Register
 
 </div>
-<div align = "center">
 
 ### Request URL
 </div>
 
 `http://127.0.0.1:8080/api/user/register`
-
-<div align = "center">
 
 ### Request Method
 
@@ -34,8 +31,6 @@
 
 
 ### Example
-
-</div>
 
 `注册成功`
 
