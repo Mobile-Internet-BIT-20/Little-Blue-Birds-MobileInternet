@@ -10,8 +10,6 @@ All Date Format follow [ YYYY - MM - DD ]
 
 </div>
 
-</details>
-
 <details>
    <summary> March 2023 </summary>
 

@@ -2,26 +2,38 @@
 
 # Register
 
-</div>
+<hr width = "20%"/>
 
 ### Request URL
-</div>
+<hr width = "20%"/>
 
 `http://127.0.0.1:8080/api/user/register`
 
-### **Request Method**
+<br/>
+<hr width = "20%"/>
+
+### Request Method
+<hr width = "20%"/>
 
 - [ ] GET
 - [X] POST
 
-### **Request Parameters**
+<br/>
+<hr width = "20%"/>
+
+### Request Parameters
+<hr width = "20%"/>
 
 |参数名|参数类型|参数说明|备注|必填|
 |:---:|:---:|:---:|:---:|:---:|
 |UserEmail|String|用户注册时候所使用的邮箱||:heavy_check_mark:|
 |UserPassword|String|用户注册时候所设置的密码|由前端进行加密|:heavy_check_mark:|
 
-### **Return Parameters**
+<br/>
+<hr width = "20%"/>
+
+### Return Parameters
+<hr width = "20%"/>
 
 |参数名|参数类型|参数说明|
 |:---:|:---:|:---:|
@@ -29,10 +41,15 @@
 |code|String|状态码|
 |msg|String|返回信息|
 
+<br/>
+<hr width = "20%"/>
 
-### **Example**
+### Example
+<hr width = "20%"/>
 
-`注册成功`
+`登陆成功`
+</div>
+
 
 ```json
 {
@@ -48,5 +65,5 @@
 ---
 <div align="right">
 
-###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 18-Mar-2023 22:05*
+###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 19-Mar-2023 20:57*
 </div>
