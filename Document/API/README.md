@@ -31,3 +31,9 @@ All API Document
 - [Update Password](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/blob/main/Document/API/UserUpdate/UpdateProfilePicture.md)
 
 </details>
+
+---
+<div align="right">
+
+###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 19-Mar-2023 22:53*
+</div>
