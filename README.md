@@ -88,6 +88,39 @@
 
 </div>
 
+<br/>
+<hr width="20%"/>
+
+### **REPOSITORY DIRECTORY**
+<hr width="20%"/><br/>
+
+<div align = "left">
+
+``` txt
+LittleBlueBirds
+├───Code
+│   ├───Android -> Android Code
+│   │   
+│   ├───Server -> Server Code
+│   │
+│   └───Website -> Website Code
+│
+├───Document
+│   ├───API
+│   │   ├───Post
+│   │   ├───User
+│   │   └───UserUpdate
+│   └───Structure
+│       ├───Post
+│       └───User
+└───Element
+    ├───Color
+    ├───Icon
+    └───Logo
+```
+</div>
+
+<br/>
 <hr width="20%"/>
 
 ### **GROUP MEMBERS**
