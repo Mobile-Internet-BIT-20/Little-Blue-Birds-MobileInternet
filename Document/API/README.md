@@ -32,8 +32,17 @@ All API Document
 
 </details>
 
+<details>
+<summary> Post </summary>
+
+- [Publish Post](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/blob/main/Document/API/Post/PublishPost.md)
+
+- [Modify Post](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/blob/main/Document/API/Post/ModifyPost.md)
+
+</details>
+
 ---
 <div align="right">
 
-###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 19-Mar-2023 22:53*
+###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 20-Mar-2023 21:16*
 </div>
