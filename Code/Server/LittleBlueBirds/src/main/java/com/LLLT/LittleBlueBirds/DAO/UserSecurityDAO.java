@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class UserSecurityDAO extends BaseDAO<UserSecurity> {
 
-    private String CollectionName = "UserSecurity";
+    private final String CollectionName = "UserSecurity";
 
     public UserSecurityDAO(MongoTemplate mongoTemplate) {
         super(mongoTemplate);

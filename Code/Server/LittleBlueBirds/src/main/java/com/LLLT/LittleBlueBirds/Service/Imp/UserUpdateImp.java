@@ -44,7 +44,7 @@ public class UserUpdateImp implements UserUpdateService {
         }
 
 
-        result = new UploadFile.UploadPicture().Single(ProfilePicture, UploadPath, UserId, "/profile");
+        result = new UploadFile.UploadPicture().Single(ProfilePicture, UploadPath, UserId, "profile");
 
         if (result.getCode() == Result.CodeEnum.UPLOAD_FAILED.getCode()) {
 

@@ -76,6 +76,7 @@
 > - [安卓端代码](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/tree/main/Code/Android)
 >   - 本次开发中所有的安卓端均在 ***Android Studio*** 进行开发
 >   - 安卓端代码基于 ***Kotlin*** 进行开发
+>   - 安卓端代码尚无法连接后端
 > - [网页端代码](https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/tree/main/Code/Website)
 >   - 网页端基于 ***HTML5, CSS3, JavaScript, jQuery*** 进行所有的开发操作，暂未使用其它技术进行处理
 >   - 在开发过程中，项目的代码使用 ***IDEA*** 进行编写，所有的网页端代码在测试中暂时顺利运行响应
@@ -93,22 +94,22 @@
 <hr width="20%"/><br/>
 
 <table>
-    <tr>
+    <tr align = "center">
         <td><a href="https://github.com/Leosta0807"><kbd><img src="https://avatars.githubusercontent.com/u/93914414?v=4" width="75" height="75"/></kbd></a></td>
         <td>LEYE LAU</td>
         <td><a href="mailto:lele.ye.01@gmail.com">lele.ye.01@gmail.com</a></td>
     </tr>
-    <tr>
+    <tr align = "center">
         <td><a href="https://github.com/SeeChen/"><kbd><img src="https://avatars.githubusercontent.com/u/39422761?v=4" width="75" height="75"/></kbd></a></td>
         <td>SEECHEN LEE</td>
         <td><a href="mailto:leeseechen@gmail.com">leeseechen@gmail.com</a></td>
     </tr>
-    <tr>
+    <tr align = "center">
         <td><a href="https://github.com/CloudWY45/"><kbd><img src="https://avatars.githubusercontent.com/u/95856719?v=4" width="75" height="75"/></kbd></a></td>
         <td>WINYI LEE</td>
         <td><a href="mailto:leewinyiyb@gmail.com">leewinyiyb@gmail.com</a></td>
     </tr>
-    <tr>
+    <tr align = "center">
         <td><a href="https://github.com/tanvihang"><kbd><img src="https://avatars.githubusercontent.com/u/59675739?v=4" width="75" height="75"/></kbd></a></td>
         <td>VIHANG TAN</td>
         <td><a href="mailto:tvhang7@gmail.com">tvhang7@gmail.com</a></td>
@@ -143,5 +144,5 @@ Thanks for your advice. Have a great day today.
 ---
 <div align="right">
 
-###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 19-Mar-2023 23:51*
+###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 20-Mar-2023 11:33*
 </div>

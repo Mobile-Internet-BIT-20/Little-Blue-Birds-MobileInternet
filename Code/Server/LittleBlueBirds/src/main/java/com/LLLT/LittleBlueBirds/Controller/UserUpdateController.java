@@ -4,6 +4,7 @@ import com.LLLT.LittleBlueBirds.Entity.UserBasic;
 import com.LLLT.LittleBlueBirds.Entity.UserSecurity;
 import com.LLLT.LittleBlueBirds.Service.UserUpdateService;
 import com.LLLT.LittleBlueBirds.Util.Convert;
+import com.LLLT.LittleBlueBirds.Util.GetCookie;
 import com.LLLT.LittleBlueBirds.Util.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,18 +30,7 @@ public class UserUpdateController {
             @RequestParam("UserPhoto") MultipartFile multipartFile
     ) {
 
-        Cookie[] cookies = request.getCookies();
-        HashMap<String, String> hashMap = new HashMap<String, String>() {{
-
-            put("UserId"      , "");
-            put("UserEmail"   , "");
-            put("UserPassword", "");
-        }};
-
-        for (Cookie c : cookies) {
-
-            hashMap.replace(c.getName(), c.getValue());
-        }
+        HashMap<String, String> hashMap = GetCookie.UserCookie.SecurityCookie(request.getCookies());
 
         return userUpdateService.UpdatePicture(multipartFile, hashMap.get("UserId"), hashMap.get("UserEmail"), hashMap.get("UserPassword"));
     }
@@ -50,18 +40,7 @@ public class UserUpdateController {
             HttpServletRequest  request
     ) {
 
-        Cookie[] cookies = request.getCookies();
-        HashMap<String, String> hashMap = new HashMap<String, String>() {{
-
-            put("UserId"      , "");
-            put("UserEmail"   , "");
-            put("UserPassword", "");
-        }};
-
-        for (Cookie c : cookies) {
-
-            hashMap.replace(c.getName(), c.getValue());
-        }
+        HashMap<String, String> hashMap = GetCookie.UserCookie.SecurityCookie(request.getCookies());
 
         String Name     = request.getParameter("Name"    );
         String Intro    = request.getParameter("Intro"   );
