@@ -58,4 +58,39 @@ public class PostController {
 
         return postService.PublishPost(hashMap.get("UserId"), PostTitle, PostContent, PostImg);
     }
+
+    @RequestMapping("/modify")
+    public Result<Post> ModifyPost (
+            HttpServletRequest request,
+            @RequestParam(
+                    value = "PostId",
+                    required = true
+            ) String PostId,
+            @RequestParam(
+                    value = "PostImg",
+                    required = false
+            ) MultipartFile[] multipartFiles
+    ) {
+        HashMap<String, String> cookies = GetCookie.UserCookie.SecurityCookie(request.getCookies());
+
+        UserSecurity userSecurity = userService.UserLogin(cookies.get("UserEmail"), cookies.get("UserPassword")).getData();
+        Result<Post> result = new Result<>();
+
+        if (userSecurity == null) {
+
+            return result.init(Result.CodeEnum.FAILED);
+        }
+
+        String PostTitle   = request.getParameter("PostTitle"  );
+        String PostContent = request.getParameter("PostContent");
+
+        MultipartFile[] PostImg = {};
+
+        if (multipartFiles != null) {
+
+            PostImg = multipartFiles;
+        }
+
+        return postService.ModifyPost(cookies.get("UserId"), PostId, PostTitle, PostContent, PostImg);
+    }
 }

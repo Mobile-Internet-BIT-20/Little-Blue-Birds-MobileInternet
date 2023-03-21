@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -35,10 +36,19 @@ public abstract class BaseDAO<T> {
         mongoTemplate.remove(query, Clazz, CollectionName);
     }
 
-    public void UpdateByKey (String Key, String Value, String CollectionName, HashMap<String, String> data) {
+    public void UpdateByKey (String Key, String Value, String CollectionName, HashMap<String, Object> data) {
         Update update = new Update();
-        for (Map.Entry<String, String> m : data.entrySet()) {
-            update.set(m.getKey(), Judge.Numbers.isNumeric(m.getValue()) ? Integer.valueOf(m.getValue()) : m.getValue());
+        for (Map.Entry<String, Object> m : data.entrySet()) {
+            if (m.getValue() instanceof String) {
+                update.set(m.getKey(), Judge.Numbers.isNumeric(m.getValue().toString()) ? Integer.valueOf(m.getValue().toString()) : m.getValue());
+                continue;
+            }
+            if (m.getValue() instanceof List<?>) {
+                update.set(m.getKey(), m.getValue());
+                continue;
+            }
+            System.out.println(m.getValue().getClass());
+            break;
         }
         Query query = new Query(Criteria.where(Key).is(Value));
         mongoTemplate.upsert(query, update, Clazz, CollectionName);

@@ -1,10 +1,12 @@
 package com.LLLT.LittleBlueBirds.Entity;
 
+import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
 @Document("UserSecurity")
+@Data
 public class UserSecurity implements Serializable {
 
     private String UserId      ;
@@ -17,32 +19,5 @@ public class UserSecurity implements Serializable {
         this.UserId       = UserId      ;
         this.UserEmail    = UserEmail   ;
         this.UserPassword = UserPassword;
-    }
-
-    // Getter and Setter
-
-
-    public String getUserId() {
-        return UserId;
-    }
-
-    public void setUserId(String userId) {
-        UserId = userId;
-    }
-
-    public String getUserEmail() {
-        return UserEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        UserEmail = userEmail;
-    }
-
-    public String getUserPassword() {
-        return UserPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        UserPassword = userPassword;
     }
 }

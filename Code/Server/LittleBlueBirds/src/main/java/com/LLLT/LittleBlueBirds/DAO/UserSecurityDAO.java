@@ -14,7 +14,7 @@ public class UserSecurityDAO extends BaseDAO<UserSecurity> {
     }
 
     public UserSecurity findOneById (String UserId) {
-        return super.findOneByKey("UserId", UserId,CollectionName);
+        return super.findOneByKey("UserId", UserId, CollectionName);
     }
 
     public UserSecurity findOneByEmail (String Email) {
@@ -30,7 +30,7 @@ public class UserSecurityDAO extends BaseDAO<UserSecurity> {
     }
 
     public void Update (String UserId, String UpdateKey, String UpdateValue) {
-        HashMap<String, String> hashMap = new HashMap<>();
+        HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put(UpdateKey, UpdateValue);
         super.UpdateByKey("UserId", UserId, CollectionName, hashMap);
     }

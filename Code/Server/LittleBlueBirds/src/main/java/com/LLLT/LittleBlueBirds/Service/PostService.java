@@ -9,4 +9,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface PostService {
 
     Result<Post> PublishPost (String HolderId, String PostTitle, String PostContent, MultipartFile[] PostImg);
+    Result<Post> ModifyPost  (String HolderId, String PostId, String PostTitle, String PostContent, MultipartFile[] PostImg);
 }

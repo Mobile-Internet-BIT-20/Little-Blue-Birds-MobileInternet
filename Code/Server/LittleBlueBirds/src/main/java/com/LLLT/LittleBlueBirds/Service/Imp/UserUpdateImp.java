@@ -6,7 +6,7 @@ import com.LLLT.LittleBlueBirds.Entity.UserBasic;
 import com.LLLT.LittleBlueBirds.Entity.UserSecurity;
 import com.LLLT.LittleBlueBirds.Service.UserUpdateService;
 import com.LLLT.LittleBlueBirds.Util.Result;
-import com.LLLT.LittleBlueBirds.Util.UploadFile;
+import com.LLLT.LittleBlueBirds.Util.FileOP;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class UserUpdateImp implements UserUpdateService {
         }
 
 
-        result = new UploadFile.UploadPicture().Single(ProfilePicture, UploadPath, UserId, "profile");
+        result = new FileOP.UploadPicture().Single(ProfilePicture, UploadPath, UserId, "profile");
 
         if (result.getCode() == Result.CodeEnum.UPLOAD_FAILED.getCode()) {
 
@@ -76,7 +76,7 @@ public class UserUpdateImp implements UserUpdateService {
 
         UserBasicDAO userBasicDAO = new UserBasicDAO(mongoTemplate);
 
-        HashMap<String, String> hashMap = new HashMap<>();
+        HashMap<String, Object> hashMap = new HashMap<>();
         String[] UpdateKey = {"Name", "Intro", "Sex", "BirthDay"};
 
         for (int i = 0; i < UpdateMsg.length; i++) {

@@ -1,10 +1,12 @@
 package com.LLLT.LittleBlueBirds.Entity;
 
+import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
 @Document("Comment")
+@Data
 public class Comment implements Serializable {
 
     private String CommentId;

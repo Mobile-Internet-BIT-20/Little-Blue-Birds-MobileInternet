@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class UserBasicDAO extends BaseDAO<UserBasic> {
 
-    private String CollectionName = "UserBasic";
+    private final String CollectionName = "UserBasic";
 
     public UserBasicDAO(MongoTemplate mongoTemplate) {
         super(mongoTemplate);
@@ -26,12 +26,12 @@ public class UserBasicDAO extends BaseDAO<UserBasic> {
     }
 
     public void Update (String UserId, String UpdateKey, String UpdateValue) {
-        HashMap<String, String> hashMap = new HashMap<>();
+        HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put(UpdateKey, UpdateValue);
         super.UpdateByKey("UserId", UserId, CollectionName, hashMap);
     }
 
-    public void Update (String UserId, HashMap<String, String> hashMap) {
+    public void Update (String UserId, HashMap<String, Object> hashMap) {
         super.UpdateByKey("UserId", UserId, CollectionName, hashMap);
     }
 }

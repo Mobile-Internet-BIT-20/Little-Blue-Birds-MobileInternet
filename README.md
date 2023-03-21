@@ -99,11 +99,11 @@
 ``` txt
 LittleBlueBirds
 ├───Code
-│   ├───Android -> Android Code
+│   ├───Android
 │   │   
-│   ├───Server -> Server Code
+│   ├───Server
 │   │
-│   └───Website -> Website Code
+│   └───Website
 │
 ├───Document
 │   ├───API

@@ -18,11 +18,12 @@
 |LikeNum|Integer|点赞的数量|0|
 |CollectNum|Integer|收藏的帖子数量|0|
 |CommentNum|Integer|评论的数量|0|
+|PostPrivacy|Enum|帖子的权限|0|
 
 </div>
 
 ---
 <div align="right">
 
-###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 20-Mar-2023 21:12*
+###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 21-Mar-2023 08:46*
 </div>
