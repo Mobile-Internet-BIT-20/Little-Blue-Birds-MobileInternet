@@ -2,8 +2,6 @@ package com.LLLT.LittleBlueBirds.Service.Imp;
 
 import com.LLLT.LittleBlueBirds.DAO.UserBasicDAO;
 import com.LLLT.LittleBlueBirds.DAO.UserSecurityDAO;
-import com.LLLT.LittleBlueBirds.Entity.UserBasic;
-import com.LLLT.LittleBlueBirds.Entity.UserSecurity;
 import com.LLLT.LittleBlueBirds.Service.UserUpdateService;
 import com.LLLT.LittleBlueBirds.Util.Result;
 import com.LLLT.LittleBlueBirds.Util.FileOP;

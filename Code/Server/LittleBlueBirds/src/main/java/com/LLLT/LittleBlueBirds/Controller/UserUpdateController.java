@@ -1,10 +1,8 @@
 package com.LLLT.LittleBlueBirds.Controller;
 
-import com.LLLT.LittleBlueBirds.Entity.UserBasic;
-import com.LLLT.LittleBlueBirds.Entity.UserSecurity;
 import com.LLLT.LittleBlueBirds.Service.UserUpdateService;
 import com.LLLT.LittleBlueBirds.Util.Convert;
-import com.LLLT.LittleBlueBirds.Util.GetCookie;
+import com.LLLT.LittleBlueBirds.Util.CookieOP;
 import com.LLLT.LittleBlueBirds.Util.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +28,7 @@ public class UserUpdateController {
             @RequestParam("UserPhoto") MultipartFile multipartFile
     ) {
 
-        HashMap<String, String> hashMap = GetCookie.UserCookie.SecurityCookie(request.getCookies());
+        HashMap<String, String> hashMap = CookieOP.UserCookie.SecurityCookie(request.getCookies());
 
         return userUpdateService.UpdatePicture(multipartFile, hashMap.get("UserId"), hashMap.get("UserEmail"), hashMap.get("UserPassword"));
     }
@@ -40,7 +38,7 @@ public class UserUpdateController {
             HttpServletRequest  request
     ) {
 
-        HashMap<String, String> hashMap = GetCookie.UserCookie.SecurityCookie(request.getCookies());
+        HashMap<String, String> hashMap = CookieOP.UserCookie.SecurityCookie(request.getCookies());
 
         String Name     = request.getParameter("Name"    );
         String Intro    = request.getParameter("Intro"   );

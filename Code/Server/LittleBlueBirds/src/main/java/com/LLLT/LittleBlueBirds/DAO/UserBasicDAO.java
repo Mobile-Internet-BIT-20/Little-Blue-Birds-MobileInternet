@@ -1,6 +1,5 @@
 package com.LLLT.LittleBlueBirds.DAO;
 
-import com.LLLT.LittleBlueBirds.Entity.UserBasic;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.HashMap;

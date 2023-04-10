@@ -3,7 +3,28 @@ package com.LLLT.LittleBlueBirds.Util;
 import javax.servlet.http.Cookie;
 import java.util.HashMap;
 
-public class GetCookie {
+public class CookieOP {
+
+    public static class setCookie {
+
+        public static class CookieAccount {
+
+            public static Cookie CookieSecurity (
+                    String Key   ,
+                    String Value ,
+                    int    maxAge
+            ) {
+
+                Cookie cookie = new Cookie(Key, Value);
+                cookie.setPath("/");
+                cookie.setHttpOnly(true);
+                cookie.setMaxAge(maxAge);
+
+                return cookie;
+            }
+        }
+    }
+
 
     public static class UserCookie {
 

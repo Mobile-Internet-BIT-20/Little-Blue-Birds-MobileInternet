@@ -1,10 +1,8 @@
 package com.LLLT.LittleBlueBirds.Controller;
 
 import com.LLLT.LittleBlueBirds.Entity.Post;
-import com.LLLT.LittleBlueBirds.Entity.UserSecurity;
 import com.LLLT.LittleBlueBirds.Service.PostService;
-import com.LLLT.LittleBlueBirds.Service.UserService;
-import com.LLLT.LittleBlueBirds.Util.GetCookie;
+import com.LLLT.LittleBlueBirds.Util.CookieOP;
 import com.LLLT.LittleBlueBirds.Util.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +34,7 @@ public class PostController {
             ) MultipartFile[] multipartFiles
     ) {
 
-        HashMap<String, String> hashMap = GetCookie.UserCookie.SecurityCookie(request.getCookies());
+        HashMap<String, String> hashMap = CookieOP.UserCookie.SecurityCookie(request.getCookies());
 
         UserSecurity userSecurity = userService.UserLogin(hashMap.get("UserEmail"), hashMap.get("UserPassword")).getData();
         Result<Post> result = new Result<>();
@@ -71,7 +69,7 @@ public class PostController {
                     required = false
             ) MultipartFile[] multipartFiles
     ) {
-        HashMap<String, String> cookies = GetCookie.UserCookie.SecurityCookie(request.getCookies());
+        HashMap<String, String> cookies = CookieOP.UserCookie.SecurityCookie(request.getCookies());
 
         UserSecurity userSecurity = userService.UserLogin(cookies.get("UserEmail"), cookies.get("UserPassword")).getData();
         Result<Post> result = new Result<>();
