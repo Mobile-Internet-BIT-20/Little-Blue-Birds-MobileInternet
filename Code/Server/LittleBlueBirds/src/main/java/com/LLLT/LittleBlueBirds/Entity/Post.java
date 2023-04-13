@@ -1,6 +1,5 @@
 package com.LLLT.LittleBlueBirds.Entity;
 
-import com.LLLT.LittleBlueBirds.Util.PrivacyEnum;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 

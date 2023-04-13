@@ -1,10 +1,9 @@
 package com.LLLT.LittleBlueBirds.Entity;
 
-import com.LLLT.LittleBlueBirds.Util.PrivacyEnum;
-import com.LLLT.LittleBlueBirds.Util.SexEnum;
+import com.LLLT.LittleBlueBirds.Enum.EnumPrivacy;
+import com.LLLT.LittleBlueBirds.Enum.EnumSex;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -53,9 +52,9 @@ public class AccountBasic implements Serializable {
         this.UserName = this.UserIntro = this.ProfilePicture = "__DEFAULT__";
         this.DayBirth = "__DEFAULT__";
         this.DayJoin = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Timestamp(System.currentTimeMillis()));
-        this.UserSex = SexEnum.NONE.getCode();
+        this.UserSex = EnumSex.NONE.getCode();
         this.NumPost = this.NumFollower = this.NumFollowing = this.NumCollect = 0;
-        this.PrivacyFollower = this.PrivacyFollowing = this.PrivacyLike = this.PrivacyCollect = PrivacyEnum.PUBLIC.getCode();
+        this.PrivacyFollower = this.PrivacyFollowing = this.PrivacyLike = this.PrivacyCollect = EnumPrivacy.LOGIN_USER.getCode();
         this.ListCollect = this.ListFollower = this.ListFollowing = this.ListLike = Collections.emptyList();
     }
 }

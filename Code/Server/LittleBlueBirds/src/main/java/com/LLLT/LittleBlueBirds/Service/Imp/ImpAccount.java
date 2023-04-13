@@ -4,8 +4,9 @@ import com.LLLT.LittleBlueBirds.DAO.DAOAccountBasic;
 import com.LLLT.LittleBlueBirds.DAO.DAOAccountSecurity;
 import com.LLLT.LittleBlueBirds.Entity.AccountBasic;
 import com.LLLT.LittleBlueBirds.Entity.AccountSecurity;
+import com.LLLT.LittleBlueBirds.Enum.EnumResult;
 import com.LLLT.LittleBlueBirds.Service.ServiceAccount;
-import com.LLLT.LittleBlueBirds.Util.Result;
+import com.LLLT.LittleBlueBirds.Util.UtilResult;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -21,19 +22,19 @@ public class ImpAccount implements ServiceAccount {
     }
 
     @Override
-    public Result<AccountSecurity> AccountRegister (
+    public UtilResult<AccountSecurity> AccountRegister (
             String AccountEmail   ,
             String AccountPassword
     ) {
 
-        Result<AccountSecurity> result = new Result<>();
+        UtilResult<AccountSecurity> result = new UtilResult<>();
 
         DAOAccountSecurity DAOaccountSecurity = new DAOAccountSecurity(mongoTemplate);
         DAOAccountBasic    DAOaccountBasic    = new DAOAccountBasic(mongoTemplate);
 
         if (DAOaccountSecurity.findOneByEmail(AccountEmail) != null) {
 
-            return result.init(Result.CodeEnum.EMAIL_INVALID);
+            return result.init(EnumResult.EMAIL_INVALID);
         }
 
         String UID = "U" + new ObjectId();
@@ -43,52 +44,52 @@ public class ImpAccount implements ServiceAccount {
 
         accountBasic.init();
 
-        DAOaccountBasic.Save(accountBasic);
-        DAOaccountSecurity.Save(accountSecurity);
+        DAOaccountBasic.save(accountBasic);
+        DAOaccountSecurity.save(accountSecurity);
 
-        return result.init(Result.CodeEnum.SUCCESS, accountSecurity);
+        return result.init(EnumResult.SUCCESS, accountSecurity);
     }
 
     @Override
-    public Result<AccountSecurity> AccountLogin(
+    public UtilResult<AccountSecurity> AccountLogin(
             String AccountEmail   ,
             String AccountPassword
     ) {
 
-        Result<AccountSecurity> result = new Result<>();
+        UtilResult<AccountSecurity> result = new UtilResult<>();
 
         DAOAccountSecurity DAOAccountSecurity = new DAOAccountSecurity(mongoTemplate);
         AccountSecurity    accountSecurity    = DAOAccountSecurity.findOneByEmail(AccountEmail);
 
         if (accountSecurity == null) {
 
-            return result.init(Result.CodeEnum.EMAIL_INVALID);
+            return result.init(EnumResult.EMAIL_INVALID);
         }
 
         if (!accountSecurity.getAccountPassword().equals(AccountPassword)) {
 
-            return result.init(Result.CodeEnum.WRONG_PASSWORD);
+            return result.init(EnumResult.WRONG_PASSWORD);
         }
 
-        return result.init(Result.CodeEnum.SUCCESS, accountSecurity);
+        return result.init(EnumResult.SUCCESS, accountSecurity);
     }
 
     @Override
-    public Result<String> AccountDelete (
+    public UtilResult<String> AccountDelete (
             String UID            ,
             String AccountEmail   ,
             String AccountPassword,
             String UserName
     ) {
 
-       Result<String> result = new Result<>();
+       UtilResult<String> result = new UtilResult<>();
 
        DAOAccountSecurity DAOAccountSecurity = new DAOAccountSecurity(mongoTemplate);
        DAOAccountBasic    DAOAccountBasic    = new DAOAccountBasic(mongoTemplate);
 
        if (DAOAccountSecurity.findOneById(UID) == null) {
 
-           return result.init(Result.CodeEnum.USER_NOT_FOUND);
+           return result.init(EnumResult.USER_NOT_FOUND);
        }
 
        AccountSecurity accountSecurity = DAOAccountSecurity.findOneById(UID);
@@ -96,22 +97,22 @@ public class ImpAccount implements ServiceAccount {
 
        if (!accountSecurity.getAccountEmail().equals(AccountEmail)) {
 
-           return result.init(Result.CodeEnum.EMAIL_INVALID);
+           return result.init(EnumResult.EMAIL_INVALID);
        }
 
        if (!accountSecurity.getAccountPassword().equals(AccountPassword)) {
 
-           return result.init(Result.CodeEnum.WRONG_PASSWORD);
+           return result.init(EnumResult.WRONG_PASSWORD);
        }
 
        if (!accountBasic.getUserName().equals(UserName)) {
 
-           return result.init(Result.CodeEnum.FAILED);
+           return result.init(EnumResult.FAILED);
        }
 
-        DAOAccountBasic.Remove(UID);
-       DAOAccountSecurity.Remove(UID);
+       DAOAccountBasic.remove(UID);
+       DAOAccountSecurity.remove(UID);
 
-       return result.init(Result.CodeEnum.SUCCESS);
+       return result.init(EnumResult.SUCCESS);
     }
 }

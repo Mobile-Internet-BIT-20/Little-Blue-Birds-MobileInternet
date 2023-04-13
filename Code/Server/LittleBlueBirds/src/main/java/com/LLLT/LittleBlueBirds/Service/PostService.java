@@ -1,7 +1,6 @@
 package com.LLLT.LittleBlueBirds.Service;
 
 import com.LLLT.LittleBlueBirds.Entity.Post;
-import com.LLLT.LittleBlueBirds.Util.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

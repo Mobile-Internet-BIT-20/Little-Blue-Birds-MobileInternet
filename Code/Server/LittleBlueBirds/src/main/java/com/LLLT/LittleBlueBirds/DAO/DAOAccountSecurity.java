@@ -11,33 +11,36 @@ public class DAOAccountSecurity extends BaseDAO<AccountSecurity> {
         super(mongoTemplate);
     }
 
+    // Create
+    public void save (
+            AccountSecurity Data
+    ) {
+        super.Save(Data, CollectionName);
+    }
+
+    // Retrieve
     private AccountSecurity findOneByKey (
             String Key  ,
             String Value
     ) {
-
-        return findOneByKey(Key, Value, CollectionName);
-    }
-
-    public AccountSecurity findOneByEmail(
-            String Email
-    ) {
-        return findOneByKey("AccountEmail", Email);
+        return super.FindOneByKey(Key, Value, CollectionName);
     }
 
     public AccountSecurity findOneById (
             String UID
     ) {
-        return findOneByKey("UID", UID);
+        return this.findOneByKey("UID", UID);
     }
 
-    public void Save (
-            AccountSecurity data
+    public AccountSecurity findOneByEmail (
+            String Email
     ) {
-        super.Save(data, CollectionName);
+        return this.findOneByKey("AccountEmail", Email);
     }
 
-    public void Remove (
+    // Update
+    // Delete
+    public void remove (
             String UID
     ) {
         super.RemoveByKey("UID", UID, CollectionName);

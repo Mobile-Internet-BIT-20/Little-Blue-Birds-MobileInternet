@@ -1,6 +1,6 @@
 package com.LLLT.LittleBlueBirds.DAO;
 
-import com.LLLT.LittleBlueBirds.Util.Judge;
+import com.LLLT.LittleBlueBirds.Util.UtilJudge;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -15,42 +15,78 @@ import java.util.Map;
 @Repository
 public abstract class BaseDAO<T> {
 
-    private MongoTemplate mongoTemplate;
-    private Class<T> Clazz = (java.lang.Class)((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    private final MongoTemplate mongoTemplate;
+    private final Class<T> Clazz = (java.lang.Class)((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
-    public BaseDAO(MongoTemplate mongoTemplate) {
+    protected BaseDAO(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
-    public T findOneByKey (String Key, String Value, String CollectionName) {
+    // Create
+    protected void Save (
+            T      Data          ,
+            String CollectionName
+    ) {
+        mongoTemplate.insert(Data, CollectionName);
+    }
+
+    // Retrieve
+    protected T FindOneByKey (
+            String Key  ,
+            String Value,
+            String CollectionName
+
+    ) {
+
         Query query = new Query(Criteria.where(Key).is(Value));
         return mongoTemplate.findOne(query, Clazz, CollectionName);
     }
 
-    public void Save (T t, String CollectionName) {
-        mongoTemplate.insert(t, CollectionName);
-    }
+    // Update
+    protected void UpdateByKey (
+            String Key           ,
+            String Value         ,
+            String CollectionName,
+            HashMap<String, Object> Data
+    ) {
 
-    public void RemoveByKey (String Key, String Value, String CollectionName) {
-        Query query = new Query(Criteria.where(Key).is(Value));
-        mongoTemplate.remove(query, Clazz, CollectionName);
-    }
-
-    public void UpdateByKey (String Key, String Value, String CollectionName, HashMap<String, Object> data) {
         Update update = new Update();
-        for (Map.Entry<String, Object> m : data.entrySet()) {
-            if (m.getValue() instanceof String) {
-                update.set(m.getKey(), Judge.Numbers.isNumeric(m.getValue().toString()) ? Integer.valueOf(m.getValue().toString()) : m.getValue());
+
+        for (Map.Entry<String, Object> map : Data.entrySet()) {
+
+            if (map.getValue() instanceof String) {
+
+                update.set(map.getKey(),
+                        UtilJudge.Numbers.isNumeric(map.getValue().toString()) ? Integer.valueOf(map.getValue().toString()) : map.getValue()
+                );
+
                 continue;
             }
-            if (m.getValue() instanceof List<?>) {
-                update.set(m.getKey(), m.getValue());
+
+            if (map.getValue() instanceof List<?>) {
+
+                update.set(map.getKey(), map.getValue());
+
                 continue;
             }
-            System.out.println(m.getValue().getClass());
+
+            System.out.println(map.getValue().getClass());
             break;
         }
+
         Query query = new Query(Criteria.where(Key).is(Value));
         mongoTemplate.upsert(query, update, Clazz, CollectionName);
+    }
+
+
+    // Delete
+    protected void RemoveByKey (
+            String Key           ,
+            String Value         ,
+            String CollectionName
+    ) {
+
+        Query query = new Query(Criteria.where(Key).is(Value));
+        mongoTemplate.remove(query, Clazz, CollectionName);
     }
 }

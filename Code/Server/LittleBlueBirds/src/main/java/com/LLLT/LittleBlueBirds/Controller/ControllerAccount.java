@@ -1,10 +1,11 @@
 package com.LLLT.LittleBlueBirds.Controller;
 
 import com.LLLT.LittleBlueBirds.Entity.AccountSecurity;
+import com.LLLT.LittleBlueBirds.Enum.EnumResult;
 import com.LLLT.LittleBlueBirds.Service.ServiceAccount;
-import com.LLLT.LittleBlueBirds.Util.Convert;
-import com.LLLT.LittleBlueBirds.Util.CookieOP;
-import com.LLLT.LittleBlueBirds.Util.Result;
+import com.LLLT.LittleBlueBirds.Util.UtilConvert;
+import com.LLLT.LittleBlueBirds.Util.UtilCookie;
+import com.LLLT.LittleBlueBirds.Util.UtilResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class ControllerAccount {
     }
 
     @PostMapping("/register")
-    public Result<AccountSecurity> AccountRegister (
+    public UtilResult<AccountSecurity> AccountRegister (
             HttpServletRequest request
     ) {
 
@@ -34,7 +35,7 @@ public class ControllerAccount {
     }
 
     @PostMapping("/login")
-    public Result<AccountSecurity> AccountLogin (
+    public UtilResult<AccountSecurity> AccountLogin (
             HttpServletRequest  request ,
             HttpServletResponse response
     ) {
@@ -42,22 +43,34 @@ public class ControllerAccount {
         String AccountEmail    = request.getParameter("email"   );
         String AccountPassword = request.getParameter("password");
 
-        Result<AccountSecurity> result = serviceAccount.AccountLogin(AccountEmail, AccountPassword);
+        UtilResult<AccountSecurity> result = serviceAccount.AccountLogin(AccountEmail, AccountPassword);
 
-        if (result.getCode() == Result.CodeEnum.SUCCESS.getCode()) {
+        if (result.getCode() == EnumResult.SUCCESS.getCode()) {
 
-            int expired = Convert.Time.year2sec(1);
+            int expired = UtilConvert.ConvertTime.year2sec(1);
 
-            response.addCookie(CookieOP.setCookie.CookieAccount.CookieSecurity("UID"            , result.getData().getUID()            , expired));
-            response.addCookie(CookieOP.setCookie.CookieAccount.CookieSecurity("AccountEmail"   , result.getData().getAccountEmail()   , expired));
-            response.addCookie(CookieOP.setCookie.CookieAccount.CookieSecurity("AccountPassword", result.getData().getAccountPassword(), expired));
+            response.addCookie(UtilCookie.setCookie.cookieAccount.cookieSecurity(
+                    "UID"               ,
+                    result.getData().getUID(),
+                    expired
+            ));
+            response.addCookie(UtilCookie.setCookie.cookieAccount.cookieSecurity(
+                    "AccountEmail"               ,
+                    result.getData().getAccountEmail(),
+                    expired
+            ));
+            response.addCookie(UtilCookie.setCookie.cookieAccount.cookieSecurity(
+                    "AccountPassword"               ,
+                    result.getData().getAccountPassword(),
+                    expired
+            ));
         }
 
         return result;
     }
 
     @PostMapping("/delete")
-    public Result<String> AccountDelete (
+    public UtilResult<String> AccountDelete (
             HttpServletRequest  request ,
             HttpServletResponse response,
             @CookieValue(
@@ -70,13 +83,25 @@ public class ControllerAccount {
         String AccountPassword = request.getParameter("password");
         String UserName        = request.getParameter("userName");
 
-        Result<String> result = serviceAccount.AccountDelete(UID, AccountEmail, AccountPassword, UserName);
+        UtilResult<String> result = serviceAccount.AccountDelete(UID, AccountEmail, AccountPassword, UserName);
 
-        if (result.getCode() == Result.CodeEnum.SUCCESS.getCode()) {
+        if (result.getCode() == EnumResult.SUCCESS.getCode()) {
 
-            response.addCookie(CookieOP.setCookie.CookieAccount.CookieSecurity("UID"            , null, 0));
-            response.addCookie(CookieOP.setCookie.CookieAccount.CookieSecurity("AccountEmail"   , null, 0));
-            response.addCookie(CookieOP.setCookie.CookieAccount.CookieSecurity("AccountPassword", null, 0));
+            response.addCookie(UtilCookie.setCookie.cookieAccount.cookieSecurity(
+                    "UID",
+                    null,
+                    0
+            ));
+            response.addCookie(UtilCookie.setCookie.cookieAccount.cookieSecurity(
+                    "AccountEmail",
+                    null,
+                    0
+            ));
+            response.addCookie(UtilCookie.setCookie.cookieAccount.cookieSecurity(
+                    "AccountPassword",
+                    null,
+                    0
+            ));
         }
 
         return result;

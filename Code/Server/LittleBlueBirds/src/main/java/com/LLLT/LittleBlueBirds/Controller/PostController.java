@@ -2,8 +2,6 @@ package com.LLLT.LittleBlueBirds.Controller;
 
 import com.LLLT.LittleBlueBirds.Entity.Post;
 import com.LLLT.LittleBlueBirds.Service.PostService;
-import com.LLLT.LittleBlueBirds.Util.CookieOP;
-import com.LLLT.LittleBlueBirds.Util.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
