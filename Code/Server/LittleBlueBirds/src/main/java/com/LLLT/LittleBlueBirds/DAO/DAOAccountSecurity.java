@@ -3,6 +3,8 @@ package com.LLLT.LittleBlueBirds.DAO;
 import com.LLLT.LittleBlueBirds.Entity.AccountSecurity;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+import java.util.HashMap;
+
 public class DAOAccountSecurity extends BaseDAO<AccountSecurity> {
 
     private final String CollectionName = "AccountSecurity";
@@ -39,6 +41,19 @@ public class DAOAccountSecurity extends BaseDAO<AccountSecurity> {
     }
 
     // Update
+    public void update (
+            String UID  ,
+            String Key  ,
+            String Value
+    ) {
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put(Key, Value);
+
+        super.UpdateByKey("UID", UID, CollectionName, hashMap);
+    }
+
+
     // Delete
     public void remove (
             String UID

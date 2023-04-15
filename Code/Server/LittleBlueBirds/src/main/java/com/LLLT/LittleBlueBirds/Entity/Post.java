@@ -1,6 +1,8 @@
 package com.LLLT.LittleBlueBirds.Entity;
 
+import com.LLLT.LittleBlueBirds.Enum.EnumPrivacy;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -9,43 +11,55 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 
-@Document("Post")
 @Data
+@Document("Post")
 public class Post implements Serializable {
 
-    private String PostId     ;
-    private String Holder     ;
-    private String Title      ;
-    private String Content    ;
-    private String PublishTime;
+    @Id
+    private String PID        ;
+    private String HolderId   ;
+    private String PostTitle  ;
+    private String PostContent;
 
-    private List<String> Img        ;
-    private List<String> LikeUser   ;
-    private List<String> CollectUser;
-    private List<String> CommentList;
+    private String TimePublish   ;
+    private String TimeLastModify;
 
-    private Integer LikeNum   ;
-    private Integer CollectNum;
-    private Integer CommentNum;
+    private List<String> ListPostImg    ;
+    private List<String> ListPostLike   ;
+    private List<String> ListPostCollect;
 
-    private Integer PostPrivacy;
+    private List<Comment> ListComment;
+
+    private Integer NumLike   ;
+    private Integer NumUnlike ;
+    private Integer NumCollect;
+    private Integer NumComment;
+
+    private Integer PrivacyPost;
 
     public Post () {}
 
-    public Post(String postId, String holder, String title, String content, List<String> Img) {
-        this.PostId  = postId ;
-        this.Holder  = holder ;
-        this.Title   = title  ;
-        this.Content = content;
-        this.Img     = Img    ;
+    public Post (
+            String PID        ,
+            String HolderId   ,
+            String PostTitle  ,
+            String PostContent
+    ) {
+        this.PID         = PID        ;
+        this.HolderId    = HolderId   ;
+        this.PostTitle   = PostTitle  ;
+        this.PostContent = PostContent;
     }
 
-    public Post init () {
+    public Post init (
 
-        this.PublishTime = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Timestamp(System.currentTimeMillis()));
-        this.LikeUser = this.CollectUser = this.CommentList = Collections.emptyList();
-        this.LikeNum = this.CollectNum = this.CommentNum = 0;
-        this.PostPrivacy = PrivacyEnum.PUBLIC.getCode();
+    ) {
+
+        this.TimePublish = this.TimeLastModify = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Timestamp(System.currentTimeMillis()));
+        this.ListPostImg = this.ListPostLike = this.ListPostCollect  = Collections.emptyList();
+        this.ListComment = Collections.emptyList();
+        this.NumLike = this.NumUnlike = this.NumCollect = this.NumComment = 0;
+        this.PrivacyPost = EnumPrivacy.PUBLIC.getCode();
 
         return this;
     }

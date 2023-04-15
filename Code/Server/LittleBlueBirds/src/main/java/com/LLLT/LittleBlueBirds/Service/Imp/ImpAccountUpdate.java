@@ -74,4 +74,34 @@ public class ImpAccountUpdate implements ServiceAccountUpdate {
 
         return result.init(EnumResult.SUCCESS, DAOAccountBasic.findOneById(UID));
     }
+
+    @Override
+    public UtilResult<AccountSecurity> UpdateAccountEmail (
+            String UID     ,
+            String EmailNew
+    ) {
+
+        UtilResult<AccountSecurity> result = new UtilResult<>();
+
+        DAOAccountSecurity DAOAccountSecurity = new DAOAccountSecurity(mongoTemplate);
+
+        DAOAccountSecurity.update(UID, "AccountEmail", EmailNew);
+
+        return result.init(EnumResult.SUCCESS, DAOAccountSecurity.findOneByEmail(EmailNew));
+    }
+
+    @Override
+    public UtilResult<AccountSecurity> UpdateAccountPassword (
+            String UID        ,
+            String PasswordNew
+    ) {
+
+        UtilResult<AccountSecurity> result = new UtilResult<>();
+
+        DAOAccountSecurity DAOAccountSecurity = new DAOAccountSecurity(mongoTemplate);
+
+        DAOAccountSecurity.update(UID, "AccountPassword", PasswordNew);
+
+        return result.init(EnumResult.SUCCESS, DAOAccountSecurity.findOneById(UID));
+    }
 }

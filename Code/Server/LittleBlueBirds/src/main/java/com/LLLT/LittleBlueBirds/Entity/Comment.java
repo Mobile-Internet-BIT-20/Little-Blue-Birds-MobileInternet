@@ -1,49 +1,51 @@
 package com.LLLT.LittleBlueBirds.Entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.List;
 
-@Document("Comment")
 @Data
+@Document("Comment")
 public class Comment implements Serializable {
 
-    private String CommentId;
-    private String UserId   ;
-    private String Content  ;
+    @Id
+    private String CommentId     ;
+    private String HolderId      ;
+    private String CommentContent;
+
+    private String TimePublish;
+
+    private List<Reply> ListReply;
+
+    private Integer NumReply ;
+    private Integer NumLike  ;
+    private Integer NumUnlike;
 
     public Comment () {}
-    public Comment (String CommentId, String UserId, String Content) {
-        this.CommentId = CommentId;
-        this.UserId    = UserId   ;
-        this.Content   = Content  ;
+
+    public Comment (
+            String CommentId     ,
+            String HolderId      ,
+            String CommentContent
+    ) {
+
+        this.CommentId      = CommentId     ;
+        this.HolderId       = HolderId      ;
+        this.CommentContent = CommentContent;
     }
 
-    // Getter and Setter
+    public Comment init () {
 
+        this.TimePublish = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Timestamp(System.currentTimeMillis()));
+        this.ListReply = Collections.emptyList();
+        this.NumReply = this.NumLike = this.NumUnlike = 0;
 
-    public String getCommentId() {
-        return CommentId;
-    }
-
-    public void setCommentId(String commentId) {
-        CommentId = commentId;
-    }
-
-    public String getUserId() {
-        return UserId;
-    }
-
-    public void setUserId(String userId) {
-        UserId = userId;
-    }
-
-    public String getContent() {
-        return Content;
-    }
-
-    public void setContent(String content) {
-        Content = content;
+        return this;
     }
 }
