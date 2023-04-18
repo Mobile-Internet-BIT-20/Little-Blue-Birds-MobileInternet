@@ -10,7 +10,7 @@
 <a href="https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/blob/main/LICENSE">
 <img src="https://img.shields.io/github/license/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet?color=1AA260&label=LICENSE"/></a>
 <a href="https://gitter.im/Mobile-Internet-BIT-20/TermProject" target="_blank"><img src = "https://img.shields.io/badge/CHAT-GITTER-FF5CF7?style=flat&logo=gitter"/></a>
-<a href="https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/main/README-zh.md"><img src = https://img.shields.io/badge/-中文-gray?style=social&logo=googletranslate /></a>
+<a href="https://github.com/Mobile-Internet-BIT-20/Little-Blue-Birds-MobileInternet/blob/main/README-zh.md"><img src = https://img.shields.io/badge/-中文-gray?style=social&logo=googletranslate /></a>
 <br/><br/>
 
 
@@ -181,5 +181,5 @@ Thanks for your advice. Have a great day today.
 ---
 <div align="right">
 
-###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 20-Mar-2023 11:33*
+###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 18-Apr-2023 23:10*
 </div>
