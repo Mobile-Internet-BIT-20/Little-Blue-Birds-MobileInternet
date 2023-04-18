@@ -34,7 +34,9 @@ public class ControllerAccountUpdate {
     @PostMapping("/profilePicture")
     public UtilResult<String> AccountUpdateProfilePicture (
             HttpServletRequest  request,
-            @RequestParam("ProfilePicture")MultipartFile multipartFile
+            @RequestParam(
+                    "ProfilePicture"
+            ) MultipartFile multipartFile
     ) {
 
         UtilResult<String> result = new UtilResult<>();

@@ -3,7 +3,12 @@ package com.LLLT.LittleBlueBirds.Util;
 import com.LLLT.LittleBlueBirds.Enum.EnumResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.transform.Result;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 public class UtilFile {
 
@@ -14,6 +19,19 @@ public class UtilFile {
                 String        parentPath,
                 String        targetPath,
                 String        targetName
+        );
+
+        UtilResult<List<String>> Multiple (
+                MultipartFile[] files     ,
+                String          parentPath,
+                String          targetPath
+        );
+    }
+
+    interface _dropFile {
+
+        void AllSub (
+                String path
         );
     }
 
@@ -61,6 +79,62 @@ public class UtilFile {
                 System.err.println(e);
                 return result.init(EnumResult.FAILED);
             }
+        }
+
+        @Override
+        public UtilResult<List<String>> Multiple (
+                MultipartFile[] files,
+                String parentPath    ,
+                String targetPath
+        ) {
+
+            UtilResult<List<String>> result = new UtilResult<>();
+
+            List<String> ImgList = new ArrayList<>(Collections.emptyList());
+
+            for (MultipartFile mfs : files) {
+
+                UtilResult<String> tmpResult = Single(mfs, parentPath, targetPath, UUID.randomUUID().toString());
+
+                if (tmpResult.getCode() != EnumResult.SUCCESS.getCode()) {
+
+                    return result.init(EnumResult.FAILED);
+                }
+
+                ImgList.add(tmpResult.getData());
+            }
+
+            return result.init(EnumResult.SUCCESS, ImgList);
+        }
+    }
+
+    public static final class DropFile implements _dropFile {
+
+        @Override
+        public void AllSub (
+                String path
+        ) {
+
+            File   file  = new File(path);
+            File[] files = file.listFiles();
+
+            if (files == null) {
+
+                return;
+            }
+
+            for (File f : files) {
+
+                if (f.isDirectory()) {
+
+                    AllSub(f.getPath());
+                    continue;
+                }
+
+                f.delete();
+            }
+
+            file.delete();
         }
     }
 
