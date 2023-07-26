@@ -1,6 +1,6 @@
 <div align="center">
 
-# Development Schedule
+# Development Log
 
 ```
 Here is the development progress of this software
@@ -9,28 +9,19 @@ All Date Format follow [ YYYY - MM - DD ]
 ```
 
 </div>
-
 <details>
-   <summary> March 2023 </summary>
-
-**`2023 - 03 - 20`**
-```
-1. Realize publish post function.
-2. Complete Modify Post function.
-```
-
-**`2023 - 03 - 13`**
-``` 
-1. Unified return format.
-2. Write DAO interface.
-3. Complete User Login, Register, Delete, Update information function.
-```
+   <summary> April 2023 </summary>
    
-**`2023 - 03 - 12`**
-``` 
-1. Rewrite Server Code
-```
+   **`2023 - 04 - 19`**
+   ```
+   1. Rewrite Publish Post, Modify Post Function.
+   ```
 
+   **`2023 - 04 - 18`**
+   ```
+   1. Rewrite Register, Login, Delete Function.
+   ```
+   
 </details>
 
 <details>
@@ -71,5 +62,5 @@ All Date Format follow [ YYYY - MM - DD ]
 
 <div align="right">
 
-###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 20-Mar-2023 18:01*
+###### *Last Modified by [SeeChen](https://github.com/SeeChen/) @ 19-Apr-2023 02:20*
 </div>
